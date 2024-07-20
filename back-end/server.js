@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const mypageRoutes = require("./function/mypage");
 const loginRoutes = require("./function/login");
 const signupRoutes = require("./function/signup");
-const socketRoutes = require("./function/socket");
+const chatbotRoutes = require("./function/chatbot");
 const userdataRoutes = require("./function/userdata");
 const check_loginRoutes = require("./function/check_login");
 
@@ -54,13 +54,13 @@ app.use("/", loginRoutes);
 app.use("/", check_loginRoutes);
 app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
-app.use("/", socketRoutes);
+app.use("/", chatbotRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
 
 // Socket.IO 초기화
-const initSocket = require("./function/socket");
+const initSocket = require("./function/chatbot");
 initSocket(server, sessionMiddleware, db_config);
 
 // 모든 요청은 build/index.html로
