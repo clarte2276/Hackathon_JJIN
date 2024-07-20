@@ -48,6 +48,7 @@ const signupRoutes = require("./function/signup");
 const socketRoutes = require("./function/socket");
 const userdataRoutes = require("./function/userdata");
 const check_loginRoutes = require("./function/check_login");
+const boardRoutes = require("./function/board");
 
 app.use("/", mypageRoutes);
 app.use("/", loginRoutes);
@@ -55,6 +56,7 @@ app.use("/", check_loginRoutes);
 app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
 app.use("/", socketRoutes);
+app.use("/", boardRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
