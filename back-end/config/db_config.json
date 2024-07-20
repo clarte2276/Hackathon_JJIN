@@ -1,0 +1,7 @@
+{
+    "host": "34.72.174.140",
+    "user": "root",
+    "password": "hanul",
+    "database": "hackathon",
+    "port": "3306 "
+  }
