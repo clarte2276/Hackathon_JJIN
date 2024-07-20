@@ -1,0 +1,134 @@
+/* Chatbot.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.chatbot-container-unique {
+  width: 80%;
+  max-width: 800px;
+  height: 82vh;
+  margin: 2rem auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chatbot-bot-intro-unique {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.chatbot-bot-intro-unique img {
+  width: 11%;
+  margin-right: 1rem;
+}
+
+.chatbot-bot-intro-unique p {
+  font-size: calc(0.8rem + 0.5vw);
+  line-height: 1.6;
+  background-color: #fff9f9;
+  padding: 5%;
+  border-radius: 5px;
+}
+
+.chatbot-chat-messages-unique {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+#chatbot-messages-unique {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#chatbot-messages-unique li {
+  margin-bottom: 1rem;
+}
+
+.chatbot-message-left-unique {
+  text-align: left;
+}
+
+.chatbot-message-right-unique {
+  text-align: right;
+}
+
+.nickname-tiakko {
+  color: #ffa549; /* 티아코의 닉네임 색상 */
+}
+
+#chatbot-chatform-unique {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#chatbot-messageinput-unique {
+  border: 1px solid pink !important;
+  flex: 1;
+  padding: 0.5rem;
+  font-size: calc(0.8rem + 0.5vw);
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  background-color: #fff9f9;
+}
+
+#chatbot-chatform-unique button {
+  border: 1px solid pink !important;
+  padding: 0rem 0.5rem;
+  font-size: calc(0.8rem + 0.5vw);
+  color: #fff;
+  background-color: inherit;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0px;
+}
+
+#chatbot-chatform-unique button:hover {
+  background-color: rgb(245, 237, 223);
+}
+
+.chatbot-button-group-unique {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.chatbot-button-group-unique button {
+  font-family: Noto Sans KR, sans-serif !important;
+  padding: 0.5rem;
+  font-size: calc(0.8rem + 0.5vw);
+  color: black;
+  background-color: #fff9f9 !important;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+  border: 1px solid #b9b9b9;
+}
+
+.chatbot-button-group-unique button:hover {
+  background-color: rgb(245, 237, 223);
+}
+
+.sendBtn {
+  display: flex;
+}
