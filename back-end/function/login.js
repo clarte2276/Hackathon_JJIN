@@ -1,3 +1,4 @@
+//로그인 페이지
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
@@ -50,7 +51,6 @@ router.post("/process/login", (req, res) => {
             req.session.user = {
               id: user.id,
               name: user.name,
-              role: user.role, // 역할 추가
               authorized: true,
             };
             res.json({ success: true });
