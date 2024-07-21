@@ -5,6 +5,10 @@ import Login from './components/mypage/Login';
 import Signup from './components/mypage/Signup';
 import Mypage from './components/mypage/Mypage';
 import Chatbot from './components/chat/Chatbot';
+import Notice from './components/notice/Notice';
+import CreateNotice from './components/notice/CRUD/CreateNotice';
+import ReadNotice from './components/notice/CRUD/ReadNotice';
+import UpdateNotice from './components/notice/CRUD/UpdateNotice';
 
 function App() {
   return (
@@ -14,6 +18,10 @@ function App() {
         <Route path="/signuppage" element={<Signup />} />
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/Chatbot" element={<Chatbot />} />
+        <Route path="/notice" element={<Notice />} />
+        <Route path="/notice/process/new_Post" element={<CreateNotice />} />
+        <Route path="/notice/PostView/:no" element={<ReadNotice />} />
+        <Route path="/notice/Postview/:no/process/update" element={<UpdateNotice />} />
       </Routes>
     </BrowserRouter>
   );
