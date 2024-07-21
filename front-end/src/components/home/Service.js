@@ -6,9 +6,9 @@ import './Service.css';
 function Service() {
   return (
     <div className="servicePage">
-      <div className="serviceImg">
+      {/* <div className="serviceImg">
         <img className="mainServiceImg" src={mainServiceImg} alt="Service" />
-      </div>
+      </div> */}
       <div className="serviceText">
         <h1>Our Service</h1>
         <p>
