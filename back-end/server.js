@@ -8,18 +8,6 @@ const app = express();
 const cors = require("cors");
 const http = require("http");
 require("dotenv").config();
-const cron = require("node-cron");
-
-// MySQL 연결 설정
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: db_config.host,
-  user: db_config.user,
-  password: db_config.password,
-  database: db_config.database,
-  port: db_config.port,
-  debug: false,
-});
 
 // MySQL 세션 스토어 옵션
 const sessionStoreOptions = {
@@ -66,6 +54,7 @@ const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
 const suggestRoutes = require("./function/suggest");
 const cancelReservationsRoutes = require("./function/cancelReservations");
+
 app.use("/", noticeRoutes);
 app.use("/", searchRoutes);
 app.use("/", bagsRoutes);
@@ -84,30 +73,9 @@ const server = http.createServer(app);
 
 // Socket.IO 초기화
 const initSocket = require("./function/socket");
+const initrandSocket = require("./function/rand_chat");
 initSocket(server, sessionMiddleware, db_config);
-
-// 매일 자정에 count 리셋
-cron.schedule("0 0 * * *", () => {
-  pool.query(
-    "UPDATE user_reservations SET reservation_count = 0",
-    (err, result) => {
-      if (err) {
-        console.error("예약 count 리셋 오류:", err);
-      } else {
-        console.log("예약 count가 리셋되었습니다.");
-      }
-    }
-  );
-});
-cron.schedule("0 0 * * *", () => {
-  pool.query("TRUNCATE TABLE bags", (err, result) => {
-    if (err) {
-      console.error("테이블 비우기 오류:", err);
-    } else {
-      console.log("bags 테이블이 초기화되었습니다.");
-    }
-  });
-});
+initrandSocket(server, sessionMiddleware, db_config);
 
 // 모든 요청은 build/index.html로
 app.get("*", (req, res) => {

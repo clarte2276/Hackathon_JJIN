@@ -1,10 +1,16 @@
 .seat-status-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 1rem;
-  width: 300px;
+  width: 380px;
+  height: 280px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f4f4f4;
 }
 
 .seat-status-header {
@@ -18,51 +24,87 @@
   margin: 0;
   font-size: 1.2rem;
   color: #333;
+  margin-top: 2%;
 }
 
 .seat-status-content {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
 }
 
 .seat-room {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem 0;
+  justify-content: center;
+  padding: 0 1rem;
   border-bottom: 1px solid #eee;
+  width: 100%;
 }
 
 .room-name {
-  background-color: #ffbf00;
+  background-color: #ea5514;
   padding: 0.5rem;
   border-radius: 4px;
   color: white;
   width: 100px;
   text-align: center;
   margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.room-name:hover {
+  background-color: #ca460e;
 }
 
 .room-seats {
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .available-seats {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #333;
+  letter-spacing: 1;
 }
 
 .reserve-button {
-  background-color: #007bff;
+  background-color: #61b8de;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 0.5rem;
+  font-weight: 700;
 }
 
 .reserve-button:hover {
-  background-color: #0056b3;
+  background-color: #128bc0;
+}
+
+.reserveLink {
+  text-decoration: none;
+  color: white;
+}
+
+.divider {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  width: 300px;
+  padding: 0.2rem;
+}
+
+.divider_middle {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  height: 180px;
+  margin: 0.5rem;
 }
