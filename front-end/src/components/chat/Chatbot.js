@@ -5,6 +5,7 @@ import chatbotImg from "../images/chatbotImg.png";
 import sendBtn from "../images/sendBtn.png";
 
 const socket = io();
+const aiuser = "내꿈코";
 
 const Chatbot = ({ currentUser }) => {
   const [messages, setMessages] = useState([]);
@@ -21,6 +22,7 @@ const Chatbot = ({ currentUser }) => {
     });
 
     socket.on("chat message", (msg) => {
+      console.log("Received message: ", msg); // 로그 추가
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
@@ -51,15 +53,16 @@ const Chatbot = ({ currentUser }) => {
           body: JSON.stringify({ input }),
         });
         const data = await response.json();
+        console.log("Server response: ", data); // 서버 응답 로그 추가
 
-        // 사용자가 입력한 메시지를 채팅에 추가합니다.
+        // 사용자 메시지 전송
         socket.emit("chat message", { text: input, user: currentUser });
 
-        // 0.5초 딜레이 후 서버로부터 받은 GPT 응답을 "티아코" 사용자로 채팅에 추가합니다.
+        // GPT 응답을 내꿈코로 전송
         setTimeout(() => {
           socket.emit("chat message", {
             text: data.response,
-            user: "내꿈코",
+            user: aiuser,
           });
         }, 500);
         setInput("");
@@ -71,7 +74,7 @@ const Chatbot = ({ currentUser }) => {
 
   const handleButtonClick = (label, text) => {
     socket.emit("chat message", { text, user: currentUser });
-    socket.emit("ask chatbot", label);
+    socket.emit("ask chatbot", { label });
   };
 
   const scrollToBottom = () => {
@@ -94,15 +97,17 @@ const Chatbot = ({ currentUser }) => {
             <li
               key={index}
               className={
-                msg.user === currentUser
-                  ? "chatbot-message-right-unique"
-                  : "chatbot-message-left-unique"
+                msg.user === aiuser
+                  ? "chatbot-message-left-unique"
+                  : "chatbot-message-right-unique"
               }
             >
-              <strong className={msg.user === "내꿈코" ? "nickname" : ""}>
-                {msg.user}:
-              </strong>{" "}
-              {msg.text}
+              <div className="message-content">
+                <strong className={msg.user === aiuser ? "nickname" : ""}>
+                  {msg.user}:
+                </strong>{" "}
+                {msg.text}
+              </div>
             </li>
           ))}
           <div ref={messagesEndRef} />

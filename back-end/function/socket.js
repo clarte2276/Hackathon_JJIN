@@ -65,7 +65,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
           } else {
             pool.query(
               "INSERT INTO rooms (name) VALUES (?)",
-              [user + "'s room"],
+              [`${user}'s room`],
               (err, result) => {
                 if (err) {
                   console.error("Failed to create room:", err);
@@ -130,7 +130,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
           });
 
           socket.on("ask chatbot", (msg) => {
-            const predefinedResponse = predefinedPrompts[msg];
+            const predefinedResponse = predefinedPrompts[msg.label];
             if (predefinedResponse) {
               const gptMessage = {
                 user: "내꿈코",
@@ -153,7 +153,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
                 );
               }, 500);
             } else {
-              console.error("Predefined response not found for:", msg);
+              console.error("Predefined response not found for:", msg.label);
             }
           });
 
