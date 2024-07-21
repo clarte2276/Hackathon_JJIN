@@ -251,26 +251,44 @@ router.get('/suggest/comments/:no', (req, res) => {
     );
   });
 
+// // 댓글 삭제
+// router.delete('/comments/:comment_no', (req, res) => {
+//   if (!isLoggedIn(req)) {
+//     return res.status(403).send('로그인해야 댓글을 삭제할 수 있습니다.');
+//   }
+
+//   const commentId = req.params.comment_no;
+//   const userId = req.session.user.id;
+
+//   pool.query('SELECT user_id FROM comments WHERE comment_no = ?', [commentId], (error, results) => {
+//     if (error) {
+//       console.error('쿼리 실행 중 오류 발생: ', error);
+//       return res.status(500).send('내부 서버 오류');
+//     }
+//     if (results.length === 0) {
+//       return res.status(404).send('댓글을 찾을 수 없습니다.');
+//     }
+//     if (results[0].user_id !== userId) {
+//       return res.status(403).send('삭제 권한이 없습니다.');
+//     }
+//     pool.query('DELETE FROM comments WHERE comment_no = ?', [commentId], (error) => {
+//       if (error) {
+//         console.error('댓글 삭제 중 오류 발생:', error);
+//         return res.status(500).send('내부 서버 오류');
+//       }
+//       res.sendStatus(204);
+//     });
+//   });
+// });
+
 // 댓글 삭제
 router.delete('/comments/:comment_no', (req, res) => {
-  if (!isLoggedIn(req)) {
-    return res.status(403).send('로그인해야 댓글을 삭제할 수 있습니다.');
-  }
-
-  const commentId = req.params.comment_no;
-  const userId = req.session.user.id;
-
-  pool.query('SELECT user_id FROM comments WHERE comment_no = ?', [commentId], (error, results) => {
-    if (error) {
-      console.error('쿼리 실행 중 오류 발생: ', error);
-      return res.status(500).send('내부 서버 오류');
+    if (!isLoggedIn(req)) {
+      return res.status(403).send('로그인해야 댓글을 삭제할 수 있습니다.');
     }
-    if (results.length === 0) {
-      return res.status(404).send('댓글을 찾을 수 없습니다.');
-    }
-    if (results[0].user_id !== userId) {
-      return res.status(403).send('삭제 권한이 없습니다.');
-    }
+  
+    const commentId = req.params.comment_no;
+    // 댓글 삭제 요청 시 userId를 사용하지 않고 바로 삭제
     pool.query('DELETE FROM comments WHERE comment_no = ?', [commentId], (error) => {
       if (error) {
         console.error('댓글 삭제 중 오류 발생:', error);
@@ -279,6 +297,6 @@ router.delete('/comments/:comment_no', (req, res) => {
       res.sendStatus(204);
     });
   });
-});
+  
 
 module.exports = router;
