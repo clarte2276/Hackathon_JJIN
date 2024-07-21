@@ -67,22 +67,22 @@ function Mypage() {
           <form onSubmit={handleSaveWrapper} className="userProfileForm">
             <hr className="divider" />
             <div className="inputSpace">
-              <div className="inputLine1">
-                <p className="inputName">
+              <div className="inputLeft">
+                <p className="a_name">
                   이름
                   <input type="text" name="name" placeholder="이름" value={name} disabled />
                 </p>
-                <p>
-                  연락처
-                  <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
-                </p>
-              </div>
-              <div className="inputLine2">
-                <p>
+                <p className="a_id">
                   아이디
                   <input type="text" name="id" placeholder="아이디" value={id} disabled />
                 </p>
-                <p>
+              </div>
+              <div className="inputRight">
+                <p className="a_phone">
+                  연락처
+                  <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
+                </p>
+                <p className="a_pw">
                   비밀번호
                   <input
                     type="password"
@@ -96,14 +96,10 @@ function Mypage() {
             </div>
           </form>
           <div className="userProfileBtn">
-            <button className="logoutBtn" onClick={handleLogout}>
-              로그아웃
-            </button>
             <button type="submit" className="saveBtn">
               저장
             </button>
           </div>
-          <hr className="divider" />
         </div>
       </div>
       <ReservationDetails />
