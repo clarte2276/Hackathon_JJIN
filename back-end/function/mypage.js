@@ -25,7 +25,7 @@ const checkLogin = (req, res, next) => {
   }
 };
 
-// users 정보
+// users 정보 불러오기
 router.post("/", checkLogin, (req, res) => {
   const userID = req.session.user.id;
 
@@ -53,7 +53,7 @@ router.post("/", checkLogin, (req, res) => {
   });
 });
 
-//구매
+//예약정보 불러오기 -> 수정예정
 router.post("/", checkLogin, (req, res) => {
   const userID = req.session.user.id;
 
@@ -82,13 +82,16 @@ router.post("/", checkLogin, (req, res) => {
 });
 
 // 내 정보 업데이트
-// 내 정보 업데이트
 router.post("/process/update", checkLogin, async (req, res) => {
   const id = req.session.user.id;
-  const { student_num, phone_num, password } = req.body;
+  const { password } = req.body;
+
+  if (!password) {
+    return res.status(400).json({ message: "비밀번호를 입력하세요" });
+  }
 
   try {
-    const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     pool.getConnection((err, conn) => {
       if (err) {
@@ -97,16 +100,8 @@ router.post("/process/update", checkLogin, async (req, res) => {
         return res.status(500).json({ message: "DB 서버 연결 실패" });
       }
 
-      const sql = `
-        UPDATE users SET student_num = ?, phone_num = ?${
-          hashedPassword ? ", password = ?" : ""
-        } WHERE id = ?`;
-
-      const params = [student_num, phone_num];
-      if (hashedPassword) {
-        params.push(hashedPassword);
-      }
-      params.push(id);
+      const sql = "UPDATE users SET password = ? WHERE id = ?";
+      const params = [hashedPassword, id];
 
       const exec = conn.query(sql, params, (err, result) => {
         conn.release();
