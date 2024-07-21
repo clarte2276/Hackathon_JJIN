@@ -10,6 +10,7 @@ function Reservation() {
 
   const [reservation_hour, setReservation_hour] = useState(null);
   const [bag_id, setBag_id] = useState(null); // 빈백 좌석 번호
+  const [selectedBagLabel, setSelectedBagLabel] = useState('');
 
   const bagOptions = [
     { value: 'bag1', label: '1번 빈백' },
@@ -32,11 +33,13 @@ function Reservation() {
     setReservation_hour(event.target.value);
   };
 
-  const handleBagChange = (selectOption) => {
-    if (selectOption) {
-      setBag_id(selectOption.value);
+  const handleBagChange = (selectedOption) => {
+    if (selectedOption) {
+      setBag_id(selectedOption.value);
+      setSelectedBagLabel(selectedOption.label);
     } else {
       setBag_id(null);
+      setSelectedBagLabel('');
     }
   };
 
@@ -83,7 +86,7 @@ function Reservation() {
   return (
     <div className="reservationPage">
       <div className="reservation_title">
-        <h1>좌석 예약하기</h1>
+        <h1>빈백 예약하기</h1>
       </div>
       <div className="reservation-container">
         <div className="notice-section">
@@ -181,16 +184,17 @@ function Reservation() {
           </div>
 
           <div className="form-bag">
-            <h3>좌석 선택</h3>
+            <h3>빈백 좌석 선택</h3>
             <Select
               className="bagIdAlt"
               options={bagOptions}
               value={bagOptions.find((option) => option.value === bag_id)}
               onChange={handleBagChange}
-              placeholder="좌석 번호 선택"
+              placeholder="빈백 번호 선택"
               styles={customSelectStyle}
               isClearable
             />
+            {selectedBagLabel && <p>{selectedBagLabel}을 선택하셨습니다.</p>}
           </div>
 
           <div className="submitBtnPlace">
