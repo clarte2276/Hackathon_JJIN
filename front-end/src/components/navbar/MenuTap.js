@@ -47,7 +47,7 @@ function MenuTap() {
           href="/notice"
           onClick={(e) => checkLogin(e, '/notice')}
         >
-          Hospital
+          Notice
         </Link>
       </div>
     </>
