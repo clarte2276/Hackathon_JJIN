@@ -1,11 +1,11 @@
-* {
+.chat-container {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: "Arial", sans-serif;
+.chat-container body {
+  font-family: 'Arial', sans-serif;
   background-color: #e0f4fb; /* 연한 배경색 */
 }
 
