@@ -5,6 +5,7 @@ import useUserData from '../useUserData';
 import axios from 'axios';
 import NavbarTop from '../navbar/NavbarTop';
 import Footer from '../Footer';
+import ReservationDetails from './ReservationDetails';
 
 function Mypage() {
   const navigate = useNavigate();
@@ -66,28 +67,32 @@ function Mypage() {
           <form onSubmit={handleSaveWrapper} className="userProfileForm">
             <hr className="divider" />
             <div className="inputSpace">
-              <p>
-                이름
-                <input type="text" name="name" placeholder="이름" value={name} disabled />
-              </p>
-              <p>
-                연락처
-                <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
-              </p>
-              <p>
-                아이디
-                <input type="text" name="id" placeholder="아이디" value={id} disabled />
-              </p>
-              <p>
-                비밀번호
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="비밀번호"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </p>
+              <div className="inputLine1">
+                <p>
+                  이름
+                  <input type="text" name="name" placeholder="이름" value={name} disabled />
+                </p>
+                <p>
+                  연락처
+                  <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
+                </p>
+              </div>
+              <div className="inputLine2">
+                <p>
+                  아이디
+                  <input type="text" name="id" placeholder="아이디" value={id} disabled />
+                </p>
+                <p>
+                  비밀번호
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="비밀번호"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </p>
+              </div>
             </div>
           </form>
           <div className="userProfileBtn">
@@ -98,8 +103,10 @@ function Mypage() {
               저장
             </button>
           </div>
+          <hr className="divider" />
         </div>
       </div>
+      <ReservationDetails />
       <Footer />
     </div>
   );
