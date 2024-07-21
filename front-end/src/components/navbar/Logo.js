@@ -8,7 +8,7 @@ function Logo() {
   return (
     <>
       <Link to={'/'}>
-        <img className="DreamBAG" src={DreamBAG} alt="DreamBAG" width={153} height={80} />
+        <img className="DreamBAG" src={DreamBAG} alt="DreamBAG" width={189} height={73} />
       </Link>
     </>
   );

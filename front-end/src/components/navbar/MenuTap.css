@@ -8,14 +8,16 @@
 
 .navbarMenu {
   color: black;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  width: 160px;
   height: 30px;
   font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight: 600;
   font-style: normal;
-  font-size: 1.2em;
+  font-size: 1.1em;
   text-decoration: none;
 }
 
