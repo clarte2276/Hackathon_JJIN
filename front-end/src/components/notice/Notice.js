@@ -16,6 +16,7 @@ const Notice = () => {
   const [dataList, setDataList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const postsPerPage = 10;
   const location = useLocation();
 
@@ -24,7 +25,10 @@ const Notice = () => {
       const endpoint = keyword ? `/notice/search?keyword=${encodeURIComponent(keyword)}` : '/notice';
       const response = await axios.get(endpoint);
       console.log('응답 데이터:', response.data);
-      setDataList(Array.isArray(response.data) ? response.data : []);
+      if (response.data.admin !== undefined) {
+        setIsAdmin(response.data.admin);
+      }
+      setDataList(Array.isArray(response.data.posts) ? response.data.posts : []);
     } catch (error) {
       console.error('There was an error fetching the posts!', error);
     }
@@ -89,7 +93,7 @@ const Notice = () => {
           <div>게시글이 없습니다.</div>
         )}
       </ListNotice>
-      <CreateButtonNotice nextNo={getNextNo()} />
+      {isAdmin && <CreateButtonNotice nextNo={getNextNo()} />}
       <div className="PaginationCustom">
         <PaginationCustom
           currentPage={currentPage}
