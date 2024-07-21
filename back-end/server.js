@@ -7,6 +7,7 @@ const db_config = require("./config/db_config.json");
 const app = express();
 const cors = require("cors");
 const http = require("http");
+require("dotenv").config();
 
 // MySQL 세션 스토어 옵션
 const sessionStoreOptions = {
@@ -43,27 +44,29 @@ app.use(express.static(path.join(__dirname, "public")));
 // js파일 연동
 const mypageRoutes = require("./function/mypage");
 const loginRoutes = require("./function/login");
+const processRoutes = require("./function/check-login");
+const ChatbotRoutes = require("./function/Chatbot");
 const signupRoutes = require("./function/signup");
-const check_loginRoutes = require("./function/check-login");
+const userdataRoutes = require("./function/userdata");
+const bagsRoutes = require("./function/bags");
 const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
-const bagsRoutes = require("./function/bags");
-const chatbotRoutes = require("./function/chatbot");
 
-app.use("/", chatbotRoutes);
-app.use("/mypage", mypageRoutes);
-app.use("/loginpage", loginRoutes);
-app.use("/process", check_loginRoutes);
-app.use("/loginpage", signupRoutes);
-app.use("/notice", noticeRoutes);
-app.use("/search", searchRoutes);
-app.use("/bags", bagsRoutes);
+app.use("/", noticeRoutes);
+app.use("/", searchRoutes);
+app.use("/", bagsRoutes);
+app.use("/", mypageRoutes);
+app.use("/", loginRoutes);
+app.use("/", processRoutes);
+app.use("/", ChatbotRoutes);
+app.use("/", signupRoutes);
+app.use("/", userdataRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
 
 // Socket.IO 초기화
-const initSocket = require("./function/chatbot");
+const initSocket = require("./function/socket");
 initSocket(server, sessionMiddleware, db_config);
 
 // 모든 요청은 build/index.html로

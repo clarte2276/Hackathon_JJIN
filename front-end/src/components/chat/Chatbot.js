@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import "./Chatbot.css";
 import chatbotImg from "../images/chatbotImg.png";
+import sendBtn from "../images/sendBtn.png";
 
 const socket = io();
 
@@ -38,6 +39,38 @@ const Chatbot = ({ currentUser }) => {
     scrollToBottom();
   }, [messages]);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (input) {
+      try {
+        const response = await fetch("/ask-gpt4", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ input }),
+        });
+        const data = await response.json();
+
+        // 사용자가 입력한 메시지를 채팅에 추가합니다.
+        socket.emit("chat message", { text: input, user: currentUser });
+
+        // 0.5초 딜레이 후 서버로부터 받은 GPT 응답을 "티아코" 사용자로 채팅에 추가합니다.
+        setTimeout(() => {
+          socket.emit("chat message", {
+            text: data.response,
+            user: "티아코",
+          });
+        }, 500);
+
+        // 입력 필드를 초기화합니다.
+        setInput("");
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  };
+
   const handleButtonClick = (label, text) => {
     socket.emit("chat message", { text, user: currentUser });
     socket.emit("ask chatbot", label);
@@ -52,9 +85,9 @@ const Chatbot = ({ currentUser }) => {
       <div className="chatbot-bot-intro-unique">
         <img src={chatbotImg} alt="chatBotprofile" />
         <p>
-          안녕하세요! 동국대학교 꿈의 요정 내꿈코예용~!
+          안녕하세요! 동국대학교 티케팅요정 티아코예용~!
           <br />
-          빈백 사용법 및 정보 등에 대해서 궁금한 내용을 질문하면 답변해드릴게요!
+          티켓팅 방법, 축제 등에 대해서 궁금한 내용을 질문하면 답변해드릴게요!
         </p>
       </div>
       <div className="chatbot-chat-messages-unique">
@@ -69,7 +102,7 @@ const Chatbot = ({ currentUser }) => {
               }
             >
               <strong
-                className={msg.user === "내꿈코" ? "nickname-tiakko" : ""}
+                className={msg.user === "티아코" ? "nickname-tiakko" : ""}
               >
                 {msg.user}:
               </strong>{" "}
@@ -82,31 +115,38 @@ const Chatbot = ({ currentUser }) => {
       <div className="chatbot-button-group-unique">
         <button
           onClick={() =>
-            handleButtonClick(
-              "TEXT 1",
-              "나의 공강을 책임질 빈백의 위치를 알려줘!"
-            )
+            handleButtonClick("TEXT 1", "이번 공연의 가수는 누가 나오나요?")
           }
         >
-          나의 공강을 책임질 빈백의 위치를 알려줘!
+          이번 공연의 가수는 누가 나오나요?
         </button>
         <button
           onClick={() =>
-            handleButtonClick("TEXT 2", "빈백 운영시간은 어떻게 돼?")
+            handleButtonClick("TEXT 2", "연예인 공연 몇 시에 시작하나요?")
           }
         >
-          빈백 운영시간은 어떻게 돼?"
+          연예인 공연 몇 시에 시작하나요?
         </button>
         <button
           onClick={() =>
-            handleButtonClick(
-              "TEXT 3",
-              "나의 완벽한 숙면을 위해 음악을 추천해줄래?"
-            )
+            handleButtonClick("TEXT 3", "티켓 수령 본인 확인은 어떻게 하나요?")
           }
         >
-          나의 완벽한 숙면을 위해 음악을 추천해줄래?
+          티켓 수령 본인 확인은 어떻게 하나요?
         </button>
+        <form id="chatbot-chatform-unique" onSubmit={handleSubmit}>
+          <input
+            id="chatbot-messageinput-unique"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            autoComplete="off"
+          />
+          <button type="submit">
+            <div className="sendBtn">
+              <img src={sendBtn} alt="전송 아이콘"></img>
+            </div>
+          </button>
+        </form>
       </div>
     </div>
   );

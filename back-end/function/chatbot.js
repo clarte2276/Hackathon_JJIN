@@ -1,170 +1,35 @@
-const socketIo = require("socket.io");
-const mysql = require("mysql");
+const express = require("express");
+const router = express.Router();
+const axios = require("axios");
+require("dotenv").config();
 
-const predefinedPrompts = {
-  "TEXT 1":
-    "우리 학교의 빈백의 위치는 중앙도서관 3층, 그리고 학림관 1층에 있어용~!! 가서 함께 편히 쉬어볼까용?😚",
-  "TEXT 2":
-    "중앙도서관은 09:00 ~ 21:00에 운영하며 빈백 개수는 20개, 학림관은 10:00 ~ 17:00에 운영하며 빈백 개수는 4개가 있어용~~🥰",
-  "TEXT 3":
-    "저는 유튜브로 수면 ASMR 음악을 들어용~~! 유튜브 링크로 추천해드릴게용~~😉'https://www.youtube.com/results?search_query=%EC%88%98%EB%A9%B4+ASMR' ",
-};
+router.post("/ask-gpt4", async (req, res) => {
+  const userInput = req.body.input;
 
-const initSocket = (server, sessionMiddleware, dbConfig) => {
-  const io = socketIo(server);
-  const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: dbConfig.host,
-    user: dbConfig.user,
-    password: dbConfig.password,
-    database: dbConfig.database,
-    port: dbConfig.port,
-    charset: "utf8mb4",
-    debug: false,
-  });
+  // "티아코" 말투로 답변하는 프롬프트
+  const prompt = `너는 이제부터 "티케팅요정 티아코"처럼 말할 거야. 티아코는 귀엽고 친절하게 말하지만 이모티콘을 쓰지마. 모든 질문에 귀엽고 친절하게 답변해줘. 티아코의 평소 말투 예시는 다음과 같아 "안녕하세요! 티케팅요정 티아코예용~!
+티켓팅 방법, 축제 등에 대해서 궁금한 내용을 질문하면 답변해드릴게용~~" 지금부터 티아코처럼 답변하되 이모지는 절대로 사용하지마.: "${userInput}"`;
 
-  let loggedInUsers = [];
-
-  const updateLoggedInUsers = (roomId) => {
-    pool.query(
-      "SELECT user FROM messages WHERE room_id = ? GROUP BY user",
-      [roomId],
-      (err, results) => {
-        if (err) {
-          console.error("Failed to load users:", err);
-        } else {
-          const users = results.map((result) => result.user);
-          io.to(roomId).emit("update user list", users);
-        }
+  try {
+    const response = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      {
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user", content: prompt }],
+        max_tokens: 150,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
       }
     );
-  };
 
-  io.use((socket, next) => {
-    sessionMiddleware(socket.request, socket.request.res || {}, next);
-  });
+    res.json({ response: response.data.choices[0].message.content.trim() });
+  } catch (error) {
+    res.status(500).send(`Error fetching from OpenAI: ${error.response.data}`);
+  }
+});
 
-  io.on("connection", (socket) => {
-    const session = socket.request.session;
-    if (session && session.user) {
-      const user = session.user.name;
-      const userId = session.user.id;
-      pool.query(
-        "SELECT room_id FROM user_rooms WHERE user_id = ?",
-        [userId],
-        (err, results) => {
-          if (err) {
-            console.error("Failed to get user room:", err);
-            return;
-          }
-          let roomId;
-          if (results.length > 0) {
-            roomId = results[0].room_id;
-          } else {
-            pool.query(
-              "INSERT INTO rooms (name) VALUES (?)",
-              [user + "'s room"],
-              (err, result) => {
-                if (err) {
-                  console.error("Failed to create room:", err);
-                  return;
-                }
-                roomId = result.insertId;
-                pool.query(
-                  "INSERT INTO user_rooms (user_id, room_id) VALUES (?, ?)",
-                  [userId, roomId],
-                  (err) => {
-                    if (err) {
-                      console.error("Failed to link user to room:", err);
-                    }
-                  }
-                );
-              }
-            );
-          }
-
-          socket.join(roomId);
-
-          socket.on("chat message", (msg) => {
-            if (session && session.user) {
-              const message = {
-                user: session.user.name,
-                text: msg.text,
-                room_id: roomId,
-              };
-
-              pool.query(
-                "INSERT INTO messages (user, text, room_id) VALUES (?, ?, ?)",
-                [message.user, message.text, message.room_id],
-                (err) => {
-                  if (err) {
-                    console.error("Failed to save message:", err);
-                  } else {
-                    io.to(roomId).emit("chat message", message);
-                    updateLoggedInUsers(roomId);
-                  }
-                }
-              );
-            }
-          });
-
-          socket.on("ask chatbot", async (msg) => {
-            const predefinedResponse = predefinedPrompts[msg];
-            if (predefinedResponse) {
-              const chatbotMessage = {
-                user: "내꿈코",
-                text: predefinedResponse,
-                room_id: roomId,
-              };
-
-              setTimeout(() => {
-                pool.query(
-                  "INSERT INTO messages (user, text, room_id) VALUES (?, ?, ?)",
-                  [
-                    chatbotMessage.user,
-                    chatbotMessage.text,
-                    chatbotMessage.room_id,
-                  ],
-                  (err) => {
-                    if (err) {
-                      console.error("Failed to save Chatbot message:", err);
-                    } else {
-                      io.to(roomId).emit("chat message", chatbotMessage);
-                      updateLoggedInUsers(roomId);
-                    }
-                  }
-                );
-              }, 500);
-            }
-          });
-
-          socket.on("disconnect", () => {
-            const user = session.user.name;
-            const specialUser = "내꿈코";
-
-            pool.query(
-              "DELETE FROM messages WHERE (user = ? OR user = ? OR user = ?) AND room_id = ?",
-              [user, specialUser, roomId],
-              (err, result) => {
-                if (err) {
-                  console.error("Failed to delete messages:", err);
-                } else {
-                  console.log(
-                    `Deleted messages for user ${user} and ${specialUser} in room ${roomId}`
-                  );
-                  console.log(`Deleted ${result.affectedRows} rows`);
-                  updateLoggedInUsers(roomId);
-                }
-              }
-            );
-            socket.leave(roomId);
-          });
-        }
-      );
-    } else {
-      console.log("Session not found for user");
-    }
-  });
-};
-
-module.exports = initSocket;
+module.exports = router;
