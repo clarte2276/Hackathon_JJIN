@@ -76,6 +76,31 @@ function Mypage() {
     }
   };
 
+  // Select 속성의 css 속성 값
+
+  //  const customSelectStyles1 = {
+  //     control: (provided) => ({
+  //       ...provided,
+  //       width: '420px',
+  //       height: '25px',
+  //       border: '2px solid #b6bec6',
+  //       borderRadius: '10px',
+  //       fontSize: '1rem',
+  //       fontWeight: '400',
+  //       color: '#787878',
+  //       paddingLeft: '4.5%',
+  //       paddingBottom: '12%',
+  //     }),
+  //     menu: (provided) => ({
+  //       ...provided,
+  //       width: '420px',
+  //     }),
+  //     indicatorSeparator: (provided) => ({
+  //       ...provided,
+  //       display: 'none',
+  //     }),
+  //   };
+
   return (
     <div className="mypageAll">
       <h1>마이페이지</h1>
@@ -135,6 +160,16 @@ function Mypage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </p>
+            {/* 성별
+            <Select
+              className="genderAlt"
+              options={genderOptions}
+              value={genderOptions.find((option) => option.value === gender)}
+              onChange={handleGenderChange}
+              placeholder="성별"
+              styles={customSelectStyles1}
+              isClearable
+            /> */}
           </div>
         </form>
         <hr className="divider" />
