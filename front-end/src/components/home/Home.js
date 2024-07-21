@@ -45,8 +45,14 @@ function Home() {
         </div>
         <Header />
         <Service />
-        <NoticeHome />
-        <SeatStatus />
+        <div className="homepage_layout">
+          <div className="noticeHome">
+            <NoticeHome />
+          </div>
+          <div className="seatStatus">
+            <SeatStatus />
+          </div>
+        </div>
       </div>
       <Footer />
     </>
