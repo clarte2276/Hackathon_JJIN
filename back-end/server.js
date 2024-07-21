@@ -7,7 +7,6 @@ const db_config = require("./config/db_config.json");
 const app = express();
 const cors = require("cors");
 const http = require("http");
-require("dotenv").config();
 
 // MySQL 세션 스토어 옵션
 const sessionStoreOptions = {
