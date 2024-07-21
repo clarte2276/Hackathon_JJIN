@@ -10,50 +10,43 @@ function Reservation() {
   const { name, id: user_id, phone_num } = useUserData();
 
   const [reservation_hour, setReservation_hour] = useState(null);
-  const [bag_id, setBag_id] = useState(null); // 빈백 좌석 번호
+  const [bag_id, setBag_id] = useState(null);
   const [selectedBagLabel, setSelectedBagLabel] = useState('');
+  const [availability, setAvailability] = useState({});
 
   const bagOptions = Array.from({ length: 14 }, (_, i) => ({
     value: i + 1,
     label: `${i + 1}번 빈백`,
   }));
 
-  // const timeOptions = [
-  //   '9:00 ~ 10:00',
-  //   '10:00 ~ 11:00',
-  //   '11:00 ~ 12:00',
-  //   '12:00 ~ 13:00',
-  //   '13:00 ~ 14:00',
-  //   '14:00 ~ 15:00',
-  //   '15:00 ~ 16:00',
-  //   '16:00 ~ 17:00',
-  //   '17:00 ~ 18:00',
-  //   '18:00 ~ 19:00',
-  //   '19:00 ~ 20:00',
-  //   '20:00 ~ 21:00',
-  // ];
-
   const timeOptions = Array.from({ length: 12 }, (_, i) => ({
-    value: i + 9, // 9부터 시작하여 21까지
+    value: i + 9,
     label: `${i + 9}:00 ~ ${i + 10}:00`,
   }));
 
+  useEffect(() => {
+    const fetchAvailability = async () => {
+      const response = await fetch('/bags/form');
+      if (response.ok) {
+        const data = await response.json();
+        setAvailability(data.availability);
+      }
+    };
+
+    fetchAvailability();
+  }, []);
+
   const handleTimeClick = (time) => {
-    setReservation_hour(time.value); // 객체 대신 값만 저장
-  };
-  const handleBagChange = (selectedOption) => {
-    if (selectedOption) {
-      setBag_id(selectedOption.value);
-      setSelectedBagLabel(selectedOption.label);
-    } else {
-      setBag_id(null);
-      setSelectedBagLabel('');
-    }
+    setReservation_hour(time.value);
+    setBag_id(null);
+    setSelectedBagLabel('');
   };
 
   const handleBagClick = (id, label) => {
-    setBag_id(id);
-    setSelectedBagLabel(label);
+    if (isSlotAvailable(reservation_hour, id)) {
+      setBag_id(id);
+      setSelectedBagLabel(label);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -66,7 +59,7 @@ function Reservation() {
 
     const requestBody = {
       userId: user_id,
-      reservation_hour: reservation_hour,
+      reservation_hour,
       bag_id,
     };
 
@@ -88,8 +81,11 @@ function Reservation() {
     }
   };
 
-  // 버튼 활성화 조건 확인
-  const isButtonEnabled = reservation_hour && bag_id;
+  const isSlotAvailable = (hour, bag) => {
+    return availability[bag]?.[hour - 9] ?? true;
+  };
+
+  const isButtonEnabled = reservation_hour && bag_id && isSlotAvailable(reservation_hour, bag_id);
 
   return (
     <div>
@@ -149,18 +145,24 @@ function Reservation() {
                 {bagOptions.map((option) => (
                   <div
                     key={option.value}
-                    className={`bag-seat ${bag_id === option.value ? 'selected' : ''}`}
+                    className={`bag-seat ${bag_id === option.value ? 'selected' : ''} ${
+                      !isSlotAvailable(reservation_hour, option.value) ? 'unavailable' : ''
+                    }`}
                     onClick={() => handleBagClick(option.value, option.label)}
                   >
                     {option.label.split('번 빈백')[0]}
                   </div>
                 ))}
               </div>
-              {selectedBagLabel && <p>{selectedBagLabel}을 선택하셨습니다.</p>}
+              {selectedBagLabel && <p className="selectedText">{selectedBagLabel}을 선택하셨습니다.</p>}
             </div>
 
             <div className="submitBtnPlace">
-              <button type="submit" className={`submitBtn ${isButtonEnabled ? 'enabled' : ''}`}>
+              <button
+                type="submit"
+                className={`submitBtn ${isButtonEnabled ? 'enabled' : ''}`}
+                disabled={!isButtonEnabled}
+              >
                 예약완료
               </button>
             </div>

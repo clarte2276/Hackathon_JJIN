@@ -138,7 +138,7 @@
 }
 
 .time-slot.selected {
-  background-color: #ffa549;
+  background-color: #ffb954;
   color: white;
 }
 
@@ -149,24 +149,26 @@
 .form-bag {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 }
 
 .bag-seats {
   display: flex;
+  text-align: center;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 3rem;
-  justify-content: space-between;
-  background-color: #fff3e1;
+  gap: 1.5rem;
+  background-color: white;
   padding: 1rem;
   border-radius: 8px;
+  border: 1px solid #979797;
 }
 
 .bag-seat {
-  width: 60px;
+  width: 80px;
   height: 60px;
-  background-color: #ff7f50;
+  background-color: #ea5514;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,6 +177,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  box-shadow: 2px 2px 5px rgba(151, 151, 151, 0.5);
 }
 
 .bag-seat:hover {
@@ -182,7 +185,12 @@
 }
 
 .bag-seat.selected {
-  background-color: #ffa549;
+  background-color: #ffb954;
+}
+
+.bag-seat.unavailable {
+  cursor: not-allowed;
+  background-color: #d3d3d3;
 }
 
 .select_bag {
@@ -226,7 +234,7 @@
 }
 
 .submitBtn.enabled {
-  background-color: #ffa549;
+  background-color: #ea5514;
   color: white;
 }
 
@@ -234,4 +242,8 @@
   text-decoration: none;
   color: white;
   font-size: 1rem;
+}
+
+.selectedText {
+  color: #ff0000;
 }

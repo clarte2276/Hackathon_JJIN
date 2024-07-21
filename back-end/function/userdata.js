@@ -39,4 +39,15 @@ router.get("/api/user", (req, res) => {
   );
 });
 
+router.get("/api/empty", (req, res) => {
+  pool.query("SELECT COUNT(*) AS total FROM bags", (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: "Database query error" });
+    }
+    const totalReserved = results[0].total;
+    const availableSeats = 168 - totalReserved;
+    res.json({ availableSeats });
+  });
+});
+
 module.exports = router;
