@@ -29,7 +29,7 @@
 }
 
 .borderLine {
-  border-bottom: 1.8px solid #49454f;
+  border-bottom: 1px solid #979797;
   width: 100%;
   margin-bottom: 20px;
 }
@@ -54,11 +54,11 @@
 
 .titleInput,
 .BodyInput {
-  width: 900px;
+  width: 950px;
   font-size: 15px;
   padding-left: 10px;
   border-radius: 10px;
-  border: 2px solid #cac4d0;
+  border: 1px solid #cac4d0;
 }
 
 .titleInput {
@@ -71,30 +71,53 @@
   resize: none;
 }
 
+.imgUp {
+  margin-left: 5px;
+}
+
 .backBtn,
-.CreateBtn {
+.CreateBtn,
+.Read_backBtn {
   text-decoration: none;
-  padding: 10px;
-  border-radius: 10px;
+  border-radius: 4px;
   margin-left: 25px;
   letter-spacing: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.Read_backBtn {
+  padding: 7px 10px;
+}
+
+.backBtn,
+.CreateBtn {
   width: 100px;
+  padding: 10px;
 }
 
 .backBtn:hover,
-.CreateBtn:hover {
+.CreateBtn:hover,
+.Read_backBtn:hover {
   cursor: pointer;
 }
 
 .backBtn {
   background-color: #ffffff;
-  border: 1.8px solid #474747;
+  border: 1px solid #474747;
 }
 
-.CreateBtn {
+.CreateBtn,
+.Read_backBtn {
   color: white;
-  background-color: #17499e;
+  background-color: #ea5514;
   border: none;
+}
+
+.orangeSuggest {
+  margin-left: 10px;
+  color: #ea5514;
+  font-weight: 600;
+  margin-top: 60px;
 }
 
 .ReadTitle {
@@ -102,21 +125,46 @@
   font-weight: 600;
   font-size: 28px;
   margin-left: 10px;
-  margin-top: 30px;
 }
 
+.info,
 .updateDelete {
   display: flex;
+  gap: 20px;
 }
 
 .infoUpdateDelete {
   display: flex;
   justify-content: space-between;
+  margin: 20px 10px 20px 10px;
+}
+
+.ReadUpdate {
+  text-decoration: none;
+  color: black;
+}
+
+.Suggest_underline {
+  border-bottom: 1px solid #979797;
+  width: 100%;
 }
 
 .ReadContent {
-  margin-top: 30px;
+  margin: 50px 0px;
   margin-left: 20px;
+}
+
+.ReadBackBtn_layout {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.commentLogo {
+  display: flex;
+  /* align-items: center; */
+  margin: 20px 10px;
+
+  gap: 10px;
 }
 
 .comment_all {
@@ -125,6 +173,12 @@
   padding-left: 5px;
   display: flex;
 }
+
+.comment_width {
+  width: 1000px;
+  padding: 0px 10px;
+}
+
 .commentNickname {
   font-weight: 600;
   font-size: 20px;
@@ -132,4 +186,23 @@
 
 .commentDate {
   color: #898989;
+}
+
+.commentdateDelete_layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.commentDelete {
+  color: #979797;
+  border: none;
+  background-color: white;
+}
+
+.Updateimg_layout {
+  display: flex;
+  margin: 20px 0px;
+  margin-left: 50px;
+  gap: 30px;
+  align-items: center;
 }

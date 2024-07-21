@@ -8,13 +8,11 @@ const List = (props) => {
     <table className="List">
       <thead>
         <tr>
-          {headersName.map((item, index) => {
-            return (
-              <td className="List-header-column" key={index}>
-                {item}
-              </td>
-            );
-          })}
+          {headersName.map((item, index) => (
+            <td className="List-header-column" key={index}>
+              {item}
+            </td>
+          ))}
         </tr>
       </thead>
       <tbody>{children}</tbody>
