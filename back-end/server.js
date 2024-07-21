@@ -8,6 +8,18 @@ const app = express();
 const cors = require("cors");
 const http = require("http");
 require("dotenv").config();
+const cron = require('node-cron');
+
+// MySQL 연결 설정
+const pool = mysql.createPool({
+  connectionLimit: 10,
+  host: db_config.host,
+  user: db_config.user,
+  password: db_config.password,
+  database: db_config.database,
+  port: db_config.port,
+  debug: false,
+});
 
 // MySQL 세션 스토어 옵션
 const sessionStoreOptions = {
@@ -68,6 +80,17 @@ const server = http.createServer(app);
 // Socket.IO 초기화
 const initSocket = require("./function/socket");
 initSocket(server, sessionMiddleware, db_config);
+
+// 매일 자정에 count 리셋
+cron.schedule('0 0 * * *', () => {
+  pool.query('UPDATE bags SET count = 0', (err, result) => {
+    if (err) {
+      console.error('예약 count 리셋 오류:', err);
+    } else {
+      console.log('예약 count가 리셋되었습니다.');
+    }
+  });
+});
 
 // 모든 요청은 build/index.html로
 app.get("*", (req, res) => {
