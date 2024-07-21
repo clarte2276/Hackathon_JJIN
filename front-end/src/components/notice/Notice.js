@@ -64,47 +64,49 @@ const Notice = () => {
   };
 
   return (
-    <div className="NoticeAll_layout">
+    <>
       <NavbarTop />
-      <div className="NoticeTop_layout">
-        <TitleBodyNotice title="공지사항" body="이곳은 공지사항 안내하는 페이지입니다" />
-        <form onSubmit={handleSearch} className="SearchForm">
-          <input
-            type="text"
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-            placeholder="검색어를 입력하세요"
+      <div className="NoticeAll_layout">
+        <div className="NoticeTop_layout">
+          <TitleBodyNotice title="공지사항" body="이곳은 공지사항 페이지입니다" />
+          <form onSubmit={handleSearch} className="SearchForm">
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+              placeholder="검색어를 입력하세요"
+            />
+            <button type="submit">검색</button>
+          </form>
+        </div>
+        <ListNotice headersName={['제목', '작성자', '작성일']}>
+          {currentPosts.length > 0 ? (
+            currentPosts.map((item, index) => (
+              <RowList key={index}>
+                <ColumnList>
+                  <Link to={`/notice/PostView/${item.no}`} style={{ textDecoration: 'none' }}>
+                    <div className="List_title">{item.title}</div>
+                  </Link>
+                </ColumnList>
+                <ColumnList>관리자</ColumnList>
+                <ColumnList>{item.created_date}</ColumnList>
+              </RowList>
+            ))
+          ) : (
+            <div>게시글이 없습니다.</div>
+          )}
+        </ListNotice>
+        {isAdmin && <CreateButtonNotice nextNo={getNextNo()} />}
+        <div className="PaginationCustom">
+          <PaginationCustom
+            currentPage={currentPage}
+            totalPages={Math.ceil(dataList.length / postsPerPage)}
+            onPageChange={handlePageChange}
           />
-          <button type="submit">검색</button>
-        </form>
-      </div>
-      <ListNotice headersName={['제목', '작성자', '작성일']}>
-        {currentPosts.length > 0 ? (
-          currentPosts.map((item, index) => (
-            <RowList key={index}>
-              <ColumnList>
-                <Link to={`/notice/PostView/${item.no}`} style={{ textDecoration: 'none' }}>
-                  <div className="List_title">{item.title}</div>
-                </Link>
-              </ColumnList>
-              <ColumnList>관리자</ColumnList>
-              <ColumnList>{item.created_date}</ColumnList>
-            </RowList>
-          ))
-        ) : (
-          <div>게시글이 없습니다.</div>
-        )}
-      </ListNotice>
-      {isAdmin && <CreateButtonNotice nextNo={getNextNo()} />}
-      <div className="PaginationCustom">
-        <PaginationCustom
-          currentPage={currentPage}
-          totalPages={Math.ceil(dataList.length / postsPerPage)}
-          onPageChange={handlePageChange}
-        />
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
