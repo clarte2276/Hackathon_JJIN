@@ -2,33 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-import TitleBody from './element/TitleBody.js';
-import List from './element/List.js';
-import ColumnList from './element/ColumnList.js';
-import RowList from './element/RowList.js';
-import CreateButton from './element/CreateButton.js';
-import PaginationCustom from './element/PaginationCustom.js';
+import TitleBody from '../notice/element/TitleBody.js';
+import List from '../notice/element/List.js';
+import ColumnList from '../notice/element/ColumnList.js';
+import RowList from '../notice/element/RowList.js';
+import CreateButton from '../notice/element/CreateButton.js';
+import PaginationCustom from '../notice/element/PaginationCustom.js';
 import NavbarTop from '../navbar/NavbarTop.js';
 import Footer from '../Footer.js';
 
-import './Notice.css';
+import './Suggest.css';
 
-const Notice = () => {
+const Suggest = () => {
   const [dataList, setDataList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState('');
-  const [isAdmin, setIsAdmin] = useState(false);
   const postsPerPage = 10;
   const location = useLocation();
 
   const fetchData = async (keyword = '') => {
     try {
-      const endpoint = keyword ? `/notice/search?keyword=${encodeURIComponent(keyword)}` : '/notice';
+      const endpoint = keyword ? `/suggest/search?keyword=${encodeURIComponent(keyword)}` : '/suggest';
       const response = await axios.get(endpoint);
       console.log('응답 데이터:', response.data);
-      if (response.data.admin !== undefined) {
-        setIsAdmin(response.data.admin);
-      }
       setDataList(Array.isArray(response.data.posts) ? response.data.posts : []);
     } catch (error) {
       console.error('There was an error fetching the posts!', error);
@@ -66,9 +62,9 @@ const Notice = () => {
   return (
     <>
       <NavbarTop />
-      <div className="NoticeAll_layout">
-        <div className="NoticeTop_layout">
-          <TitleBody title="공지사항" body="이곳은 공지사항 페이지입니다" />
+      <div className="SuggestAll_layout">
+        <div className="SuggestTop_layout">
+          <TitleBody title="건의사항" body="이곳은 건의사항 페이지입니다" />
           <form onSubmit={handleSearch} className="SearchForm">
             <input
               type="text"
@@ -84,11 +80,11 @@ const Notice = () => {
             currentPosts.map((item, index) => (
               <RowList key={index}>
                 <ColumnList>
-                  <Link to={`/notice/PostView/${item.no}`} style={{ textDecoration: 'none' }}>
+                  <Link to={`/suggest/PostView/${item.no}`} style={{ textDecoration: 'none' }}>
                     <div className="List_title">{item.title}</div>
                   </Link>
                 </ColumnList>
-                <ColumnList>관리자</ColumnList>
+                <ColumnList>익명</ColumnList>
                 <ColumnList>{item.created_date}</ColumnList>
               </RowList>
             ))
@@ -96,7 +92,7 @@ const Notice = () => {
             <div>게시글이 없습니다.</div>
           )}
         </List>
-        {isAdmin && <CreateButton nextNo={getNextNo()} />}
+        <CreateButton nextNo={getNextNo()} />
         <div className="PaginationCustom">
           <PaginationCustom
             currentPage={currentPage}
@@ -110,4 +106,4 @@ const Notice = () => {
   );
 };
 
-export default Notice;
+export default Suggest;

@@ -1,7 +1,7 @@
 import React from 'react';
-import './ElementNotice.css';
+import './Element.css';
 
-function TitleBodyNotice(props) {
+function TitleBody(props) {
   return (
     <>
       <h1>{props.title}</h1>
@@ -12,4 +12,4 @@ function TitleBodyNotice(props) {
   );
 }
 
-export default TitleBodyNotice;
+export default TitleBody;

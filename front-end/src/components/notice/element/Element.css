@@ -1,4 +1,4 @@
-.TitleBodyNotice_body {
+.TitleBody_body {
   margin-bottom: 10px;
 }
 
@@ -20,14 +20,14 @@
   background-color: rgb(231, 231, 231);
 }
 
-.ListNotice {
+.List {
   width: 900px;
   margin: 0 auto;
   text-align: center;
   border-spacing: 0;
 }
 
-.ListNotice-header-column {
+.List-header-column {
   border-bottom: 1px solid #e8e8e8;
   padding: 0;
   font-size: 16px;
@@ -35,17 +35,17 @@
   font-weight: bold;
 }
 
-.ListNotice-column {
+.List-column {
   padding: 10px 5px;
   text-decoration: none;
 }
 
-.ListNotice-row:hover {
+.List-row:hover {
   background-color: #eceaea;
   cursor: pointer;
 }
 
-.CreateButtonNotice {
+.CreateButton {
   text-decoration: none;
   color: white;
   background-color: #17499e;
@@ -53,7 +53,7 @@
   border-radius: 10%;
 }
 
-.CreateButton {
+.CreateButton_layout {
   display: flex;
   justify-content: right;
   margin: 25px 0px;

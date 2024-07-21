@@ -11,6 +11,10 @@ import Notice from './components/notice/Notice';
 import CreateNotice from './components/notice/CRUD/CreateNotice';
 import ReadNotice from './components/notice/CRUD/ReadNotice';
 import UpdateNotice from './components/notice/CRUD/UpdateNotice';
+import Suggest from './components/suggest/Suggest';
+import CreateSuggest from './components/suggest/CRUD/CreateSuggest';
+import ReadSuggest from './components/suggest/CRUD/ReadSuggest';
+import UpdateSuggest from './components/suggest/CRUD/UpdateSuggest';
 
 function App() {
   return (
@@ -26,6 +30,10 @@ function App() {
         <Route path="/notice/process/new_Post" element={<CreateNotice />} />
         <Route path="/notice/PostView/:no" element={<ReadNotice />} />
         <Route path="/notice/Postview/:no/process/update" element={<UpdateNotice />} />
+        <Route path="/suggest" element={<Suggest />} />
+        <Route path="/suggest/process/new_Post" element={<CreateSuggest />} />
+        <Route path="/suggest/PostView/:no" element={<ReadSuggest />} />
+        <Route path="/suggest/Postview/:no/process/update" element={<UpdateSuggest />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,16 +1,16 @@
 import React from 'react';
-import './ElementNotice.css';
+import './Element.css';
 
-const ListNotice = (props) => {
+const List = (props) => {
   const { headersName, children } = props;
 
   return (
-    <table className="ListNotice">
+    <table className="List">
       <thead>
         <tr>
           {headersName.map((item, index) => {
             return (
-              <td className="ListNotice-header-column" key={index}>
+              <td className="List-header-column" key={index}>
                 {item}
               </td>
             );
@@ -22,4 +22,4 @@ const ListNotice = (props) => {
   );
 };
 
-export default ListNotice;
+export default List;
