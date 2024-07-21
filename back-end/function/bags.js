@@ -104,11 +104,9 @@ router.post("/bags/form", (req, res) => {
             }
 
             if (userSameTimeReservations[0].count > 0) {
-              return res
-                .status(400)
-                .json({
-                  message: "동일 시간대에 이미 예약한 좌석이 있습니다.",
-                });
+              return res.status(400).json({
+                message: "동일 시간대에 이미 예약한 좌석이 있습니다.",
+              });
             }
 
             // 사용자의 당일 예약 횟수 확인
@@ -131,11 +129,9 @@ router.post("/bags/form", (req, res) => {
                     : 0;
 
                 if (reservationCount >= 2) {
-                  return res
-                    .status(400)
-                    .json({
-                      message: "하루 최대 예약 가능 시간은 2시간입니다.",
-                    });
+                  return res.status(400).json({
+                    message: "하루 최대 예약 가능 시간은 2시간입니다.",
+                  });
                 }
 
                 // 예약 삽입
