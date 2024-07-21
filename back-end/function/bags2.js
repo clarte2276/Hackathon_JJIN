@@ -74,33 +74,17 @@ router.post("/bags/form2", (req, res) => {
     pool.query(
       `
       SELECT COUNT(*) as count
-      FROM bags
-      WHERE bag_id = ? AND reservation_hour = ? AND reservation_date = ?
-      UNION ALL
-      SELECT COUNT(*) as count
       FROM bags2
       WHERE bag_id = ? AND reservation_hour = ? AND reservation_date = ?
     `,
-      [
-        bag_id,
-        reservation_hour,
-        currentDateString,
-        bag_id,
-        reservation_hour,
-        currentDateString,
-      ],
+      [bag_id, reservation_hour, currentDateString],
       (err, existingReservations) => {
         if (err) {
           console.error("예약 확인 오류:", err);
           return res.status(500).json({ message: "서버 내부 오류" });
         }
 
-        const totalCount = existingReservations.reduce(
-          (sum, row) => sum + row.count,
-          0
-        );
-
-        if (totalCount > 0) {
+        if (existingReservations[0].count > 0) {
           return res.status(400).json({ message: "이미 예약된 좌석입니다." });
         }
 
@@ -230,8 +214,12 @@ router.get("/api/reservations", (req, res) => {
   }
 
   pool.query(
-    "SELECT * FROM bags2 WHERE user_id = ?",
-    [userId],
+    `
+    SELECT '중앙도서관' AS location, bag_id, reservation_hour, reservation_date FROM bags WHERE user_id = ?
+    UNION ALL
+    SELECT '학림관' AS location, bag_id, reservation_hour, reservation_date FROM bags2 WHERE user_id = ?
+    `,
+    [userId, userId],
     (err, results) => {
       if (err) {
         console.error("예약 내역 가져오기 오류:", err);
