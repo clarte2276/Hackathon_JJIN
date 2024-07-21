@@ -1,4 +1,4 @@
-/* .NoticeAll_layout {
+.NoticeAll_layout {
   display: grid;
   justify-content: center;
 }
@@ -17,4 +17,4 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
-} */
+}

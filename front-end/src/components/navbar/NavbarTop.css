@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 380px;
 }
 
 .NavbarTop_layout {
@@ -15,6 +16,5 @@
 }
 
 .UserInfo_layout {
-  display: flex;
-  gap: 15px;
+  width: 380px;
 }
