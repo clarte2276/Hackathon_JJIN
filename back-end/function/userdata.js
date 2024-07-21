@@ -39,4 +39,16 @@ router.get("/api/user", (req, res) => {
   );
 });
 
+router.get("/api/empty", (req, res) => {
+  pool.query(
+    "SELECT * FROM empty_space WHERE reserved = FALSE",
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ error: "Database query error" });
+      }
+      res.json(results);
+    }
+  );
+});
+
 module.exports = router;
