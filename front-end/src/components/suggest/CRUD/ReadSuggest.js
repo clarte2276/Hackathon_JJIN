@@ -129,6 +129,9 @@ function ReadSuggest() {
                     <div className="commentNickname">익명</div>
                     <div>{comment.content}</div>
                     <div className="commentDate">{comment.created_date}</div>
+                    <div>
+                      <button onClick={() => handleDelete(comment.comment_no)}>삭제</button>
+                    </div>
                   </div>
                 </div>
               ))
@@ -137,7 +140,6 @@ function ReadSuggest() {
             )}
           </div>
           <div>
-            <div>내 닉네임</div>
             <CreateComment postId={no} onCommentSubmit={handleCommentSubmit} />
           </div>
         </div>

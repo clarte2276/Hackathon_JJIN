@@ -122,25 +122,6 @@ function CreateComment({ postId, onCommentSubmit }) {
           <input type="submit" value="등록"></input>
         </div>
       </form>
-
-      <div>
-        {comments.length > 0 ? (
-          comments.map((comment) => (
-            <div className="comment_all" key={comment.comment_no}>
-              <div>
-                <div className="commentNickname">익명</div>
-                <div>{comment.content}</div>
-                <div className="commentDate">{comment.created_date}</div>
-                <div>
-                  <button onClick={() => handleDelete(comment.comment_no)}>삭제</button>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>댓글이 없습니다.</div>
-        )}
-      </div>
     </div>
   );
 }
