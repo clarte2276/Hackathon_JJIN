@@ -93,7 +93,7 @@ function Reservation() {
       <NavbarTop></NavbarTop>
       <div className="reservationPage">
         <div className="reservation_title">
-          <h1>빈백 예약하기</h1>
+          <h1>중앙도서관 빈백 예약하기</h1>
         </div>
         <div className="reservation-container">
           <div className="notice-section">
