@@ -1,7 +1,9 @@
 .Notice_all {
-  width: 700px;
+  width: 550px;
   height: 245px;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .nameLink_layout {
@@ -61,7 +63,7 @@
   font-size: 22px;
   display: flex;
   align-items: center;
-  margin-left: 7px;
+  margin-left: 15px;
 }
 
 .NoticeHome_plus {
