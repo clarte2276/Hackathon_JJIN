@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
 .SuggestAll_layout {
   display: grid;
   justify-content: center;
@@ -45,7 +47,7 @@
 }
 
 .searchform_input {
-  padding-left: 5px;
+  padding-left: 10px;
   height: 40px;
   width: 300px;
 }
@@ -79,7 +81,6 @@
   font-size: 16px;
   font-weight: bold;
   border-bottom: 1px solid #000000;
-  width: 400px;
 }
 
 .List-column {
@@ -99,6 +100,7 @@
   background-color: #ea5514;
   padding: 8px 16px;
   border-radius: 4px;
+  font-weight: 600;
 }
 
 .CreateButton_layout {
