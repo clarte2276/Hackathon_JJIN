@@ -131,12 +131,16 @@ function ReadSuggest() {
 
   const { title, created_date, content } = post;
 
+  const createMarkup = (html) => {
+    return { __html: html.replace(/\n/g, '<br>') };
+  };
+
   return (
     <>
       <NavbarTop />
       <div className="Read_all">
         <div>
-          <div className="orangeSuggest">건의사항</div>
+          <div className="orangeNoticeSuggest">건의사항</div>
           <div className="ReadTitle">{title}</div>
           <div className="infoUpdateDelete">
             <div className="info">
@@ -152,10 +156,10 @@ function ReadSuggest() {
               </div>
             </div>
           </div>
-          <div className="Suggest_underline"></div>
+          <div className="NoticeSuggest_underline"></div>
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
-            <p>{content}</p>
+            <div dangerouslySetInnerHTML={createMarkup(content)} />
           </div>
           <div className="ReadBackBtn_layout">
             <button className="Read_backBtn" type="button" onClick={backToList}>
@@ -173,7 +177,7 @@ function ReadSuggest() {
                   <div className="comment_width">
                     <div className="commentNickname">{comment.name}</div>
                     <br />
-                    <div>{comment.content}</div>
+                    <div dangerouslySetInnerHTML={createMarkup(comment.content)} />
                     <br />
                     <div className="commentdateDelete_layout">
                       <div className="commentDate">{comment.created_date}</div>

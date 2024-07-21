@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import './CRUD.css';
+import '../../suggest/CRUD/CRUD.css';
 import axios from 'axios';
 import CRUDHeader from './CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';

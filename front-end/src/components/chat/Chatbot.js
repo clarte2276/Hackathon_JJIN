@@ -127,7 +127,7 @@ const Chatbot = ({ currentUser }) => {
                 <strong className={msg.user === aiuser ? "nickname" : ""}>
                   {msg.user}:
                 </strong>{" "}
-                {msg.text}
+                <span dangerouslySetInnerHTML={{ __html: msg.text }} />
               </div>
             </li>
           ))}
@@ -157,13 +157,10 @@ const Chatbot = ({ currentUser }) => {
         <div className="chatbot-button-row">
           <button
             onClick={() =>
-              handleButtonClick(
-                "TEXT 3",
-                "나의 완벽한 숙면을 위해 음악을 추천해줄래?"
-              )
+              handleButtonClick("TEXT 3", "심심해! 랜덤 단체채팅 하고 싶어!")
             }
           >
-            완벽한 숙면을 위해 음악을 추천해줄래?
+            심심해! 랜덤 단체채팅 하고 싶어!
           </button>
           <button onClick={handleSeatsButtonClick}>
             현재 예약 가능한 좌석 현황을 알려주라

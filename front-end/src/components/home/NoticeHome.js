@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./NoticeHome.css";
+import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './NoticeHome.css';
 
 function NoticeHome() {
   const [dataList, setDataList] = useState([]);
@@ -11,11 +11,11 @@ function NoticeHome() {
     axios
       .post(`/notice`)
       .then((response) => {
-        console.log("응답 데이터:", response.data.posts); // 응답 데이터 출력
+        console.log('응답 데이터:', response.data.posts); // 응답 데이터 출력
         setDataList(response.data.posts);
       })
       .catch((error) => {
-        console.error("There was an error fetching the posts!", error);
+        console.error('There was an error fetching the posts!', error);
       });
   }, []);
 
@@ -33,8 +33,7 @@ function NoticeHome() {
             for (let i = 0; i < Math.min(3, dataList.length); i++) {
               items.push(
                 <div key={i} className="Notice_body">
-                  <h3>{dataList[i].title}</h3>
-                  {/* <div>{i === 0 && <div className="BorderLine"></div>}</div> */}
+                  <div className="HomeNotice_title">{dataList[i].title}</div>
                 </div>
               );
             }
