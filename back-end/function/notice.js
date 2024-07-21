@@ -32,31 +32,31 @@ const isAdmin = (req) => {
 
 // 게시판 데이터 및 검색 기능 통합
 router.get("/", (req, res) => {
-    const adminStatus = isAdmin(req);
-    const keyword = req.query.keyword ? `%${req.query.keyword}%` : '%';
-  
-    pool.query(
-      `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d') AS created_date, file_data 
+  const adminStatus = isAdmin(req);
+  const keyword = req.query.keyword ? `%${req.query.keyword}%` : "%";
+
+  pool.query(
+    `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d') AS created_date, file_data 
        FROM notice 
        WHERE title LIKE ? OR content LIKE ? OR user_id LIKE ? 
        ORDER BY created_date DESC`,
-      [keyword, keyword, keyword],
-      (error, results) => {
-        if (error) {
-          console.error("데이터베이스 오류:", error);
-          res.status(500).json({
-            error: "서버에서 게시판 데이터를 불러오는 중 오류가 발생했습니다.",
-          });
-        } else {
-          res.json({
-            admin: adminStatus,
-            user: req.session.user,
-            posts: results,
-          });
-        }
+    [keyword, keyword, keyword],
+    (error, results) => {
+      if (error) {
+        console.error("데이터베이스 오류:", error);
+        res.status(500).json({
+          error: "서버에서 게시판 데이터를 불러오는 중 오류가 발생했습니다.",
+        });
+      } else {
+        res.json({
+          admin: adminStatus,
+          user: req.session.user,
+          posts: results,
+        });
       }
-    );
-  });
+    }
+  );
+});
 
 // 새 글 작성 (관리자만)
 router.post("/process/new_Post", upload.single("file"), (req, res) => {

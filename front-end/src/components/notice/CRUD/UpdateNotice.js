@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import CRUDHeader from './CRUDHeader';
-import NavbarTop from '../../navbar/NavbarTop';
-import Footer from '../../Footer';
-import '../../suggest/CRUD/CRUD.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import CRUDHeader from "./CRUDHeader";
+import NavbarTop from "../../navbar/NavbarTop";
+import Footer from "../../Footer";
+import "../../suggest/CRUD/CRUD.css";
+import axios from "axios";
 
 function UpdateNotice() {
   const { no } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState({
-    title: '',
-    body: '',
+    title: "",
+    body: "",
     file_data: null,
   });
   const [file, setFile] = useState(null);
@@ -34,11 +34,11 @@ function UpdateNotice() {
       })
       .catch((error) => {
         if (error.response && error.response.status === 403) {
-          alert('수정 권한이 없습니다.');
+          alert("수정 권한이 없습니다.");
           navigate(`/notice/PostView/${no}`);
         } else {
-          console.error('게시글을 불러오는 중 오류가 발생했습니다!', error);
-          setError('게시글을 불러오는 중 오류가 발생했습니다!');
+          console.error("게시글을 불러오는 중 오류가 발생했습니다!", error);
+          setError("게시글을 불러오는 중 오류가 발생했습니다!");
           setLoading(false);
         }
       });
@@ -60,28 +60,28 @@ function UpdateNotice() {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('title', post.title);
-    formData.append('content', post.body);
+    formData.append("title", post.title);
+    formData.append("content", post.body);
     if (file) {
-      formData.append('file', file);
+      formData.append("file", file);
     }
 
     try {
       await axios.post(`/notice/PostView/${no}/process/update`, formData, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
-      alert('수정되었습니다.');
+      alert("수정되었습니다.");
       navigate(`/notice/PostView/${no}`);
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        alert('수정 권한이 없습니다.');
+        alert("수정 권한이 없습니다.");
         navigate(`/notice/PostView/${no}`);
       } else {
-        console.error('게시글을 수정하는 중 오류가 발생했습니다:', error);
-        alert('게시글을 수정하는 중 오류가 발생했습니다:');
+        console.error("게시글을 수정하는 중 오류가 발생했습니다:", error);
+        alert("게시글을 수정하는 중 오류가 발생했습니다:");
       }
     }
   };
@@ -92,10 +92,10 @@ function UpdateNotice() {
         withCredentials: true,
       });
       setPost({ ...post, file_data: null });
-      alert('파일이 삭제되었습니다.');
+      alert("파일이 삭제되었습니다.");
     } catch (error) {
-      console.error('파일 삭제 중 오류가 발생했습니다:', error);
-      alert('파일 삭제 중 오류가 발생했습니다.');
+      console.error("파일 삭제 중 오류가 발생했습니다:", error);
+      alert("파일 삭제 중 오류가 발생했습니다.");
     }
   };
 
@@ -160,7 +160,11 @@ function UpdateNotice() {
                 <span>현재 업로드된 파일</span>
                 {post.file_data ? (
                   <>
-                    <img src={`data:image/jpeg;base64,${post.file_data}`} alt="Current Upload" width="200" />
+                    <img
+                      src={`data:image/jpeg;base64,${post.file_data}`}
+                      alt="Current Upload"
+                      width="200"
+                    />
                     <br />
                     <button type="button" onClick={deleteFile}>
                       파일 삭제

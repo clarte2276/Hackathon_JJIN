@@ -1,5 +1,5 @@
-import React from 'react';
-import './Element.css';
+import React from "react";
+import "./Element.css";
 
 function TitleBody(props) {
   return (

@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import '../../suggest/CRUD/CRUD.css';
-import axios from 'axios';
-import CRUDHeader from './CRUDHeader';
-import NavbarTop from '../../navbar/NavbarTop';
-import Footer from '../../Footer';
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "../../suggest/CRUD/CRUD.css";
+import axios from "axios";
+import CRUDHeader from "./CRUDHeader";
+import NavbarTop from "../../navbar/NavbarTop";
+import Footer from "../../Footer";
 
 function CreateNotice() {
   const navigate = useNavigate();
 
   const [board, setBoard] = useState({
-    title: '',
-    body: '',
+    title: "",
+    body: "",
   });
   const [file, setFile] = useState(null);
 
@@ -33,29 +33,31 @@ function CreateNotice() {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('title', title);
-    formData.append('content', body);
-    formData.append('created_date', new Date().toISOString());
+    formData.append("file", file);
+    formData.append("title", title);
+    formData.append("content", body);
+    formData.append("created_date", new Date().toISOString());
 
     try {
       const response = await axios.post(`/notice/process/new_Post`, formData, {
         withCredentials: true,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
       const newPostId = response.data.no;
-      alert('등록되었습니다.');
-      navigate(`/notice/PostView/${newPostId}`, { state: { newPost: response.data } });
+      alert("등록되었습니다.");
+      navigate(`/notice/PostView/${newPostId}`, {
+        state: { newPost: response.data },
+      });
     } catch (error) {
-      console.error('Error saving post:', error);
-      alert('글을 저장하는 도중 오류가 발생했습니다.');
+      console.error("Error saving post:", error);
+      alert("글을 저장하는 도중 오류가 발생했습니다.");
     }
   };
 
   const backToList = () => {
-    navigate('/notice');
+    navigate("/notice");
   };
 
   return (
@@ -111,7 +113,11 @@ function CreateNotice() {
               <button className="backBtn" type="button" onClick={backToList}>
                 취소
               </button>
-              <input className="CreateBtn" type="submit" value="등록하기"></input>
+              <input
+                className="CreateBtn"
+                type="submit"
+                value="등록하기"
+              ></input>
             </div>
           </form>
         </div>
