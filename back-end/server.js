@@ -47,7 +47,8 @@ const signupRoutes = require("./function/signup");
 const chatbotRoutes = require("./function/chatbot");
 const userdataRoutes = require("./function/userdata");
 const check_loginRoutes = require("./function/check_login");
-const boardRoutes = require("./function/board");
+const noticeRoutes = require("./function/notice");
+const searchRoutes = require("./function/search");
 
 app.use("/", mypageRoutes);
 app.use("/", loginRoutes);
@@ -56,7 +57,8 @@ app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
 app.use("/", chatbotRoutes);
 app.use("/", socketRoutes);
-app.use("/", boardRoutes);
+app.use("/", noticeRoutes);
+app.use("/", searchRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
