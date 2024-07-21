@@ -44,7 +44,7 @@ const SeatStatus = () => {
           <div className="room-name">중앙도서관</div>
           <div className="room-seats">
             <span className="available-seats">
-              <p>가능한 예약 갯수 : </p>
+              <p>예약 가능 갯수 : </p>
               {availableSeats} / 168
             </span>
           </div>
@@ -59,7 +59,7 @@ const SeatStatus = () => {
           <div className="room-name">학림관</div>
           <div className="room-seats">
             <span className="available-seats">
-              <p>가능한 예약 갯수 :</p>
+              <p>예약 가능 갯수 :</p>
               {HavailableSeats} / 32
             </span>
           </div>

@@ -139,7 +139,7 @@ function Reservation2() {
             </div>
             <br></br>
             <div>
-              <strong>가능 예약 횟수 : {2 - canReserve} / 2</strong>
+              <strong>예약 가능 횟수 : {2 - canReserve} / 2</strong>
             </div>
           </div>
 
