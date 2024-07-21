@@ -8,7 +8,7 @@ const predefinedPrompts = {
   "TEXT 2":
     "중앙도서관은 09:00 ~ 21:00에 운영하며 빈백 개수는 20개, 학림관은 10:00 ~ 17:00에 운영하며 빈백 개수는 4개가 있어용~~🥰",
   "TEXT 3":
-    "저는 유튜브로 수면 ASMR 음악을 들어용~~! 유튜브 링크로 추천해드릴게용~~😉'https://www.youtube.com/results?search_query=%EC%88%98%EB%A9%B4+ASMR'",
+    "이곳에 가시면 DreamBag 사용자들과 익명 단체 톡을 참여할 수 있어요! <a href='/randomchat'>DreamBag 랜덤 단체 채팅방</a>",
 };
 
 const initSocket = (server, sessionMiddleware, dbConfig) => {

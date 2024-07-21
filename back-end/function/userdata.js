@@ -3,7 +3,7 @@ const express = require("express");
 const mysql = require("mysql");
 const db_config = require("../config/db_config.json");
 const router = express.Router();
-
+const cron = require("node-cron");
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: db_config.host,
@@ -102,5 +102,92 @@ router.get("/api/user_reserve", (req, res) => {
     }
   );
 });
+
+// API 라우트 추가
+router.get("/api/messages", (req, res) => {
+  pool.query("SELECT message FROM randomchat", (err, results) => {
+    if (err) {
+      console.error("Failed to fetch messages:", err);
+      res.status(500).send("Failed to fetch messages");
+    } else {
+      res.json(results.map((row) => row.message));
+    }
+  });
+});
+
+router.post("/api/messages", (req, res) => {
+  const message = req.body.message;
+  if (!message || message.trim() === "") {
+    return res.status(400).send("Message is empty");
+  }
+
+  pool.query(
+    "INSERT INTO randomchat (message) VALUES (?)",
+    [message],
+    (err, result) => {
+      if (err) {
+        console.error("Failed to save message to database:", err);
+        res.status(500).send("Failed to save message");
+      } else {
+        console.log("Message saved to database");
+        res.json({ message });
+      }
+    }
+  );
+});
+
+// 매일 자정에 count 리셋
+cron.schedule("0 0 * * *", () => {
+  pool.query(
+    "UPDATE user_reservations SET reservation_count = 0",
+    (err, result) => {
+      if (err) {
+        console.error("예약 count 리셋 오류:", err);
+      } else {
+        console.log("예약 count가 리셋되었습니다.");
+      }
+    }
+  );
+});
+cron.schedule("0 0 * * *", () => {
+  pool.query("TRUNCATE TABLE bags", (err, result) => {
+    if (err) {
+      console.error("테이블 비우기 오류:", err);
+    } else {
+      console.log("bags 테이블이 초기화되었습니다.");
+    }
+  });
+});
+
+//랜덤채팅방 초기화
+const initializeRandomChat = () => {
+  pool.query("TRUNCATE TABLE randomchat", (err, result) => {
+    if (err) {
+      console.error("테이블 비우기 오류:", err);
+    } else {
+      console.log("randomchat 테이블이 초기화되었습니다.");
+      const initialMessage = {
+        message:
+          "안녕하세요~ 랜덤채팅방입니다!\n 랜덤채팅방은 5분마다 초기화됩니다! 즐겁게 놀아보세용~",
+        created_at: new Date(),
+      };
+
+      pool.query(
+        "INSERT INTO randomchat SET ?",
+        initialMessage,
+        (err, result) => {
+          if (err) {
+            console.error("초기 메시지 삽입 오류:", err);
+          } else {
+            console.log("초기 메시지가 삽입되었습니다.");
+          }
+        }
+      );
+    }
+  });
+};
+
+// 매 시간마다 실행
+cron.schedule("*/5 * * * *", initializeRandomChat);
 
 module.exports = router;
