@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 .UserInfo_layout {
   display: flex;
@@ -15,9 +15,11 @@
   text-decoration: none;
   color: #000;
   font-size: 18px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  font-weight: 600;
   padding: 7px 18px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .userinfo_link:hover {
@@ -30,8 +32,8 @@
   background-color: inherit;
   padding: 7px 18px;
   font-size: 18px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 600;
   color: #000;
   cursor: pointer;
 }
@@ -40,8 +42,8 @@
   .userinfo_link,
   .UserInfo_layout button {
     font-size: 10px; /* 작은 화면에서 텍스트 크기 줄이기 */
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 600;
     padding: 3px 8px;
   }
 }
