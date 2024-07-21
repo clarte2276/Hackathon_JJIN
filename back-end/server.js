@@ -82,7 +82,7 @@ const initSocket = require("./function/socket");
 initSocket(server, sessionMiddleware, db_config);
 
 // 매일 자정에 count 리셋
-cron.schedule("30 20 * * *", () => {
+cron.schedule("0 0 * * *", () => {
   pool.query(
     "UPDATE user_reservations SET reservation_count = 0",
     (err, result) => {
@@ -94,7 +94,7 @@ cron.schedule("30 20 * * *", () => {
     }
   );
 });
-cron.schedule("30 20 * * *", () => {
+cron.schedule("0 0 * * *", () => {
   pool.query("TRUNCATE TABLE bags", (err, result) => {
     if (err) {
       console.error("테이블 비우기 오류:", err);
