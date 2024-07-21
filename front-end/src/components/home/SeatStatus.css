@@ -27,7 +27,7 @@
 
 .seat-room {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   padding: 0.5rem 0;
   border-bottom: 1px solid #eee;
@@ -40,6 +40,7 @@
   color: white;
   width: 100px;
   text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .room-seats {
@@ -50,5 +51,18 @@
 .available-seats {
   font-size: 1rem;
   color: #333;
-  margin-right: 0.5rem;
+}
+
+.reserve-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.reserve-button:hover {
+  background-color: #0056b3;
 }

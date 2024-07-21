@@ -50,6 +50,17 @@ router.get("/api/empty", (req, res) => {
   });
 });
 
+router.get("/api/empty2", (req, res) => {
+  pool.query("SELECT COUNT(*) AS total FROM bags2", (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: "Database query error" });
+    }
+    const HtotalReserved = results[0].total;
+    const HavailableSeats = 32 - HtotalReserved;
+    res.json({ availableSeats: HavailableSeats });
+  });
+});
+
 router.get("/api/empty_status", (req, res) => {
   pool.query("SELECT COUNT(*) AS total FROM bags", (error, results) => {
     if (error) {
@@ -59,6 +70,37 @@ router.get("/api/empty_status", (req, res) => {
     const availableSeats = 168 - totalReserved;
     res.json({ availableSeats });
   });
+});
+
+router.get("/api/empty_status2", (req, res) => {
+  pool.query("SELECT COUNT(*) AS total FROM bags2", (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: "Database query error" });
+    }
+    const HtotalReserved = results[0].total;
+    const HavailableSeats = 32 - HtotalReserved;
+    res.json({ HavailableSeats });
+  });
+});
+
+router.get("/api/user_reserve", (req, res) => {
+  const { user_id } = req.query;
+  pool.query(
+    "SELECT reservation_count FROM user_reservations WHERE user_id = ? AND reservation_date = CURDATE()",
+    [user_id],
+    (error, results) => {
+      if (error) {
+        return res.status(500).json({ error: "Database query error" });
+      }
+
+      if (results.length === 0) {
+        return res.json({ reservation_count: 0 });
+      }
+
+      const reservationCount = results[0].reservation_count;
+      res.json({ reservation_count: reservationCount });
+    }
+  );
 });
 
 module.exports = router;

@@ -61,13 +61,15 @@ const ChatbotRoutes = require("./function/chatbot");
 const signupRoutes = require("./function/signup");
 const userdataRoutes = require("./function/userdata");
 const bagsRoutes = require("./function/bags");
+const bagsRoutes2 = require("./function/bags2");
 const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
 const suggestRoutes = require("./function/suggest");
-
+const cancelReservationsRoutes = require("./function/cancelReservations");
 app.use("/", noticeRoutes);
 app.use("/", searchRoutes);
 app.use("/", bagsRoutes);
+app.use("/", bagsRoutes2);
 app.use("/", mypageRoutes);
 app.use("/", loginRoutes);
 app.use("/", processRoutes);
@@ -75,6 +77,7 @@ app.use("/", ChatbotRoutes);
 app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
 app.use("/", suggestRoutes); //추가
+app.use("/", cancelReservationsRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);

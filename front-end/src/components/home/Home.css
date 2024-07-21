@@ -32,3 +32,7 @@
 .homechaticon:hover {
   animation: shake 0.5s infinite; /* Apply the shaking animation on hover */
 }
+
+.content {
+  overflow-x: hidden;
+}

@@ -15,14 +15,14 @@ const pool = mysql.createPool({
 });
 
 // 예약 가능 시간대 확인 및 예약 페이지
-router.get("/bags/form", (req, res) => {
+router.get("/bags/form2", (req, res) => {
   const currentDate = new Date();
   const dateString = currentDate.toISOString().split("T")[0];
 
   pool.query(
     `
     SELECT bag_id, reservation_hour
-    FROM bags
+    FROM bags2
     WHERE reservation_date = ?
   `,
     [dateString],
@@ -47,7 +47,7 @@ router.get("/bags/form", (req, res) => {
 });
 
 // 예약하기
-router.post("/bags/form", (req, res) => {
+router.post("/bags/form2", (req, res) => {
   const { userId, reservation_hour, bag_id } = req.body;
 
   if (!userId || !bag_id || reservation_hour === undefined) {
@@ -74,7 +74,7 @@ router.post("/bags/form", (req, res) => {
     pool.query(
       `
       SELECT COUNT(*) as count
-      FROM bags
+      FROM bags2
       WHERE bag_id = ? AND reservation_hour = ? AND reservation_date = ?
     `,
       [bag_id, reservation_hour, currentDateString],
@@ -152,8 +152,8 @@ router.post("/bags/form", (req, res) => {
                 // 예약 삽입
                 pool.query(
                   `
-            INSERT INTO bags (user_id, bag_id, reservation_hour, reservation_date, location)
-            VALUES (?, ?, ?, ?, '중앙도서관')
+            INSERT INTO bags2 (user_id, bag_id, reservation_hour, reservation_date, location)
+            VALUES (?, ?, ?, ?, '학림관')
           `,
                   [userId, bag_id, reservation_hour, currentDateString],
                   (err) => {

@@ -171,7 +171,7 @@ function ReadSuggest() {
               comments.map((comment) => (
                 <div className="comment_all" key={comment.comment_no}>
                   <div className="comment_width">
-                    <div className="commentNickname">익명</div>
+                    <div className="commentNickname">{comment.name}</div>
                     <br />
                     <div>{comment.content}</div>
                     <br />

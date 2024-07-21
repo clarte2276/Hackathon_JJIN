@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Kanit:wght@400;700&family=IBM+Plex+Sans+KR:wght@600&family=Lalezar&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lalezar&display=swap');
+
+.headerAll {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem;
+  background-color: #fff3e1;
+  font-family: 'Noto Sans KR', sans-serif;
+  height: 480px;
+}
+
+.headerAll p:first-of-type {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.text1 {
+  position: relative;
+  width: 171px;
+  height: 40px;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 48px;
+  color: #1e1e1e;
+}
+
+.text2 {
+  position: relative;
+  width: 542px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  color: #ffb47e;
+}
+
+.headerAll h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 10px 0;
+
+  position: relative;
+  width: 634px;
+  height: 150px;
+
+  font-family: 'Lalezar';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 140px;
+
+  color: #ea5514;
+
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+}
+
+.headerAll p:last-of-type {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 10px 0 30px 0;
+  font-family: 'Kanit', sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #ffb47e;
+}
+
+.mainImg {
+  width: 800px;
+  max-width: 800px;
+  height: 800px;
+  margin-right: 10%;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-left: 30%;
+  padding-left: 10%;
+  margin-top: 2%;
+}
+
+.headerImg {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 22%;
+}
