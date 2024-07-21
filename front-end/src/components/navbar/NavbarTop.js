@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from './Logo.js';
 import ClickIcon from './ClickIcon.js';
+import MenuTap from './MenuTap.js';
 import UserInfo from './UserInfo.js';
 
 import './NavbarTop.css';
@@ -12,6 +13,9 @@ function NavbarTop() {
         <div className="LogoIcon_layout">
           <Logo />
           <ClickIcon />
+        </div>
+        <div>
+          <MenuTap />
         </div>
         <div className="UserInfo_layout">
           <UserInfo />
