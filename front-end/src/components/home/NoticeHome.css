@@ -2,8 +2,6 @@
   width: 700px;
   height: 245px;
   margin-left: 20px;
-  border: 1.1px solid rgb(206, 206, 206);
-  border-radius: 1.5%;
 }
 
 .nameLink_layout {
@@ -16,10 +14,9 @@
   font-weight: 500;
   font-style: normal;
   font-size: 1.1em;
-  background-color: rgb(231, 231, 231);
   margin: 0px 15px;
-  padding: 10px 25px 10px;
-  clip-path: inset(1% 1% 1% 1% round 10px);
+  border: 0.5px solid #c0c0c0;
+  border-radius: 8px;
 }
 
 .notice_name {
@@ -33,17 +30,15 @@
   padding-bottom: 20px;
 }
 
-.Notice_body_body {
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  font-weight: 300;
-  font-style: normal;
-  font-size: 0.85em;
-}
-
 .Notice_body {
-  color: rgb(98, 98, 98);
+  color: #347988;
   padding-top: 10px;
   padding-bottom: 10px;
+  border: 0.5px solid #c0c0c0;
+}
+
+.Notice_body h3 {
+  margin: 0;
 }
 
 .BorderLine {
