@@ -148,21 +148,16 @@
 
 .form-bag {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-
-/* .form-bag p {
-  font-size: 1.1rem;
-  font-family: 'Noto Sans KR', sans-serif;
-  margin-top: 3%;
-} */
 
 .bag-seats {
   display: flex;
   flex-wrap: wrap;
   gap: 3rem;
+  justify-content: space-between;
   background-color: #fff3e1;
   padding: 1rem;
   border-radius: 8px;
