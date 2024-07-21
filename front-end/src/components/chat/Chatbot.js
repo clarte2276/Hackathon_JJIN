@@ -99,6 +99,7 @@ const Chatbot = ({ currentUser }) => {
 
   return (
     <div className="chatbot-container-unique">
+      <h1>Dream BAG</h1>
       <div className="chatbot-bot-intro-unique">
         <img src={chatbotImg} alt="chatBotprofile" />
         <p>
@@ -133,7 +134,7 @@ const Chatbot = ({ currentUser }) => {
         </div>
         <div className="chatbot-button-row">
           <button onClick={() => handleButtonClick('TEXT 3', '나의 완벽한 숙면을 위해 음악을 추천해줄래?')}>
-            나의 완벽한 숙면을 위해 음악을 추천해줄래?
+            완벽한 숙면을 위해 음악을 추천해줄래?
           </button>
           <button onClick={handleSeatsButtonClick}>현재 예약 가능한 좌석 현황을 알려주라</button>
         </div>
@@ -141,6 +142,7 @@ const Chatbot = ({ currentUser }) => {
       <form id="chatbot-chatform-unique" onSubmit={handleSubmit}>
         <input
           id="chatbot-messageinput-unique"
+          placeholder="typing your message"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           autoComplete="off"
