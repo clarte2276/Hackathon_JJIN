@@ -126,5 +126,5 @@ router.post("/process/update", checkLogin, async (req, res) => {
     res.status(500).json({ message: "비밀번호 해싱 실패" });
   }
 });
-
+router.use("/mypage", router);
 module.exports = router;
