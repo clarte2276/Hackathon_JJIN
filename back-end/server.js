@@ -50,14 +50,14 @@ const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
 const bagsRoutes = require("./function/bags");
 
-app.use("/", mypageRoutes);
-app.use("/", loginRoutes);
-app.use("/", check_loginRoutes);
-app.use("/", signupRoutes);
-app.use("/", chatbotRoutes);
-app.use("/", noticeRoutes);
-app.use("/", searchRoutes);
-app.use("/", bagsRoutes);
+app.use("/mypage", mypageRoutes);
+app.use("/loginpage", loginRoutes);
+app.use("/process", check_loginRoutes);
+app.use("/loginpage", signupRoutes);
+app.use("/chatbot", chatbotRoutes);
+app.use("/notice", noticeRoutes);
+app.use("/search", searchRoutes);
+app.use("/bags", bagsRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);

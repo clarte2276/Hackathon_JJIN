@@ -32,8 +32,12 @@ function Reservation() {
     setReservation_hour(event.target.value);
   };
 
-  const handleBagChange = (event) => {
-    setBag_id(event.target.value);
+  const handleBagChange = (selectOption) => {
+    if (selectOption) {
+      setBag_id(selectOption.value);
+    } else {
+      setBag_id(null);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -79,28 +83,19 @@ function Reservation() {
   return (
     <div className="reservationPage">
       <div className="reservation_title">
-        <h1>예약하기</h1>
+        <h1>좌석 예약하기</h1>
       </div>
       <div className="reservation-container">
         <div className="notice-section">
-          <h2>주의사항</h2>
+          <h2>※안내사항※</h2>
           <p>
-            - 대운동장의 총 수용 인원은 20,000명입니다.
+            [위치] 빈백은 중앙 도서관 3층 안내데스크 반대 방향에 있습니다.
             <br />
-            - 귀중품은 소지하지 않을 것을 권장합니다.
+            [시간] 빈백 사용 가능시간은 평일 오전 9시부터 저녁 9시까지입니다.
             <br />
-            * 대운동장 내 분실물에 대한 책임은 본인에게 있음을 사전에 알립니다.
+            [주의] 가져오신 짐, 쓰레기는 사용 종료시 꼭 챙겨주세요!!
             <br />
-            - 건강상에 문제가 있는 분들은 관람을 삼가 주시기 바랍니다.
-            <br />
-            * 개인의 질병으로 인한 불가피한 사고에 대해 주최 측은 책임지지 않습니다.
-            <br />
-            - 출연진과의 동선 근거리 접근을 제한합니다.
-            <br />
-            * 음식물과 선물 반입을 제한하오니 양해 부탁드립니다.
-            <br />
-            - 싸이 무대 중 물대포 사용으로 옷이 젖을 수 있음을 안내드립니다.
-            <br />- 방송국 촬영으로 인해 이후 송출될 수 있음을 미리 고지드립니다.
+            [사용] 각 예약당 1시간, 일일 최대 2시간 예약 가능합니다.
           </p>
         </div>
         <div className="form-userInfo">
@@ -125,6 +120,8 @@ function Reservation() {
                 <input type="radio" value="time3" checked={reservation_hour === 'time3'} onChange={handleHourChange} />
                 11:00 ~ 12:00
               </label>
+            </div>
+            <div>
               <label>
                 <input type="radio" value="time4" checked={reservation_hour === 'time4'} onChange={handleHourChange} />
                 12:00 ~ 13:00
@@ -145,12 +142,14 @@ function Reservation() {
               </label>
               <label>
                 <input type="radio" value="time8" checked={reservation_hour === 'time8'} onChange={handleHourChange} />
-                116:00 ~ 17:00
+                16:00 ~ 17:00
               </label>
               <label>
                 <input type="radio" value="time9" checked={reservation_hour === 'time9'} onChange={handleHourChange} />
                 17:00 ~ 18:00
               </label>
+            </div>
+            <div>
               <label>
                 <input
                   type="radio"
@@ -182,13 +181,13 @@ function Reservation() {
           </div>
 
           <div className="form-bag">
-            <h3>빈백 선택</h3>
+            <h3>좌석 선택</h3>
             <Select
               className="bagIdAlt"
               options={bagOptions}
               value={bagOptions.find((option) => option.value === bag_id)}
               onChange={handleBagChange}
-              placeholder="빈백 번호를 선택해주세요."
+              placeholder="좌석 번호 선택"
               styles={customSelectStyle}
               isClearable
             />

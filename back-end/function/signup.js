@@ -63,7 +63,4 @@ router.post("/process/signup", async (req, res) => {
   }
 });
 
-//app과 router 연동
-router.use("/loginpage", router);
-
 module.exports = router;
