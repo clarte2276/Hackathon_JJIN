@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 20px;
+  padding: 15px;
   background-color: #313131;
   font-family: 'Inter', sans-serif;
   color: #a5a5a5;
@@ -14,18 +14,24 @@
 
 .textLogo_layout {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .Footer_layout p {
-  padding-left: 200px;
-  padding-right: 100px;
+  margin-left: 16rem;
 }
 
 .hanul_name {
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .hanul_place {
   font-size: 12px;
+}
+
+.hanulLogo {
+  margin-right: 16rem;
+  display: grid;
+  align-items: center;
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
 .reservation_title {
   width: 820px;
@@ -183,6 +183,248 @@
 
 .bag-seat.selected {
   background-color: #ffa549;
+}
+
+.select_bag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bagImg {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.submitBtnPlace {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: end;
+  margin-right: 3%;
+}
+
+.submitBtn {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: #d9d9d9;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #b4b4b4;
+}
+
+.submitBtn.enabled {
+  background-color: #ffa549;
+  color: white;
+}
+
+.reservationLink {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+.reservation_title {
+  width: 820px;
+  display: grid;
+  justify-items: center;
+  margin-top: 20px;
+}
+
+.reservation_title h1 {
+  display: flex;
+  margin-left: 10%;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 2rem;
+  margin-top: 2%;
+  margin-bottom: 0;
+}
+
+.reservation-container body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.reservation-container {
+  width: 820px;
+  max-width: 1200px;
+  margin: 2rem auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.notice-section {
+  background-color: #fff9f9;
+  border-radius: 8px;
+  padding: 1.5rem;
+  padding-left: 3rem;
+  margin-bottom: 2rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+  justify-content: center;
+}
+
+.notice-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.notice-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.submitForm,
+.form-userInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 3rem;
+}
+
+.form-userInfo,
+.form-hour,
+.form-bag {
+  margin-bottom: 2rem;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.form-userInfo h3,
+.form-hour h3,
+.form-bag h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.form-userInfo p {
+  font-size: 1.1rem;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.userInfo-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.userInfo-label {
+  background-color: #d9d9d9;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  width: 100px;
+  text-align: center;
+}
+
+.userInfo-value {
+  display: flex;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #000;
+  width: 100px;
+  margin-left: 2rem;
+}
+
+.form-hour,
+.form-bag {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.time-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+}
+
+.time-slot {
+  flex: 0 0 auto;
+  width: 120px;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.time-slot.selected {
+  background-color: #ffa549;
+  color: white;
+}
+
+.time-slot:hover {
+  background-color: #ddd;
+}
+
+.form-bag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bag-seats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  background-color: #fff3e1;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.bag-seat {
+  width: 60px;
+  height: 60px;
+  background-color: #ff7f50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bag-seat:hover {
+  background-color: #ff6347;
+}
+
+.bag-seat.selected {
+  background-color: #ffa549;
+}
+
+.bag-seat.unavailable {
+  cursor: not-allowed;
+  background-color: #d3d3d3;
 }
 
 .select_bag {

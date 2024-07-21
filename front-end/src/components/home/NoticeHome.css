@@ -1,0 +1,69 @@
+.Notice_all {
+  width: 700px;
+  height: 245px;
+  margin-left: 20px;
+  border: 1.1px solid rgb(206, 206, 206);
+  border-radius: 1.5%;
+}
+
+.nameLink_layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Notice_title_body {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.1em;
+  background-color: rgb(231, 231, 231);
+  margin: 0px 15px;
+  padding: 10px 25px 10px;
+  clip-path: inset(1% 1% 1% 1% round 10px);
+}
+
+.notice_name {
+  text-decoration: none;
+  color: black;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.25em;
+  padding: 30px;
+  padding-bottom: 20px;
+}
+
+.Notice_body_body {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 0.85em;
+}
+
+.Notice_body {
+  color: rgb(98, 98, 98);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.BorderLine {
+  border-top: 2px solid #969696;
+  margin-top: 20px;
+}
+
+.notice_layout {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-top: 20px;
+  width: 144px;
+  height: 45px;
+}
+
+.notice_name {
+  padding: 0px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  margin-left: 7px;
+}
