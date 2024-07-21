@@ -6,7 +6,7 @@ function MenuTap() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const checkLogin = async (e, targetPath) => {
+  const checkLogin = async (e, targetPath, newWindow = false) => {
     e.preventDefault(); // 링크 기본 동작을 막음
     console.log('checkLogin 호출됨');
     try {
@@ -20,7 +20,11 @@ function MenuTap() {
       const result = await response.json();
       console.log('응답 받음:', result); // 디버깅용 로그
       if (result.loggedIn) {
-        navigate(targetPath); // 로그인 상태라면 원래 가려던 경로로 이동
+        if (newWindow) {
+          window.open(targetPath, '_blank');
+        } else {
+          navigate(targetPath); // 로그인 상태라면 원래 가려던 경로로 이동
+        }
       } else {
         navigate('/loginpage', { state: { from: targetPath } }); // 로그인되지 않은 상태라면 로그인 페이지로 리디렉션, 원래 경로 저장
       }
@@ -38,13 +42,12 @@ function MenuTap() {
         </Link>
         <Link
           className={`navbarMenu ${location.pathname === '/bag/form' ? 'underline' : ''}`}
-          onClick={(e) => checkLogin(e, '/bag/form')}
+          onClick={(e) => checkLogin(e, '/bag/form', true)} // 새 창으로 열기 위해 true 전달
         >
           Reservation
         </Link>
         <Link
           className={`navbarMenu ${location.pathname === '/notice' ? 'underline' : ''}`}
-          href="/notice"
           onClick={(e) => checkLogin(e, '/notice')}
         >
           Notice
