@@ -8,6 +8,7 @@ import ColumnList from './element/ColumnList.js';
 import RowList from './element/RowList.js';
 import CreateButtonNotice from './element/CreateButtonNotice.js';
 import PaginationCustom from './element/PaginationCustom.js';
+import NavbarTop from '../navbar/NavbarTop.js';
 import Footer from '../Footer.js';
 
 import './Notice.css';
@@ -64,6 +65,7 @@ const Notice = () => {
 
   return (
     <div className="NoticeAll_layout">
+      <NavbarTop />
       <div className="NoticeTop_layout">
         <TitleBodyNotice title="공지사항" body="이곳은 공지사항 안내하는 페이지입니다" />
         <form onSubmit={handleSearch} className="SearchForm">
