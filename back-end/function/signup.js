@@ -62,5 +62,5 @@ router.post("/process/signup", async (req, res) => {
     return res.json({ success: false, message: "비밀번호 해싱 실패" });
   }
 });
-
+router.use("/loginpage", router);
 module.exports = router;
