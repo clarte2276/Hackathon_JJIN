@@ -68,7 +68,7 @@ function Mypage() {
             <hr className="divider" />
             <div className="inputSpace">
               <div className="inputLine1">
-                <p>
+                <p className="inputName">
                   이름
                   <input type="text" name="name" placeholder="이름" value={name} disabled />
                 </p>
