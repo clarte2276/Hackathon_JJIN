@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.UserInfo_layout {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+.userinfo_link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  padding: 7px 18px;
+}
+
+.userinfo_link:hover {
+  cursor: pointer;
+  transition-duration: 0.4s;
+}
+
+.UserInfo_layout button {
+  border: none;
+  background-color: inherit;
+  padding: 7px 18px;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  color: #000;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .userinfo_link,
+  .UserInfo_layout button {
+    font-size: 10px; /* 작은 화면에서 텍스트 크기 줄이기 */
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    padding: 3px 8px;
+  }
+}
