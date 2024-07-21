@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import CRUDHeader from '../../notice/CRUD/CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';
 import Footer from '../../Footer';
-import '../../notice/CRUD/CRUD.css';
+import './CRUD.css';
 import axios from 'axios';
 
 function UpdateSuggest() {

@@ -4,22 +4,27 @@ import axios from 'axios';
 import CRUDHeader from '../../notice/CRUD/CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';
 import Footer from '../../Footer';
-import '../../notice/CRUD/CRUD.css';
+import CreateComment from '../comments/CreateComment';
+import './CRUD.css';
 
 function ReadSuggest() {
   const { no } = useParams();
   const navigate = useNavigate();
   const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageSrc, setImageSrc] = useState('');
 
   useEffect(() => {
-    const fetchPost = async () => {
+    const fetchPostAndComments = async () => {
       try {
         const postResponse = await axios.get(`/suggest/PostView/${no}`);
         console.log('응답 데이터:', postResponse.data);
         setPost(postResponse.data.post);
+
+        const commentsResponse = await axios.get(`/suggest/comments/${no}`);
+        setComments(commentsResponse.data);
 
         // 이미지 로드
         if (postResponse.data.post.file_data) {
@@ -40,7 +45,7 @@ function ReadSuggest() {
       }
     };
 
-    fetchPost();
+    fetchPostAndComments();
   }, [no]);
 
   const handleDelete = async () => {
@@ -59,6 +64,16 @@ function ReadSuggest() {
           alert('게시글 삭제 중 오류가 발생했습니다.');
         }
       }
+    }
+  };
+
+  const handleCommentSubmit = async () => {
+    // 댓글 등록 후 댓글 목록 다시 불러오기
+    try {
+      const commentsResponse = await axios.get(`/suggest/comments/${no}`);
+      setComments(commentsResponse.data);
+    } catch (error) {
+      console.error('댓글 목록을 다시 불러오는 중 오류 발생:', error);
     }
   };
 
@@ -102,6 +117,26 @@ function ReadSuggest() {
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
             <p>{content}</p>
+          </div>
+          <div>댓글</div>
+          <div>
+            {comments.length > 0 ? (
+              comments.map((comment) => (
+                <div className="comment_all" key={comment.comment_no}>
+                  <div>
+                    <div className="commentNickname">{comment.nickname}</div>
+                    <div>{comment.content}</div>
+                    <div className="commentDate">{comment.created_date}</div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>댓글이 없습니다.</div>
+            )}
+          </div>
+          <div>
+            <div>내 닉네임</div>
+            <CreateComment postId={no} onCommentSubmit={handleCommentSubmit} />
           </div>
         </div>
       </div>
