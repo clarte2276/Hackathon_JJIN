@@ -52,35 +52,6 @@ router.post("/", checkLogin, (req, res) => {
   });
 });
 
-// 예약정보 불러오기 -> 수정예정
-router.post("/reservations", checkLogin, (req, res) => {
-  const userID = req.session.user.id;
-
-  pool.getConnection((err, conn) => {
-    if (err) {
-      console.log("MySQL Connection Error", err);
-      if (conn) conn.release();
-      return res.status(500).send("DB 서버 연결 실패");
-    }
-
-    const reservationQuery =
-      "SELECT title, created_date FROM boardbuy WHERE id = ?";
-    conn.query(reservationQuery, [userID], (err, reservationRows) => {
-      conn.release();
-      if (err) {
-        console.log("SQL 실행 시 오류 발생", err);
-        return res.status(500).send("예약 정보 가져오기 실패");
-      }
-
-      if (reservationRows.length > 0) {
-        res.json(reservationRows);
-      } else {
-        res.status(404).send("예약 정보가 존재하지 않습니다.");
-      }
-    });
-  });
-});
-
 // 내 정보 업데이트
 router.post("/process/update", checkLogin, async (req, res) => {
   const id = req.session.user.id;
