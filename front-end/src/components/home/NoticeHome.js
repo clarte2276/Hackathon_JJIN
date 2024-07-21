@@ -1,7 +1,7 @@
-import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './NoticeHome.css';
+import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./NoticeHome.css";
 
 function NoticeHome() {
   const [dataList, setDataList] = useState([]);
@@ -9,13 +9,13 @@ function NoticeHome() {
   useEffect(() => {
     // 백엔드에서 게시글 목록을 가져옴
     axios
-      .get(`/notice`)
+      .post(`/notice`)
       .then((response) => {
-        console.log('응답 데이터:', response.data.posts); // 응답 데이터 출력
+        console.log("응답 데이터:", response.data.posts); // 응답 데이터 출력
         setDataList(response.data.posts);
       })
       .catch((error) => {
-        console.error('There was an error fetching the posts!', error);
+        console.error("There was an error fetching the posts!", error);
       });
   }, []);
 
