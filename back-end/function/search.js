@@ -1,4 +1,4 @@
-// 각 게시판 검색 기능
+// 각 게시판 검색 기능 구현
 const express = require('express');
 const mysql = require('mysql');
 const db_config = require('../config/db_config.json');

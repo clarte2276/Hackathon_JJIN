@@ -74,7 +74,7 @@ app.use("/", processRoutes);
 app.use("/", ChatbotRoutes);
 app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
-app.use("/", suggestRoutes);
+app.use("/", suggestRoutes); //추가
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);

@@ -1,4 +1,4 @@
-// suggest 게시판
+// suggest 게시판 기능
 const express = require('express');
 const mysql = require('mysql');
 const db_config = require('../config/db_config.json');
