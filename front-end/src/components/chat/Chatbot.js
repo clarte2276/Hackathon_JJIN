@@ -76,6 +76,23 @@ const Chatbot = ({ currentUser }) => {
     socket.emit("ask chatbot", { label });
   };
 
+  const handleSeatsButtonClick = async () => {
+    const userText = "현재 예약 가능한 좌석 현황을 알려주라";
+    // 사용자 메시지 전송
+    socket.emit("chat message", { text: userText, user: currentUser });
+
+    try {
+      const response = await fetch("/api/empty");
+      const data = await response.json();
+      const availableSeats = data.availableSeats; // 수정된 부분
+      const text = `현재 예약 가능한 좌석은 ${availableSeats}개입니다.`;
+      // 내꿈코 메시지로 전송
+      socket.emit("gpt response", { text, user: aiuser });
+    } catch (error) {
+      console.error("Error fetching empty seats:", error);
+    }
+  };
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -139,6 +156,9 @@ const Chatbot = ({ currentUser }) => {
           }
         >
           나의 완벽한 숙면을 위해 음악을 추천해줄래?
+        </button>
+        <button onClick={handleSeatsButtonClick}>
+          현재 예약 가능한 좌석 현황을 알려주라
         </button>
         <form id="chatbot-chatform-unique" onSubmit={handleSubmit}>
           <input
