@@ -57,7 +57,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const mypageRoutes = require("./function/mypage");
 const loginRoutes = require("./function/login");
 const processRoutes = require("./function/check-login");
-const ChatbotRoutes = require("./function/Chatbot");
+const ChatbotRoutes = require("./function/chatbot");
 const signupRoutes = require("./function/signup");
 const userdataRoutes = require("./function/userdata");
 const bagsRoutes = require("./function/bags");
