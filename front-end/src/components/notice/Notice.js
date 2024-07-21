@@ -24,7 +24,7 @@ const Notice = () => {
   const fetchData = async (keyword = '') => {
     try {
       const endpoint = keyword ? `/notice/search?keyword=${encodeURIComponent(keyword)}` : '/notice';
-      const response = await axios.get(endpoint);
+      const response = await axios.get(endpoint); //
       console.log('응답 데이터:', response.data);
       if (response.data.admin !== undefined) {
         setIsAdmin(response.data.admin);
