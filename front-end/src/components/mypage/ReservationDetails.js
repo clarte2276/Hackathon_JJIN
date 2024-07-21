@@ -31,7 +31,7 @@ function ReservationDetails() {
     if (!confirmCancel) return;
 
     try {
-      const response = await axios.delete(`/api/reservations/${reservationId}`);
+      const response = await axios.delete(`/api/reservations/${user_id}`);
       alert(response.data);
       setReservations(reservations.filter((reservation) => reservation.count !== reservationId));
     } catch (error) {
