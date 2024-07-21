@@ -131,6 +131,10 @@ function ReadSuggest() {
 
   const { title, created_date, content } = post;
 
+  const createMarkup = (html) => {
+    return { __html: html.replace(/\n/g, '<br>') };
+  };
+
   return (
     <>
       <NavbarTop />
@@ -155,7 +159,8 @@ function ReadSuggest() {
           <div className="Suggest_underline"></div>
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
-            <p>{content}</p>
+            <div dangerouslySetInnerHTML={createMarkup(content)} />
+            {/* <p>{content}</p> */}
           </div>
           <div className="ReadBackBtn_layout">
             <button className="Read_backBtn" type="button" onClick={backToList}>
