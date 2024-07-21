@@ -3,10 +3,8 @@ import axios from 'axios';
 
 const useUserData = (initialData = {}) => {
   const [name, setName] = useState(initialData.name || '');
-  const [student_num, setStudent_num] = useState(initialData.student_num || '');
-  const [birth, setBirth] = useState(initialData.birth || '');
   const [phone_num, setPhone_num] = useState(initialData.phone_num || '');
-  const [id, setId] = useState(initialData.id || '');
+  const [id, setId] = useState(initialData.id || ''); // 학번으로 사용
   const [password, setPassword] = useState(initialData.password || '');
 
   const fetchUserData = async () => {
@@ -16,8 +14,6 @@ const useUserData = (initialData = {}) => {
       const userData = response.data;
 
       setName(userData.name || '');
-      setStudent_num(userData.student_num || '');
-      setBirth(userData.birth || '');
       setPhone_num(userData.phone_num || '');
       setId(userData.id || '');
       setPassword(userData.password || '');
@@ -35,8 +31,6 @@ const useUserData = (initialData = {}) => {
     try {
       const updateData = {
         name,
-        student_num,
-        birth,
         phone_num,
         id,
         password,
@@ -60,14 +54,10 @@ const useUserData = (initialData = {}) => {
 
   return {
     name,
-    student_num,
-    birth,
     phone_num,
     id,
     password,
     setName,
-    setStudent_num,
-    setBirth,
     setPhone_num,
     setId,
     setPassword,
