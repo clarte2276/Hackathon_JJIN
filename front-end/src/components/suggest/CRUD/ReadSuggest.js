@@ -160,7 +160,6 @@ function ReadSuggest() {
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
             <div dangerouslySetInnerHTML={createMarkup(content)} />
-            {/* <p>{content}</p> */}
           </div>
           <div className="ReadBackBtn_layout">
             <button className="Read_backBtn" type="button" onClick={backToList}>
@@ -178,7 +177,7 @@ function ReadSuggest() {
                   <div className="comment_width">
                     <div className="commentNickname">{comment.name}</div>
                     <br />
-                    <div>{comment.content}</div>
+                    <div dangerouslySetInnerHTML={createMarkup(comment.content)} />
                     <br />
                     <div className="commentdateDelete_layout">
                       <div className="commentDate">{comment.created_date}</div>
