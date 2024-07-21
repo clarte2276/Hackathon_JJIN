@@ -54,6 +54,10 @@
   margin-bottom: 1rem;
 }
 
+.SignupPage input::placeholder {
+  color: lightgray;
+}
+
 .signupTextbox input,
 .signupBtn {
   width: 100%;
@@ -86,14 +90,4 @@
   background-color: #ff9900;
   color: #fff;
   font-family: 'Noto Sans KR', sans-serif;
-}
-
-.studentnumBox {
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.textType {
-  color: #a8a8a8;
 }
