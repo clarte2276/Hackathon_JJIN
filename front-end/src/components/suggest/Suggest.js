@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
-import TitleBody from '../notice/element/TitleBody.js';
-import List from '../notice/element/List.js';
-import ColumnList from '../notice/element/ColumnList.js';
-import RowList from '../notice/element/RowList.js';
-import CreateButton from '../notice/element/CreateButton.js';
-import PaginationCustom from '../notice/element/PaginationCustom.js';
-import NavbarTop from '../navbar/NavbarTop.js';
-import Footer from '../Footer.js';
+import TitleBody from "../notice/element/TitleBody.js";
+import List from "../notice/element/List.js";
+import ColumnList from "../notice/element/ColumnList.js";
+import RowList from "../notice/element/RowList.js";
+import CreateButton from "../notice/element/CreateButton.js";
+import PaginationCustom from "../notice/element/PaginationCustom.js";
+import NavbarTop from "../navbar/NavbarTop.js";
+import Footer from "../Footer.js";
 
-import './Suggest.css';
+import "./Suggest.css";
 
 const Suggest = () => {
   const [dataList, setDataList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState("");
   const postsPerPage = 10;
   const location = useLocation();
 
-  const fetchData = async (keyword = '') => {
+  const fetchData = async (keyword = "") => {
     try {
-      const endpoint = keyword ? `/suggest/search?keyword=${encodeURIComponent(keyword)}` : '/suggest';
-      const response = await axios.get(endpoint);
-      console.log('응답 데이터:', response.data);
+      const endpoint = keyword
+        ? `/suggest/search?keyword=${encodeURIComponent(keyword)}`
+        : "/suggest";
+      const response = await axios.post(endpoint);
+      console.log("응답 데이터:", response.data);
       setDataList(response.data);
     } catch (error) {
-      console.error('There was an error fetching the posts!', error);
+      console.error("There was an error fetching the posts!", error);
     }
   };
 
@@ -37,13 +39,15 @@ const Suggest = () => {
 
   useEffect(() => {
     if (location.state && location.state.newPost) {
-      console.log('새 게시글 추가:', location.state.newPost);
+      console.log("새 게시글 추가:", location.state.newPost);
       setDataList((prevDataList) => [location.state.newPost, ...prevDataList]);
     }
   }, [location.state]);
 
   const getNextNo = () => {
-    return dataList.length > 0 ? Math.max(...dataList.map((post) => post.no)) + 1 : 1;
+    return dataList.length > 0
+      ? Math.max(...dataList.map((post) => post.no)) + 1
+      : 1;
   };
 
   const indexOfLastPost = currentPage * postsPerPage;
@@ -75,12 +79,15 @@ const Suggest = () => {
             <button type="submit">검색</button>
           </form>
         </div>
-        <List headersName={['제목', '작성자', '작성일']}>
+        <List headersName={["제목", "작성자", "작성일"]}>
           {currentPosts.length > 0 ? (
             currentPosts.map((item, index) => (
               <RowList key={index}>
                 <ColumnList>
-                  <Link to={`/suggest/PostView/${item.no}`} style={{ textDecoration: 'none' }}>
+                  <Link
+                    to={`/suggest/PostView/${item.no}`}
+                    style={{ textDecoration: "none" }}
+                  >
                     <div className="List_title">{item.title}</div>
                   </Link>
                 </ColumnList>
