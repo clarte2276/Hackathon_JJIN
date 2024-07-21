@@ -25,7 +25,7 @@ const Suggest = () => {
       const endpoint = keyword
         ? `/suggest/search?keyword=${encodeURIComponent(keyword)}`
         : "/suggest";
-      const response = await axios.post(endpoint);
+      const response = await axios.get(endpoint);
       console.log("응답 데이터:", response.data);
       setDataList(response.data);
     } catch (error) {

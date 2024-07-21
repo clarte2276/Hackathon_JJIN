@@ -1,4 +1,4 @@
-// suggest 게시판 기능
+//suggest 게시판 기능
 const express = require("express");
 const mysql = require("mysql");
 const db_config = require("../config/db_config.json");
@@ -28,7 +28,7 @@ const isLoggedIn = (req) => {
 };
 
 // 게시판 데이터 가져오기
-router.post("/suggest", (req, res) => {
+router.get("/suggest", (req, res) => {
   pool.query(
     `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d %H:%i') AS created_date FROM suggests ORDER BY created_date DESC`,
     (error, results) => {
@@ -244,42 +244,79 @@ router.post('/suggest/PostView/:no/comments', (req, res) => {
 
     const postId = req.params.no;
     const { content } = req.body;
-    const name = '익명'; // 댓글 작성자의 이름 (익명으로 설정)
     const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
     const userId = req.session.user.id; // 현재 로그인한 사용자의 ID
 
+    // 현재 사용자가 해당 게시글에 이미 익명 번호를 받았는지 확인
     pool.query(
-        `INSERT INTO comments (board_no, name, content, created_date, user_id) VALUES (?, ?, ?, ?, ?)`,
-        [postId, name, content, createdDate, userId],
-        (error) => {
+        'SELECT anonymous_number FROM comments WHERE board_no = ? AND user_id = ? LIMIT 1',
+        [postId, userId],
+        (error, results) => {
             if (error) {
-                console.error('댓글 등록 중 오류 발생:', error);
+                console.error('익명 번호 조회 중 오류 발생:', error);
+                return res.status(500).json({ error: '익명 번호 조회 중 오류가 발생했습니다.' });
+            }
+
+            let anonymousNumber;
+            let name;
+
+            if (results.length > 0) {
+                // 이미 작성한 댓글이 있으면 기존 익명 번호 사용
+                anonymousNumber = results[0].anonymous_number;
+                name = `익명${anonymousNumber}`;
+                insertComment(postId, name, content, createdDate, userId, anonymousNumber, res);
+            } else {
+                // 작성한 댓글이 없으면 새로운 익명 번호 생성
+                pool.query(
+                    'SELECT IFNULL(MAX(anonymous_number), 0) + 1 AS newAnonymousNumber FROM comments WHERE board_no = ?',
+                    [postId],
+                    (countError, countResults) => {
+                        if (countError) {
+                            console.error('최대 익명 번호 조회 중 오류 발생:', countError);
+                            return res.status(500).json({ error: '최대 익명 번호 조회 중 오류가 발생했습니다.' });
+                        }
+
+                        anonymousNumber = countResults[0].newAnonymousNumber;
+                        name = `익명${anonymousNumber}`;
+                        insertComment(postId, name, content, createdDate, userId, anonymousNumber, res);
+                    }
+                );
+            }
+        }
+    );
+});
+
+function insertComment(postId, name, content, createdDate, userId, anonymousNumber, res) {
+    pool.query(
+        `INSERT INTO comments (board_no, name, content, created_date, user_id, anonymous_number) VALUES (?, ?, ?, ?, ?, ?)`,
+        [postId, name, content, createdDate, userId, anonymousNumber],
+        (insertError) => {
+            if (insertError) {
+                console.error('댓글 등록 중 오류 발생:', insertError);
                 res.status(500).json({ error: '댓글 등록 중 오류가 발생했습니다.' });
             } else {
                 res.json({ message: '댓글이 성공적으로 등록되었습니다.' });
             }
         }
     );
-});
+}
 
 // 댓글 목록 불러오기
 router.get("/suggest/comments/:no", (req, res) => {
-  const postId = req.params.no;
+    const postId = req.params.no;
 
-  pool.query(
-    'SELECT comment_no, name, content, DATE_FORMAT(created_date, "%y.%m.%d %H:%i") as created_date FROM comments WHERE board_no = ? ORDER BY created_date ASC',
-    [postId],
-    (error, results) => {
-      if (error) {
-        console.error("댓글 목록 불러오기 중 오류 발생:", error);
-        res
-          .status(500)
-          .json({ error: "댓글 목록을 불러오는 중 오류가 발생했습니다." });
-      } else {
-        res.json(results);
-      }
-    }
-  );
+    pool.query(
+        'SELECT comment_no, name, content, DATE_FORMAT(created_date, "%y.%m.%d %H:%i") as created_date, user_id FROM comments WHERE board_no = ? ORDER BY created_date ASC',
+        [postId],
+        (error, results) => {
+            if (error) {
+                console.error("댓글 목록 불러오기 중 오류 발생:", error);
+                res.status(500).json({ error: "댓글 목록을 불러오는 중 오류가 발생했습니다." });
+            } else {
+                res.json(results);
+            }
+        }
+    );
 });
 
 // 댓글 삭제

@@ -13,6 +13,7 @@ function Reservation2() {
   const [bag_id, setBag_id] = useState(null);
   const [selectedBagLabel, setSelectedBagLabel] = useState("");
   const [availability, setAvailability] = useState({});
+  const [canReserve, setCanReserve] = useState(0);
 
   const bagOptions = Array.from({ length: 4 }, (_, i) => ({
     value: i + 1,
@@ -35,6 +36,21 @@ function Reservation2() {
 
     fetchAvailability();
   }, []);
+
+  useEffect(() => {
+    const fetchCanReserve = async () => {
+      const response = await fetch(`/api/user_reserve?user_id=${user_id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setCanReserve(data.reservation_count);
+      } else {
+        const errorData = await response.json();
+        alert(errorData.error);
+      }
+    };
+
+    fetchCanReserve();
+  }, [user_id]);
 
   const handleTimeClick = (time) => {
     setReservation_hour(time.value);
@@ -123,6 +139,7 @@ function Reservation2() {
               <span className="userInfo-label">연락처</span>
               <span className="userInfo-value">{phone_num}</span>
             </div>
+            <div>가능 예약 횟수 : {2 - canReserve} / 2</div>
           </div>
 
           <form className="submitForm" onSubmit={handleSubmit}>
