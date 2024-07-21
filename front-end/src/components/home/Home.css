@@ -1,0 +1,34 @@
+.homechaticon_layout {
+  display: grid;
+  justify-items: end;
+}
+
+.homechaticon {
+  right: 100px;
+  position: fixed;
+  bottom: 30px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.homechaticon:hover {
+  animation: shake 0.5s infinite; /* Apply the shaking animation on hover */
+}
