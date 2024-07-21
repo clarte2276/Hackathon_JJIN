@@ -126,38 +126,3 @@
   margin-top: 30px;
   margin-left: 20px;
 }
-
-.commontLogo {
-  display: flex;
-  align-items: center;
-}
-
-.comment_all {
-  border-top: 1.5px solid #cac4d0;
-  padding: 10px 0px;
-  padding-left: 5px;
-  display: flex;
-}
-.commentNickname {
-  font-weight: 600;
-  font-size: 20px;
-}
-
-.commentDate {
-  color: #898989;
-}
-
-.titleInput,
-.BodyInput {
-  width: 900px;
-  font-size: 15px;
-  padding-left: 10px;
-  border-radius: 10px;
-  border: 2px solid #cac4d0;
-}
-
-.BodyInput {
-  padding-top: 8px;
-  height: 230px;
-  resize: none;
-}
