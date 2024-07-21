@@ -29,9 +29,20 @@ function Reservation() {
     { value: 'bag14', label: '14번 빈백' },
   ];
 
-  const handleHourChange = (event) => {
-    setReservation_hour(event.target.value);
-  };
+  const timeOptions = [
+    '9:00 ~ 10:00',
+    '10:00 ~ 11:00',
+    '11:00 ~ 12:00',
+    '12:00 ~ 13:00',
+    '13:00 ~ 14:00',
+    '14:00 ~ 15:00',
+    '15:00 ~ 16:00',
+    '16:00 ~ 17:00',
+    '17:00 ~ 18:00',
+    '18:00 ~ 19:00',
+    '19:00 ~ 20:00',
+    '20:00 ~ 21:00',
+  ];
 
   const handleBagChange = (selectedOption) => {
     if (selectedOption) {
@@ -41,6 +52,15 @@ function Reservation() {
       setBag_id(null);
       setSelectedBagLabel('');
     }
+  };
+
+  const handleBagClick = (id, label) => {
+    setBag_id(id);
+    setSelectedBagLabel(label);
+  };
+
+  const handleTimeClick = (time) => {
+    setReservation_hour(time);
   };
 
   const handleSubmit = async (event) => {
@@ -103,97 +123,49 @@ function Reservation() {
         </div>
         <div className="form-userInfo">
           <h3>예약자 확인</h3>
-          <p>이름: {name}</p>
-          <p>학번: {user_id}</p>
-          <p>연락처: {phone_num}</p>
+          <div className="userInfo-row">
+            <span className="userInfo-label">이름</span>
+            <span className="userInfo-value">{name}</span>
+          </div>
+          <div className="userInfo-row">
+            <span className="userInfo-label">학번</span>
+            <span className="userInfo-value">{user_id}</span>
+          </div>
+          <div className="userInfo-row">
+            <span className="userInfo-label">연락처</span>
+            <span className="userInfo-value">{phone_num}</span>
+          </div>
         </div>
+
         <form className="submitForm" onSubmit={handleSubmit}>
           <div className="form-hour">
             <h3>시간 선택</h3>
-            <div>
-              <label>
-                <input type="radio" value="time1" checked={reservation_hour === 'time1'} onChange={handleHourChange} />
-                9:00 ~ 10:00
-              </label>
-              <label>
-                <input type="radio" value="time2" checked={reservation_hour === 'time2'} onChange={handleHourChange} />
-                10:00 ~ 11:00
-              </label>
-              <label>
-                <input type="radio" value="time3" checked={reservation_hour === 'time3'} onChange={handleHourChange} />
-                11:00 ~ 12:00
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" value="time4" checked={reservation_hour === 'time4'} onChange={handleHourChange} />
-                12:00 ~ 13:00
-              </label>
-              <label>
-                <input type="radio" value="time5" checked={reservation_hour === 'time5'} onChange={handleHourChange} />
-                13:00 ~ 14:00
-              </label>
-              <label>
-                <input type="radio" value="time6" checked={reservation_hour === 'time6'} onChange={handleHourChange} />
-                14:00 ~ 15:00
-              </label>
-            </div>
-            <div>
-              <label>
-                <input type="radio" value="time7" checked={reservation_hour === 'time7'} onChange={handleHourChange} />
-                15:00 ~ 16:00
-              </label>
-              <label>
-                <input type="radio" value="time8" checked={reservation_hour === 'time8'} onChange={handleHourChange} />
-                16:00 ~ 17:00
-              </label>
-              <label>
-                <input type="radio" value="time9" checked={reservation_hour === 'time9'} onChange={handleHourChange} />
-                17:00 ~ 18:00
-              </label>
-            </div>
-            <div>
-              <label>
-                <input
-                  type="radio"
-                  value="time10"
-                  checked={reservation_hour === 'time10'}
-                  onChange={handleHourChange}
-                />
-                18:00 ~ 19:00
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value="time11"
-                  checked={reservation_hour === 'time11'}
-                  onChange={handleHourChange}
-                />
-                19:00 ~ 20:00
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  value="time12"
-                  checked={reservation_hour === 'time12'}
-                  onChange={handleHourChange}
-                />
-                20:00 ~ 21:00
-              </label>
+            <div className="time-bar">
+              {timeOptions.map((time, index) => (
+                <div
+                  key={index}
+                  className={`time-slot ${reservation_hour === time ? 'selected' : ''}`}
+                  onClick={() => handleTimeClick(time)}
+                >
+                  {time}
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="form-bag">
             <h3>빈백 좌석 선택</h3>
-            <Select
-              className="bagIdAlt"
-              options={bagOptions}
-              value={bagOptions.find((option) => option.value === bag_id)}
-              onChange={handleBagChange}
-              placeholder="빈백 번호 선택"
-              styles={customSelectStyle}
-              isClearable
-            />
+            <div className="bag-seats">
+              {bagOptions.map((option) => (
+                <div
+                  key={option.value}
+                  className={`bag-seat ${bag_id === option.value ? 'selected' : ''}`}
+                  onClick={() => handleBagClick(option.value, option.label)}
+                >
+                  {option.label.split('번 빈백')[0]}
+                </div>
+              ))}
+            </div>
             {selectedBagLabel && <p>{selectedBagLabel}을 선택하셨습니다.</p>}
           </div>
 

@@ -87,6 +87,31 @@
   font-family: 'Noto Sans KR', sans-serif;
 }
 
+.userInfo-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.userInfo-label {
+  background-color: #d9d9d9;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  width: 100px;
+  text-align: center;
+}
+
+.userInfo-value {
+  display: flex;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #000;
+  width: 100px;
+  margin-left: 2rem;
+}
+
 .form-hour,
 .form-bag {
   display: flex;
@@ -94,18 +119,79 @@
   font-family: 'Noto Sans KR', sans-serif;
 }
 
-.form-hour > div,
-.form-bag > div {
+.time-bar {
   display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-family: 'Noto Sans KR', sans-serif;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 0.5rem;
+}
+
+.time-slot {
+  flex: 0 0 auto;
+  width: 120px;
+  padding: 0.5rem;
+  text-align: center;
+  background-color: #f1f1f1;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.time-slot.selected {
+  background-color: #ffa549;
+  color: white;
+}
+
+.time-slot:hover {
+  background-color: #ddd;
 }
 
 .form-bag p {
   font-size: 1.1rem;
   font-family: 'Noto Sans KR', sans-serif;
   margin-top: 3%;
+}
+
+.bag-seats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  background-color: #fff3e1;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.bag-seat {
+  width: 60px;
+  height: 60px;
+  background-color: #ff7f50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bag-seat:hover {
+  background-color: #ff6347;
+}
+
+.bag-seat.selected {
+  background-color: #ffa549;
+}
+
+.select_bag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bagImg {
+  display: block;
+  margin-bottom: 1rem;
 }
 
 .submitBtnPlace {
