@@ -72,6 +72,4 @@ router.post("/process/login", (req, res) => {
   });
 });
 
-router.use("/loginpage", router);
-
 module.exports = router;

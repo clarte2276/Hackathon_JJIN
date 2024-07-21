@@ -127,6 +127,4 @@ router.post("/process/update", checkLogin, async (req, res) => {
   }
 });
 
-router.use("/mypage", router);
-//app과 router 연동
 module.exports = router;
