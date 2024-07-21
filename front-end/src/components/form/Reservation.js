@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Reservation.css';
 import { useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 import useUserData from '../useUserData';
 
 function Reservation() {
@@ -25,12 +26,6 @@ function Reservation() {
     { value: 'bag12', label: '12번 빈백' },
     { value: 'bag13', label: '13번 빈백' },
     { value: 'bag14', label: '14번 빈백' },
-    { value: 'bag15', label: '15번 빈백' },
-    { value: 'bag16', label: '16번 빈백' },
-    { value: 'bag17', label: '17번 빈백' },
-    { value: 'bag18', label: '18번 빈백' },
-    { value: 'bag19', label: '19번 빈백' },
-    { value: 'bag20', label: '20번 빈백' },
   ];
 
   const handleHourChange = (event) => {
