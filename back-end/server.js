@@ -49,13 +49,13 @@ const check_loginRoutes = require("./function/check-login");
 const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
 
-app.use("/", mypageRoutes);
-app.use("/", loginRoutes);
-app.use("/", check_loginRoutes);
-app.use("/", signupRoutes);
-app.use("/", chatbotRoutes);
-app.use("/", noticeRoutes);
-app.use("/", searchRoutes);
+app.use("/mypage", mypageRoutes);
+app.use("/login", loginRoutes);
+app.use("/check-login", check_loginRoutes);
+app.use("/signup", signupRoutes);
+app.use("/chatbot", chatbotRoutes);
+app.use("/notice", noticeRoutes);
+app.use("/search", searchRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
