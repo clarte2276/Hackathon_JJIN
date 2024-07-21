@@ -1,7 +1,6 @@
 const socketIo = require("socket.io");
 const mysql = require("mysql");
 const axios = require("axios");
-require("dotenv").config();
 
 const predefinedPrompts = {
   "TEXT 1":

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import "./Chatbot.css";
 import chatbotImg from "../images/chatbotImg.png";
-import sendBtn from "../images/sendBtn.png";
 
 const socket = io();
 

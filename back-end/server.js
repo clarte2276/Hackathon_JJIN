@@ -45,8 +45,7 @@ const mypageRoutes = require("./function/mypage");
 const loginRoutes = require("./function/login");
 const signupRoutes = require("./function/signup");
 const chatbotRoutes = require("./function/chatbot");
-const userdataRoutes = require("./function/userdata");
-const check_loginRoutes = require("./function/check_login");
+const check_loginRoutes = require("./function/check-login");
 const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
 
@@ -54,9 +53,7 @@ app.use("/", mypageRoutes);
 app.use("/", loginRoutes);
 app.use("/", check_loginRoutes);
 app.use("/", signupRoutes);
-app.use("/", userdataRoutes);
 app.use("/", chatbotRoutes);
-app.use("/", socketRoutes);
 app.use("/", noticeRoutes);
 app.use("/", searchRoutes);
 
