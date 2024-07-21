@@ -36,8 +36,7 @@ router.post("/", checkLogin, (req, res) => {
       return res.status(500).send("DB 서버 연결 실패");
     }
 
-    const userQuery =
-      "SELECT name, student_num, birth, phone_num, id FROM users WHERE id = ?";
+    const userQuery = "SELECT name, id, phone_num, FROM users WHERE id = ?";
     conn.query(userQuery, [userID], (err, userRows) => {
       conn.release();
       if (err) {

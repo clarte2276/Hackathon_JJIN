@@ -1,4 +1,4 @@
-//로그인
+//회원가입 페이지
 const express = require("express");
 const bcrypt = require("bcrypt");
 const router = express.Router();
@@ -19,10 +19,8 @@ router.post("/process/signup", async (req, res) => {
   console.log("/signup 호출됨", req.body);
 
   const paramName = req.body.name;
-  const paramStudent_num = req.body.student_num;
-  const paramBirth = req.body.birth;
   const paramPhone_num = req.body.phone_num;
-  const paramID = req.body.id;
+  const paramId = req.body.id;
   const paramPW = req.body.password;
 
   try {
@@ -37,15 +35,8 @@ router.post("/process/signup", async (req, res) => {
       console.log("데이터베이스 연결 성공");
 
       const exec = conn.query(
-        "INSERT INTO users (name, student_num , birth , phone_num , id, password) VALUES (?, ?, ?, ?, ?, ?);",
-        [
-          paramName,
-          paramStudent_num,
-          paramBirth,
-          paramPhone_num,
-          paramID,
-          hashedPassword,
-        ],
+        "INSERT INTO users (name, phone_num , id , password) VALUES (?, ?, ?, ?);",
+        [paramName, paramPhone_num, paramId, hashedPassword],
         (err, result) => {
           conn.release();
           console.log("실행된 SQL: " + exec.sql);
