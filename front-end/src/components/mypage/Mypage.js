@@ -3,6 +3,8 @@ import './Mypage.css';
 import { useNavigate } from 'react-router-dom';
 import useUserData from '../useUserData';
 import axios from 'axios';
+import NavbarTop from '../navbar/NavbarTop';
+import Footer from '../Footer';
 
 function Mypage() {
   const navigate = useNavigate();
@@ -56,46 +58,50 @@ function Mypage() {
   };
 
   return (
-    <div className="mypageAll">
-      <h1>마이페이지</h1>
-      <div className="myPage">
-        <form onSubmit={handleSaveWrapper} className="userProfileForm">
-          <div className="userProfileBtn">
-            <button className="logoutBtn" onClick={handleLogout}>
-              LOGOUT
-            </button>
-            <button type="submit" className="saveBtn">
-              SAVE
-            </button>
-          </div>
+    <div>
+      <NavbarTop></NavbarTop>
+      <div className="mypageAll">
+        <h1>마이페이지</h1>
+        <div className="myPage">
+          <form onSubmit={handleSaveWrapper} className="userProfileForm">
+            <div className="userProfileBtn">
+              <button className="logoutBtn" onClick={handleLogout}>
+                LOGOUT
+              </button>
+              <button type="submit" className="saveBtn">
+                SAVE
+              </button>
+            </div>
+            <hr className="divider" />
+            <div className="inputSpace">
+              <p>
+                이름
+                <input type="text" name="name" placeholder="이름" value={name} disabled />
+              </p>
+              <p>
+                연락처
+                <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
+              </p>
+              <p>
+                아이디
+                <input type="text" name="id" placeholder="아이디" value={id} disabled />
+              </p>
+              <p>
+                비밀번호
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="비밀번호"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </p>
+            </div>
+          </form>
           <hr className="divider" />
-          <div className="inputSpace">
-            <p>
-              이름
-              <input type="text" name="name" placeholder="이름" value={name} disabled />
-            </p>
-            <p>
-              연락처
-              <input type="text" name="phone_num" placeholder="연락처" value={phone_num} disabled />
-            </p>
-            <p>
-              아이디
-              <input type="text" name="id" placeholder="아이디" value={id} disabled />
-            </p>
-            <p>
-              비밀번호
-              <input
-                type="password"
-                name="password"
-                placeholder="비밀번호"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </p>
-          </div>
-        </form>
-        <hr className="divider" />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
