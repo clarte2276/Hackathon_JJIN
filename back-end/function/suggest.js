@@ -210,28 +210,46 @@ router.get('/suggest/image/:id', (req, res) => {
 
 // 댓글 등록
 router.post('/suggest/PostView/:no/comments', (req, res) => {
-  if (!isLoggedIn(req)) {
-    return res.status(403).send('로그인해야 댓글을 작성할 수 있습니다.');
-  }
-
-  const postId = req.params.no;
-  const { content } = req.body;
-  const name = '익명';
-  const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
-
-  pool.query(
-    `INSERT INTO comments (board_no, name, content, created_date) VALUES (?, ?, ?, ?)`,
-    [postId, name, content, createdDate],
-    (error) => {
-      if (error) {
-        console.error('댓글 등록 중 오류 발생:', error);
-        res.status(500).json({ error: '댓글 등록 중 오류가 발생했습니다.' });
-      } else {
-        res.json({ message: '댓글이 성공적으로 등록되었습니다.' });
-      }
+    if (!isLoggedIn(req)) {
+      return res.status(403).send('로그인해야 댓글을 작성할 수 있습니다.');
     }
-  );
-});
+  
+    const postId = req.params.no;
+    const { content } = req.body;
+    const name = '익명'; // 댓글 작성자의 이름 (익명으로 설정)
+    const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
+  
+    pool.query(
+      `INSERT INTO comments (board_no, name, content, created_date) VALUES (?, ?, ?, ?)`,
+      [postId, name, content, createdDate],
+      (error) => {
+        if (error) {
+          console.error('댓글 등록 중 오류 발생:', error);
+          res.status(500).json({ error: '댓글 등록 중 오류가 발생했습니다.' });
+        } else {
+          res.json({ message: '댓글이 성공적으로 등록되었습니다.' });
+        }
+      }
+    );
+  });
+
+  // 댓글 목록 불러오기
+router.get('/suggest/comments/:no', (req, res) => {
+    const postId = req.params.no;
+  
+    pool.query(
+      'SELECT comment_no, name, content, DATE_FORMAT(created_date, "%y.%m.%d %H:%i") as created_date FROM comments WHERE board_no = ? ORDER BY created_date ASC',
+      [postId],
+      (error, results) => {
+        if (error) {
+          console.error('댓글 목록 불러오기 중 오류 발생:', error);
+          res.status(500).json({ error: '댓글 목록을 불러오는 중 오류가 발생했습니다.' });
+        } else {
+          res.json(results);
+        }
+      }
+    );
+  });
 
 // 댓글 삭제
 router.delete('/comments/:comment_no', (req, res) => {
