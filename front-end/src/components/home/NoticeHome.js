@@ -39,7 +39,7 @@ function NoticeHome() {
   useEffect(() => {
     // 백엔드에서 게시글 목록을 가져옴
     axios
-      .post(`/notice`)
+      .post(`/api/notice`)
       .then((response) => {
         console.log("응답 데이터:", response.data.posts); // 응답 데이터 출력
         setDataList(response.data.posts);
@@ -49,6 +49,13 @@ function NoticeHome() {
       });
   }, []);
 
+  const truncateTitle = (title, maxLength = 50) => {
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + "...";
+    }
+    return title;
+  };
+
   return (
     <div className="Notice_all">
       <div className="nameLink_layout">
@@ -56,7 +63,7 @@ function NoticeHome() {
           <div className="notice_name">공지사항</div>
           <Link
             className="NoticeHome_plus"
-            onClick={(e) => checkLogin(e, "/notice")}
+            onClick={(e) => checkLogin(e, "/api/notice")}
           >
             +
           </Link>
@@ -65,17 +72,17 @@ function NoticeHome() {
       <div className="NoticeHome_underline"></div>
       <div className="Notice_title_body">
         {dataList.length > 0 ? (
-          (() => {
-            const items = [];
-            for (let i = 0; i < Math.min(3, dataList.length); i++) {
-              items.push(
-                <div key={i} className="Notice_body">
-                  <div className="HomeNotice_title">{dataList[i].title}</div>
-                </div>
-              );
-            }
-            return items;
-          })()
+          dataList.slice(0, 3).map((post, i) => (
+            <div key={i} className="Notice_body">
+              <Link
+                className="HomeNotice_title"
+                to={`/notice/${post.no}`}
+                onClick={(e) => checkLogin(e, `/notice/${post.no}`)}
+              >
+                {truncateTitle(post.title)}
+              </Link>
+            </div>
+          ))
         ) : (
           <div>Loading...</div>
         )}
