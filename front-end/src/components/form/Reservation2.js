@@ -137,7 +137,10 @@ function Reservation2() {
               <span className="userInfo-label">연락처</span>
               <span className="userInfo-value">{phone_num}</span>
             </div>
-            <div>가능 예약 횟수 : {2 - canReserve} / 2</div>
+            <br></br>
+            <div>
+              <strong>가능 예약 횟수 : {2 - canReserve} / 2</strong>
+            </div>
           </div>
 
           <form className="submitForm" onSubmit={handleSubmit}>

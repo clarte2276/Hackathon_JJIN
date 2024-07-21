@@ -1,5 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
+.reservationPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  left: 0;
+  box-sizing: border-box;
+}
+
 .reservation_title {
   width: 820px;
   display: grid;
@@ -9,11 +17,14 @@
 
 .reservation_title h1 {
   display: flex;
-  margin-left: 10%;
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 2rem;
   margin-top: 2%;
   margin-bottom: 0;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 25%;
 }
 
 .reservation-container body {
@@ -108,7 +119,7 @@
   position: relative;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid #000;
-  width: 100px;
+  width: 120px;
   margin-left: 2rem;
 }
 
