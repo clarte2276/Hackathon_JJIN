@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import CRUDHeader from './CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';
 import Footer from '../../Footer';
-import './CRUD.css';
+import '../../suggest/CRUD/CRUD.css';
 import axios from 'axios';
 
 function UpdateNotice() {
@@ -117,44 +117,75 @@ function UpdateNotice() {
   return (
     <>
       <NavbarTop />
-      <div>
-        <CRUDHeader title="공지사항 글 수정" />
-      </div>
-      <form onSubmit={updatePost}>
+      <div className="Create_all">
         <div>
-          <span>제목</span>
-          <input type="text" name="title" placeholder="제목" value={post.title} onChange={onChange} />
-        </div>
-        <br />
-        <div>
-          <span>내용</span>
-          <textarea name="body" placeholder="내용" value={post.body} onChange={onChange}></textarea>
-        </div>
-        <br />
-        <div>
-          <span>현재 업로드된 파일</span>
-          {post.file_data ? (
-            <>
-              <img src={`data:image/jpeg;base64,${post.file_data}`} alt="Current Upload" width="200" />
-              <br />
-              <button type="button" onClick={deleteFile}>
-                파일 삭제
+          <div className="header_layout">
+            <CRUDHeader title="공지사항 글 수정" />
+          </div>
+          <form onSubmit={updatePost}>
+            <div className="titleBody_layout">
+              <div>
+                <p>
+                  <span className="titleBody_name">제목</span>
+                </p>
+                <input
+                  className="titleInput"
+                  type="text"
+                  name="title"
+                  placeholder="제목"
+                  value={post.title}
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+            <br />
+
+            <div className="titleBody_layout">
+              <div>
+                <p>
+                  <span className="titleBody_name">내용</span>
+                </p>
+                <textarea
+                  className="BodyInput"
+                  name="body"
+                  placeholder="내용"
+                  value={post.body}
+                  onChange={onChange}
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <div>
+              <div className="Updateimg_layout">
+                <span>현재 업로드된 파일</span>
+                {post.file_data ? (
+                  <>
+                    <img src={`data:image/jpeg;base64,${post.file_data}`} alt="Current Upload" width="200" />
+                    <br />
+                    <button type="button" onClick={deleteFile}>
+                      파일 삭제
+                    </button>
+                  </>
+                ) : (
+                  <p>업로드된 파일이 없습니다.</p>
+                )}
+              </div>
+
+              <div className="Updateimg_layout">
+                <span>새로운 파일 업로드</span>
+                <input type="file" onChange={onFileChange} />
+              </div>
+            </div>
+            <br />
+            <div className="btn_layout">
+              <button className="backBtn" type="button" onClick={backToList}>
+                취소
               </button>
-            </>
-          ) : (
-            <p>업로드된 파일이 없습니다.</p>
-          )}
+              <input className="CreateBtn" type="submit" value="수정하기" />
+            </div>
+          </form>
         </div>
-        <div>
-          <span>새로운 파일 업로드</span>
-          <input type="file" onChange={onFileChange} />
-        </div>
-        <br />
-        <button type="button" onClick={backToList}>
-          취소
-        </button>
-        <input type="submit" value="수정하기" />
-      </form>
+      </div>
       <Footer />
     </>
   );

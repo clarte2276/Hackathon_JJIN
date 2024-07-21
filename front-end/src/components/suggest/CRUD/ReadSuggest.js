@@ -136,7 +136,7 @@ function ReadSuggest() {
       <NavbarTop />
       <div className="Read_all">
         <div>
-          <div className="orangeSuggest">건의사항</div>
+          <div className="orangeNoticeSuggest">건의사항</div>
           <div className="ReadTitle">{title}</div>
           <div className="infoUpdateDelete">
             <div className="info">
@@ -152,7 +152,7 @@ function ReadSuggest() {
               </div>
             </div>
           </div>
-          <div className="Suggest_underline"></div>
+          <div className="NoticeSuggest_underline"></div>
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
             <p>{content}</p>

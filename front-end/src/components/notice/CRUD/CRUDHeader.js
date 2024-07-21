@@ -1,5 +1,5 @@
 import React from 'react';
-import './CRUD.css';
+import '../../suggest/CRUD/CRUD.css';
 
 function CRUDHeader(props) {
   return (

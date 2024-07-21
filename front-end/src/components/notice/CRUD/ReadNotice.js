@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import CRUDHeader from './CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';
 import Footer from '../../Footer';
-import './CRUD.css';
+import '../../suggest/CRUD/CRUD.css';
 
 function ReadNotice() {
   const { no } = useParams();
@@ -80,6 +79,10 @@ function ReadNotice() {
     return <div>게시글을 찾을 수 없습니다.</div>;
   }
 
+  const backToList = () => {
+    navigate('/notice');
+  };
+
   const { title, created_date, content } = post;
 
   const createMarkup = (html) => {
@@ -91,19 +94,19 @@ function ReadNotice() {
       <NavbarTop />
       <div className="Read_all">
         <div>
-          <div className="header_layout">
-            <CRUDHeader title="공지사항" />
-          </div>
+          <div className="orangeNoticeSuggest">공지사항</div>
           <div className="ReadTitle">{title}</div>
           <div className="infoUpdateDelete">
             <div className="info">
               <div>관리자</div>
-              <div>{created_date}</div>
+              <div className="commentDate">{created_date}</div>
             </div>
             <div className="updateDelete">
               {isAdmin && (
-                <div>
-                  <Link to={`/notice/Postview/${no}/process/update`}>수정</Link>
+                <div className="updateDelete">
+                  <Link className="ReadUpdate" to={`/notice/Postview/${no}/process/update`}>
+                    수정
+                  </Link>
                   <div onClick={handleDelete} style={{ cursor: 'pointer' }}>
                     삭제
                   </div>
@@ -111,10 +114,15 @@ function ReadNotice() {
               )}
             </div>
           </div>
+          <div className="NoticeSuggest_underline"></div>
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
-            <div dangerouslySetInnerHTML={createMarkup(content)} />
-            {/* <p>{content}</p> */}
+            <p dangerouslySetInnerHTML={createMarkup(content)}></p>
+          </div>
+          <div className="ReadBackBtn_layout">
+            <button className="Read_backBtn" type="button" onClick={backToList}>
+              이전 페이지
+            </button>
           </div>
         </div>
       </div>

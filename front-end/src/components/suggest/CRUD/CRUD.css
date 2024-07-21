@@ -113,11 +113,12 @@
   border: none;
 }
 
-.orangeSuggest {
+.orangeNoticeSuggest {
   margin-left: 10px;
   color: #ea5514;
   font-weight: 600;
   margin-top: 60px;
+  width: 1000px;
 }
 
 .ReadTitle {
@@ -144,7 +145,7 @@
   color: black;
 }
 
-.Suggest_underline {
+.NoticeSuggest_underline {
   border-bottom: 1px solid #979797;
   width: 100%;
 }
