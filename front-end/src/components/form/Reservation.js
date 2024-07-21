@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Reservation.css';
 import { useNavigate } from 'react-router-dom';
-import useUserData from '../../useUserData';
+import Select from 'react-select';
+import useUserData from '../useUserData';
 
 function Reservation() {
   const navigate = useNavigate();
@@ -9,6 +10,23 @@ function Reservation() {
 
   const [reservation_hour, setReservation_hour] = useState(null);
   const [bag_id, setBag_id] = useState(null); // 빈백 좌석 번호
+
+  const bagOptions = [
+    { value: 'bag1', label: '1번 빈백' },
+    { value: 'bag2', label: '2번 빈백' },
+    { value: 'bag3', label: '3번 빈백' },
+    { value: 'bag4', label: '4번 빈백' },
+    { value: 'bag5', label: '5번 빈백' },
+    { value: 'bag6', label: '6번 빈백' },
+    { value: 'bag7', label: '7번 빈백' },
+    { value: 'bag8', label: '8번 빈백' },
+    { value: 'bag9', label: '9번 빈백' },
+    { value: 'bag10', label: '10번 빈백' },
+    { value: 'bag11', label: '11번 빈백' },
+    { value: 'bag12', label: '12번 빈백' },
+    { value: 'bag13', label: '13번 빈백' },
+    { value: 'bag14', label: '14번 빈백' },
+  ];
 
   const handleHourChange = (event) => {
     setReservation_hour(event.target.value);
@@ -42,6 +60,17 @@ function Reservation() {
     if (response.ok) {
       navigate('/mypage');
     }
+  };
+
+  const customSelectStyle = {
+    control: (provided) => ({
+      ...provided,
+      borderColor: 'lightgray',
+      boxShadow: 'none',
+      '&:hover': {
+        borderColor: 'blue',
+      },
+    }),
   };
 
   // 버튼 활성화 조건 확인
@@ -85,110 +114,89 @@ function Reservation() {
             <h3>시간 선택</h3>
             <div>
               <label>
-                <input type="radio" value="time1" checked={date === 'time1'} onChange={handleHourChange} />
+                <input type="radio" value="time1" checked={reservation_hour === 'time1'} onChange={handleHourChange} />
                 9:00 ~ 10:00
               </label>
               <label>
-                <input type="radio" value="time2" checked={date === 'time2'} onChange={handleHourChange} />
+                <input type="radio" value="time2" checked={reservation_hour === 'time2'} onChange={handleHourChange} />
                 10:00 ~ 11:00
               </label>
               <label>
-                <input type="radio" value="time3" checked={date === 'time3'} onChange={handleHourChange} />
+                <input type="radio" value="time3" checked={reservation_hour === 'time3'} onChange={handleHourChange} />
                 11:00 ~ 12:00
               </label>
               <label>
-                <input type="radio" value="time4" checked={date === 'time4'} onChange={handleHourChange} />
+                <input type="radio" value="time4" checked={reservation_hour === 'time4'} onChange={handleHourChange} />
                 12:00 ~ 13:00
               </label>
               <label>
-                <input type="radio" value="time5" checked={date === 'time5'} onChange={handleHourChange} />
+                <input type="radio" value="time5" checked={reservation_hour === 'time5'} onChange={handleHourChange} />
                 13:00 ~ 14:00
               </label>
               <label>
-                <input type="radio" value="time6" checked={date === 'time6'} onChange={handleHourChange} />
+                <input type="radio" value="time6" checked={reservation_hour === 'time6'} onChange={handleHourChange} />
                 14:00 ~ 15:00
               </label>
             </div>
             <div>
               <label>
-                <input type="radio" value="time7" checked={date === 'time7'} onChange={handleHourChange} />
+                <input type="radio" value="time7" checked={reservation_hour === 'time7'} onChange={handleHourChange} />
                 15:00 ~ 16:00
               </label>
               <label>
-                <input type="radio" value="time8" checked={date === 'time8'} onChange={handleHourChange} />
+                <input type="radio" value="time8" checked={reservation_hour === 'time8'} onChange={handleHourChange} />
                 116:00 ~ 17:00
               </label>
               <label>
-                <input type="radio" value="time9" checked={date === 'time9'} onChange={handleHourChange} />
+                <input type="radio" value="time9" checked={reservation_hour === 'time9'} onChange={handleHourChange} />
                 17:00 ~ 18:00
               </label>
               <label>
-                <input type="radio" value="time10" checked={date === 'time10'} onChange={handleHourChange} />
+                <input
+                  type="radio"
+                  value="time10"
+                  checked={reservation_hour === 'time10'}
+                  onChange={handleHourChange}
+                />
                 18:00 ~ 19:00
               </label>
               <label>
-                <input type="radio" value="time11" checked={date === 'time11'} onChange={handleHourChange} />
+                <input
+                  type="radio"
+                  value="time11"
+                  checked={reservation_hour === 'time11'}
+                  onChange={handleHourChange}
+                />
                 19:00 ~ 20:00
               </label>
               <label>
-                <input type="radio" value="time12" checked={date === 'time12'} onChange={handleHourChange} />
+                <input
+                  type="radio"
+                  value="time12"
+                  checked={reservation_hour === 'time12'}
+                  onChange={handleHourChange}
+                />
                 20:00 ~ 21:00
               </label>
             </div>
           </div>
 
           <div className="form-bag">
-            <h3>좌석 선택</h3>
-            <label>
-              <input type="radio" value="time1" checked={date === 'time1'} onChange={handleHourChange} />
-              9:00 ~ 10:00
-            </label>
+            <h3>빈백 선택</h3>
+            <Select
+              className="bagIdAlt"
+              options={bagOptions}
+              value={bagOptions.find((option) => option.value === bag_id)}
+              onChange={handleBagChange}
+              placeholder="빈백 번호를 선택해주세요."
+              styles={customSelectStyle}
+              isClearable
+            />
+          </div>
 
-            <label>
-              <input
-                type="radio"
-                value="bag1"
-                checked={student_state === 'students'}
-                onChange={handleStudentStateChange}
-              />
-              재학생
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="others"
-                checked={student_state === 'others'}
-                onChange={handleStudentStateChange}
-              />
-              외부인
-            </label>
-            {student_state === 'students' && (
-              <p className="state_notice">재학생인 경우 증빙자료를 제출하셔야 합니다.</p>
-            )}
-          </div>
-          {student_state === 'students' && (
-            <div className="form-imgupload">
-              <h3>동국대학교 재학생 증빙서류 제출</h3>
-              <div className="imguploadBtn">
-                <input type="file" id="file" onChange={handleFileChange} style={{ display: 'none' }} />
-                <label htmlFor="file" className="file-label">
-                  파일 선택
-                </label>
-                {file && <span className="file-name">{file.name}</span>}
-              </div>
-            </div>
-          )}
-          <div className="form-payment">
-            <h3>결제</h3>
-            <p>무통장입금 : 국민 1000000000000000</p>
-            <p className="payment-notice">
-              24시간 내로 입금하셔야 예매가 확정됩니다. 입금하시지 않는 경우 자동취소됩니다. 은행에 따라 밤 11시 30분
-              이후로는 온라인 입금이 제한될 수 있습니다.
-            </p>
-          </div>
           <div className="submitBtnPlace">
             <button type="submit" className={`submitBtn ${isButtonEnabled ? 'enabled' : ''}`}>
-              예매완료
+              예약완료
             </button>
           </div>
         </form>
