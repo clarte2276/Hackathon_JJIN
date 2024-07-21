@@ -30,7 +30,7 @@ const isLoggedIn = (req) => {
 // 게시판 데이터 가져오기
 router.get('/suggest', (req, res) => {
   pool.query(
-    `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d') AS created_date FROM suggests ORDER BY created_date DESC`,
+    `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d %H:%i') AS created_date FROM suggests ORDER BY created_date DESC`,
     (error, results) => {
       if (error) {
         console.error('데이터베이스 오류:', error);
@@ -73,7 +73,7 @@ router.get('/suggest/PostView/:no', (req, res) => {
   const postId = req.params.no;
 
   pool.query(
-    `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d') AS created_date, file_data FROM suggests WHERE no = ?`,
+    `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%y.%m.%d %H:%i') AS created_date, file_data FROM suggests WHERE no = ?`,
     [postId],
     (error, results) => {
       if (error) {
