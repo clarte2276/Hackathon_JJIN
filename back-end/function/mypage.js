@@ -1,4 +1,3 @@
-// 마이페이지 구현
 const express = require("express");
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
@@ -36,7 +35,7 @@ router.post("/", checkLogin, (req, res) => {
       return res.status(500).send("DB 서버 연결 실패");
     }
 
-    const userQuery = "SELECT name, id, phone_num, FROM users WHERE id = ?";
+    const userQuery = "SELECT name, id, phone_num FROM users WHERE id = ?";
     conn.query(userQuery, [userID], (err, userRows) => {
       conn.release();
       if (err) {
@@ -53,8 +52,8 @@ router.post("/", checkLogin, (req, res) => {
   });
 });
 
-//예약정보 불러오기 -> 수정예정
-router.post("/", checkLogin, (req, res) => {
+// 예약정보 불러오기 -> 수정예정
+router.post("/reservations", checkLogin, (req, res) => {
   const userID = req.session.user.id;
 
   pool.getConnection((err, conn) => {
@@ -64,18 +63,19 @@ router.post("/", checkLogin, (req, res) => {
       return res.status(500).send("DB 서버 연결 실패");
     }
 
-    const userQuery = "SELECT title, created_date FROM boardbuy WHERE id = ?";
-    conn.query(userQuery, [userID], (err, userRows) => {
+    const reservationQuery =
+      "SELECT title, created_date FROM boardbuy WHERE id = ?";
+    conn.query(reservationQuery, [userID], (err, reservationRows) => {
       conn.release();
       if (err) {
         console.log("SQL 실행 시 오류 발생", err);
-        return res.status(500).send("사용자 정보 가져오기 실패");
+        return res.status(500).send("예약 정보 가져오기 실패");
       }
 
-      if (userRows.length > 0) {
-        res.json(userRows[0]);
+      if (reservationRows.length > 0) {
+        res.json(reservationRows);
       } else {
-        res.status(404).send("사용자 정보가 존재하지 않습니다.");
+        res.status(404).send("예약 정보가 존재하지 않습니다.");
       }
     });
   });

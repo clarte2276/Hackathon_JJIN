@@ -1,0 +1,19 @@
+.LogoIcon_layout {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.NavbarTop_layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.UserInfo_layout {
+  display: flex;
+  gap: 15px;
+}
