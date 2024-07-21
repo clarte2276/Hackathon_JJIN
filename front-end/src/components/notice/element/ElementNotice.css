@@ -1,0 +1,71 @@
+.TitleBodyNotice_body {
+  margin-bottom: 10px;
+}
+
+.active-button,
+.inactive-button {
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 10%;
+}
+
+.active-button {
+  background-color: #17499e;
+  color: white;
+}
+
+.inactive-button {
+  color: gray;
+  background-color: rgb(231, 231, 231);
+}
+
+.ListNotice {
+  width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  border-spacing: 0;
+}
+
+.ListNotice-header-column {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 0;
+  font-size: 16px;
+  padding: 10px 5px;
+  font-weight: bold;
+}
+
+.ListNotice-column {
+  padding: 10px 5px;
+  text-decoration: none;
+}
+
+.ListNotice-row:hover {
+  background-color: #eceaea;
+  cursor: pointer;
+}
+
+.CreateButtonNotice {
+  text-decoration: none;
+  color: white;
+  background-color: #17499e;
+  padding: 10px;
+  border-radius: 10%;
+}
+
+.CreateButton {
+  display: flex;
+  justify-content: right;
+  margin: 25px 0px;
+  width: 100%;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root {
+  border-style: none !important;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: rgb(0, 0, 0) !important;
+  color: white !important;
+  border-radius: 18%;
+}
