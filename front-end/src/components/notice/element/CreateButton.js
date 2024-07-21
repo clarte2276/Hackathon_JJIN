@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './Element.css';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./Element.css";
 
 function CreateButton({ nextNo }) {
   const location = useLocation();
 
   let newPostPath;
-  if (location.pathname === '/notice') {
-    newPostPath = '/notice/process/new_Post';
-  } else if (location.pathname === '/suggest') {
-    newPostPath = '/suggest/process/new_Post';
+  if (location.pathname === "/notice") {
+    newPostPath = "/notice/process/new_Post";
+  } else if (location.pathname === "/suggest") {
+    newPostPath = "/suggest/process/new_Post";
   }
 
   return (

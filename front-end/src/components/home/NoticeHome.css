@@ -10,7 +10,7 @@
 }
 
 .Notice_title_body {
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-weight: 500;
   font-style: normal;
   font-size: 1.1em;
@@ -22,7 +22,7 @@
 .notice_name {
   text-decoration: none;
   color: black;
-  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-weight: 600;
   font-style: normal;
   font-size: 1.25em;
