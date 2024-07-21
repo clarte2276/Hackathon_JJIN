@@ -64,7 +64,7 @@ function NoticeHome() {
           <div className="notice_name">공지사항</div>
           <Link
             className="NoticeHome_plus"
-            onClick={(e) => checkLogin(e, "/api/notice")}
+            onClick={(e) => checkLogin(e, "/notice")}
           >
             +
           </Link>
@@ -75,13 +75,13 @@ function NoticeHome() {
         {dataList.length > 0 ? (
           dataList.slice(0, 3).map((post, i) => (
             <div key={i} className="Notice_body">
-              <Link
+              <div
                 className="HomeNotice_title"
-                to={`/notice/${post.no}`}
-                onClick={(e) => checkLogin(e, `/notice/${post.no}`)}
+                
+                
               >
                 {truncateTitle(post.title)}
-              </Link>
+              </div>
             </div>
           ))
         ) : (
