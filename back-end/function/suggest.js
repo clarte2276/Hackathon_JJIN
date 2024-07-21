@@ -237,28 +237,29 @@ router.get("/suggest/image/:id", (req, res) => {
 });
 
 // 댓글 등록
-router.post("/suggest/PostView/:no/comments", (req, res) => {
-  if (!isLoggedIn(req)) {
-    return res.status(403).send("로그인해야 댓글을 작성할 수 있습니다.");
-  }
-
-  const postId = req.params.no;
-  const { content } = req.body;
-  const name = "익명"; // 댓글 작성자의 이름 (익명으로 설정)
-  const createdDate = moment().format("YYYY-MM-DD HH:mm:ss");
-
-  pool.query(
-    `INSERT INTO comments (board_no, name, content, created_date) VALUES (?, ?, ?, ?)`,
-    [postId, name, content, createdDate],
-    (error) => {
-      if (error) {
-        console.error("댓글 등록 중 오류 발생:", error);
-        res.status(500).json({ error: "댓글 등록 중 오류가 발생했습니다." });
-      } else {
-        res.json({ message: "댓글이 성공적으로 등록되었습니다." });
-      }
+router.post('/suggest/PostView/:no/comments', (req, res) => {
+    if (!isLoggedIn(req)) {
+        return res.status(403).send('로그인해야 댓글을 작성할 수 있습니다.');
     }
-  );
+
+    const postId = req.params.no;
+    const { content } = req.body;
+    const name = '익명'; // 댓글 작성자의 이름 (익명으로 설정)
+    const createdDate = moment().format('YYYY-MM-DD HH:mm:ss');
+    const userId = req.session.user.id; // 현재 로그인한 사용자의 ID
+
+    pool.query(
+        `INSERT INTO comments (board_no, name, content, created_date, user_id) VALUES (?, ?, ?, ?, ?)`,
+        [postId, name, content, createdDate, userId],
+        (error) => {
+            if (error) {
+                console.error('댓글 등록 중 오류 발생:', error);
+                res.status(500).json({ error: '댓글 등록 중 오류가 발생했습니다.' });
+            } else {
+                res.json({ message: '댓글이 성공적으로 등록되었습니다.' });
+            }
+        }
+    );
 });
 
 // 댓글 목록 불러오기
@@ -281,55 +282,34 @@ router.get("/suggest/comments/:no", (req, res) => {
   );
 });
 
-// // 댓글 삭제
-// router.delete('/comments/:comment_no', (req, res) => {
-//   if (!isLoggedIn(req)) {
-//     return res.status(403).send('로그인해야 댓글을 삭제할 수 있습니다.');
-//   }
-
-//   const commentId = req.params.comment_no;
-//   const userId = req.session.user.id;
-
-//   pool.query('SELECT user_id FROM comments WHERE comment_no = ?', [commentId], (error, results) => {
-//     if (error) {
-//       console.error('쿼리 실행 중 오류 발생: ', error);
-//       return res.status(500).send('내부 서버 오류');
-//     }
-//     if (results.length === 0) {
-//       return res.status(404).send('댓글을 찾을 수 없습니다.');
-//     }
-//     if (results[0].user_id !== userId) {
-//       return res.status(403).send('삭제 권한이 없습니다.');
-//     }
-//     pool.query('DELETE FROM comments WHERE comment_no = ?', [commentId], (error) => {
-//       if (error) {
-//         console.error('댓글 삭제 중 오류 발생:', error);
-//         return res.status(500).send('내부 서버 오류');
-//       }
-//       res.sendStatus(204);
-//     });
-//   });
-// });
-
 // 댓글 삭제
-router.delete("/comments/:comment_no", (req, res) => {
-  if (!isLoggedIn(req)) {
-    return res.status(403).send("로그인해야 댓글을 삭제할 수 있습니다.");
-  }
-
-  const commentId = req.params.comment_no;
-  // 댓글 삭제 요청 시 userId를 사용하지 않고 바로 삭제
-  pool.query(
-    "DELETE FROM comments WHERE comment_no = ?",
-    [commentId],
-    (error) => {
-      if (error) {
-        console.error("댓글 삭제 중 오류 발생:", error);
-        return res.status(500).send("내부 서버 오류");
-      }
-      res.sendStatus(204);
+router.delete('/comments/:comment_no', (req, res) => {
+    if (!isLoggedIn(req)) {
+        return res.status(403).send('로그인해야 댓글을 삭제할 수 있습니다.');
     }
-  );
+
+    const commentId = req.params.comment_no;
+    const userId = req.session.user.id;
+
+    pool.query('SELECT user_id FROM comments WHERE comment_no = ?', [commentId], (error, results) => {
+        if (error) {
+            console.error('쿼리 실행 중 오류 발생: ', error);
+            return res.status(500).send('내부 서버 오류');
+        }
+        if (results.length === 0) {
+            return res.status(404).send('댓글을 찾을 수 없습니다.');
+        }
+        if (results[0].user_id !== userId) {
+            return res.status(403).send('삭제 권한이 없습니다.');
+        }
+        pool.query('DELETE FROM comments WHERE comment_no = ?', [commentId], (error) => {
+            if (error) {
+                console.error('댓글 삭제 중 오류 발생:', error);
+                return res.status(500).send('내부 서버 오류');
+            }
+            res.sendStatus(204);
+        });
+    });
 });
 
 module.exports = router;
