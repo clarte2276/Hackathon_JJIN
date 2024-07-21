@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavbarTop from '../navbar/NavbarTop';
 import Footer from '../Footer';
 import homechaticon from '../images/homechaticon.png';
+import NoticeHome from './NoticeHome';
 import './Home.css';
 
 function Home() {
@@ -35,9 +36,11 @@ function Home() {
   return (
     <>
       <NavbarTop />
-      <div className="content"></div>
-      <div className="homechaticon_layout">
-        <img className="homechaticon" src={homechaticon} width={150} onClick={handleChatbotClick} />
+      <div className="content">
+        <div className="homechaticon_layout">
+          <img className="homechaticon" src={homechaticon} width={150} onClick={handleChatbotClick} />
+        </div>
+        <NoticeHome />
       </div>
       <Footer />
     </>
