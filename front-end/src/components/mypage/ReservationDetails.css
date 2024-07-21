@@ -1,0 +1,83 @@
+/* ReservationDetails.css */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+.reservation-details {
+  width: 100%;
+  max-width: 800px;
+  margin: 70px auto;
+  margin-bottom: 200px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.reservation-details h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-left: 20px;
+}
+
+.reservation-underline {
+  border-bottom: 1px solid #000;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.no-reservations {
+  font-size: 18px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #ffa449bb;
+  font-weight: 700;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cancelBtnContent {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: end;
+  flex-direction: column;
+}
+
+.cancelBtn {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90px;
+  padding: 0.5rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: #ffa449bb;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #ff9900;
+}

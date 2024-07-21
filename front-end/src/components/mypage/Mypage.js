@@ -5,6 +5,7 @@ import useUserData from '../useUserData';
 import axios from 'axios';
 import NavbarTop from '../navbar/NavbarTop';
 import Footer from '../Footer';
+import ReservationDetails from './ReservationDetails';
 
 function Mypage() {
   const navigate = useNavigate();
@@ -98,8 +99,10 @@ function Mypage() {
               저장
             </button>
           </div>
+          <hr className="divider" />
         </div>
       </div>
+      <ReservationDetails />
       <Footer />
     </div>
   );
