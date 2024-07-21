@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import DreamBAG from '../images/DreamBAG.png';
+import DreamBAG from '../images/DreamBAG.png';
 
 import './Logo.css';
 
