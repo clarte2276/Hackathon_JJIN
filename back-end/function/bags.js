@@ -31,7 +31,7 @@ router.get('/bag/form', (req, res) => {
         }
 
         const availability = {};
-        for (let i = 1; i <= 20; i++) {
+        for (let i = 1; i <= 14; i++) {  // 좌석 수를 14로 수정
             availability[i] = Array(12).fill(true); // 9시부터 21시까지 12시간
         }
 

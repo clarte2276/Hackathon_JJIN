@@ -51,9 +51,9 @@ const searchRoutes = require("./function/search");
 const bagsRoutes = require("./function/bags");
 
 app.use("/mypage", mypageRoutes);
-app.use("/login", loginRoutes);
-app.use("/check-login", check_loginRoutes);
-app.use("/signup", signupRoutes);
+app.use("/loginpage", loginRoutes);
+app.use("/process", check_loginRoutes);
+app.use("/loginpage", signupRoutes);
 app.use("/chatbot", chatbotRoutes);
 app.use("/notice", noticeRoutes);
 app.use("/search", searchRoutes);
