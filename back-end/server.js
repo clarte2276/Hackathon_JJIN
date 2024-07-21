@@ -63,6 +63,7 @@ const userdataRoutes = require("./function/userdata");
 const bagsRoutes = require("./function/bags");
 const noticeRoutes = require("./function/notice");
 const searchRoutes = require("./function/search");
+const suggestRoutes = require("./function/suggest");
 
 app.use("/", noticeRoutes);
 app.use("/", searchRoutes);
@@ -73,6 +74,7 @@ app.use("/", processRoutes);
 app.use("/", ChatbotRoutes);
 app.use("/", signupRoutes);
 app.use("/", userdataRoutes);
+app.use("/", suggestRoutes);
 
 // 서버 및 Socket.IO 설정
 const server = http.createServer(app);
