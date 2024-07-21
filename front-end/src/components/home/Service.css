@@ -19,7 +19,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  margin-left: 11%;
+  /* margin-left: 11%; */
   width: 60%;
 }
 
@@ -31,7 +31,7 @@
 
 .serviceText {
   align-items: stretch;
-  margin-left: 5%;
+  /* margin-left: 5%; */
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -73,7 +73,7 @@
   transition: background-color 0.2s;
   text-decoration: none;
   margin-top: 10%;
-  width: 68%;
+  width: 100%;
 }
 
 .serviceBtn:hover {
