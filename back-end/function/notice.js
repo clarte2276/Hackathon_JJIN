@@ -227,6 +227,7 @@ router.post('/notice/process/new_Post', upload.single('file'), (req, res) => {
 // 게시글 상세 보기
 router.get('/notice/PostView/:no', (req, res) => {
   const postId = req.params.no;
+  const adminStatus = isAdmin(req);
 
   pool.query(
     `SELECT no, user_id, title, content, DATE_FORMAT(created_date, '%Y년 %m월 %d일 %H시 %i분') AS created_date, file_data FROM notice WHERE no = ?`,
@@ -238,10 +239,13 @@ router.get('/notice/PostView/:no', (req, res) => {
       }
       if (results.length > 0) {
         const post = results[0];
+        // Ensure file_data is either null or a valid buffer
         if (post.file_data) {
           post.file_data = post.file_data.toString('base64'); // Base64 인코딩
+        } else {
+          post.file_data = null; // Ensure file_data is always defined
         }
-        res.json(post);
+        res.json({ admin: adminStatus, post }); // Return the post wrapped in an object
       } else {
         res.status(404).send('게시물을 찾을 수 없습니다.');
       }
@@ -288,6 +292,23 @@ router.post('/notice/PostView/:no/process/update', upload.single('file'), (req, 
       res.send('게시물 수정 완료');
     }
   );
+});
+
+// 게시글의 파일 삭제 (관리자만)
+router.delete('/notice/PostView/:no/process/deleteFile', (req, res) => {
+  if (!isAdmin(req)) {
+    return res.status(403).send('삭제 권한이 없습니다.');
+  }
+
+  const postId = req.params.no;
+
+  pool.query(`UPDATE notice SET file_data = NULL WHERE no = ?`, [postId], (error) => {
+    if (error) {
+      console.error('파일 삭제 중 오류 발생:', error);
+      return res.status(500).send('내부 서버 오류');
+    }
+    res.send('파일 삭제 완료');
+  });
 });
 
 // 이미지 파일 서빙

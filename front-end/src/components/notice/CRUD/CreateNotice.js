@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import './CRUD.css';
 import axios from 'axios';
 import CRUDHeader from './CRUDHeader';
+import NavbarTop from '../../navbar/NavbarTop';
+import Footer from '../../Footer';
 
 function CreateNotice() {
   const navigate = useNavigate();
@@ -59,61 +61,65 @@ function CreateNotice() {
   };
 
   return (
-    <div className="Create_all">
-      <div>
-        <div className="header_layout">
-          <CRUDHeader title="공지사항 글쓰기" />
+    <>
+      <NavbarTop />
+      <div className="Create_all">
+        <div>
+          <div className="header_layout">
+            <CRUDHeader title="공지사항 글쓰기" />
+          </div>
+          <form onSubmit={saveBoard}>
+            <div className="titleBody_layout">
+              <div>
+                <p>
+                  <span className="titleBody_name">제목</span>
+                </p>
+                <input
+                  className="titleInput"
+                  type="text"
+                  name="title"
+                  placeholder="제목을 입력하세요"
+                  value={title}
+                  onChange={onChange}
+                />
+              </div>
+            </div>
+            <br />
+            <div className="titleBody_layout">
+              <div>
+                <p>
+                  <span className="titleBody_name">내용</span>
+                </p>
+                <textarea
+                  className="BodyInput"
+                  name="body"
+                  placeholder="내용을 입력하세요"
+                  value={body}
+                  onChange={onChange}
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <div className="titleBody_layout">
+              <div>
+                <p>
+                  <span className="titleBody_name">사진 업로드</span>
+                </p>
+                <input className="imgUp" type="file" onChange={onFileChange} />
+              </div>
+            </div>
+            <br />
+            <div className="btn_layout">
+              <button className="backBtn" type="button" onClick={backToList}>
+                취소
+              </button>
+              <input className="CreateBtn" type="submit" value="등록하기"></input>
+            </div>
+          </form>
         </div>
-        <form onSubmit={saveBoard}>
-          <div className="titleBody_layout">
-            <div>
-              <p>
-                <span className="titleBody_name">제목</span>
-              </p>
-              <input
-                className="titleInput"
-                type="text"
-                name="title"
-                placeholder="제목을 입력하세요"
-                value={title}
-                onChange={onChange}
-              />
-            </div>
-          </div>
-          <br />
-          <div className="titleBody_layout">
-            <div>
-              <p>
-                <span className="titleBody_name">내용</span>
-              </p>
-              <textarea
-                className="BodyInput"
-                name="body"
-                placeholder="내용을 입력하세요"
-                value={body}
-                onChange={onChange}
-              ></textarea>
-            </div>
-          </div>
-          <br />
-          <div className="titleBody_layout">
-            <div>
-              <p>
-                <span className="titleBody_name">사진 업로드</span>
-              </p>
-              <input className="imgUp" type="file" onChange={onFileChange} />
-            </div>
-          </div>
-          <br />
-          <div className="btn_layout">
-            <button className="backBtn" type="button" onClick={backToList}>
-              취소
-            </button>
-            <input className="CreateBtn" type="submit" value="등록하기"></input>
-          </div>
-        </form>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
