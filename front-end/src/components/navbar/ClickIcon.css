@@ -5,6 +5,12 @@
   padding: 10px;
 }
 
+.navbar_icon1,
+.navbar_icon2 {
+  display: grid;
+  padding-top: 8px;
+}
+
 .ClickIcon_icon1,
 .ClickIcon_icon2 {
   margin-left: 7px;
