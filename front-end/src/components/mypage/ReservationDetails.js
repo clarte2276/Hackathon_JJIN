@@ -26,14 +26,14 @@ function ReservationDetails() {
     fetchReservations();
   }, [user_id]);
 
-  const handleCancelReservation = async (reservationId) => {
+  const handleCancelReservation = async (user_id) => {
     const confirmCancel = window.confirm('정말로 이 예약을 취소하시겠습니까?');
     if (!confirmCancel) return;
 
     try {
-      const response = await axios.delete(`/api/reservations/${reservationId}`);
+      const response = await axios.delete(`/api/reservations/${user_id}`);
       alert(response.data);
-      setReservations(reservations.filter((reservation) => reservation.count !== reservationId));
+      setReservations(reservations.filter((reservation) => reservation.count !== user_id));
     } catch (error) {
       console.error('Error cancelling reservation:', error);
       alert('예약 취소 중 오류가 발생했습니다.');
