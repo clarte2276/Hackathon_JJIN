@@ -130,36 +130,40 @@ const Chatbot = ({ currentUser }) => {
         </ul>
       </div>
       <div className="chatbot-button-group-unique">
-        <button
-          onClick={() =>
-            handleButtonClick(
-              "TEXT 1",
-              "나의 공강을 책임질 빈백의 위치를 알려줘!"
-            )
-          }
-        >
-          나의 공강을 책임질 빈백의 위치를 알려줘!
-        </button>
-        <button
-          onClick={() =>
-            handleButtonClick("TEXT 2", "빈백 운영시간은 어떻게 돼?")
-          }
-        >
-          빈백 운영시간은 어떻게 돼?
-        </button>
-        <button
-          onClick={() =>
-            handleButtonClick(
-              "TEXT 3",
-              "나의 완벽한 숙면을 위해 음악을 추천해줄래?"
-            )
-          }
-        >
-          나의 완벽한 숙면을 위해 음악을 추천해줄래?
-        </button>
-        <button onClick={handleSeatsButtonClick}>
-          현재 예약 가능한 좌석 현황을 알려주라
-        </button>
+        <div className="chatbot-button-row">
+          <button
+            onClick={() =>
+              handleButtonClick(
+                "TEXT 1",
+                "나의 공강을 책임질 빈백의 위치를 알려줘!"
+              )
+            }
+          >
+            나의 공강을 책임질 빈백의 위치를 알려줘!
+          </button>
+          <button
+            onClick={() =>
+              handleButtonClick("TEXT 2", "빈백 운영시간은 어떻게 돼?")
+            }
+          >
+            빈백 운영시간은 어떻게 돼?
+          </button>
+        </div>
+        <div className="chatbot-button-row">
+          <button
+            onClick={() =>
+              handleButtonClick(
+                "TEXT 3",
+                "나의 완벽한 숙면을 위해 음악을 추천해줄래?"
+              )
+            }
+          >
+            나의 완벽한 숙면을 위해 음악을 추천해줄래?
+          </button>
+          <button onClick={handleSeatsButtonClick}>
+            현재 예약 가능한 좌석 현황을 알려주라
+          </button>
+        </div>
         <form id="chatbot-chatform-unique" onSubmit={handleSubmit}>
           <input
             id="chatbot-messageinput-unique"
