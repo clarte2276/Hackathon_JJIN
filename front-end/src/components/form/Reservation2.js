@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./Reservation.css";
-import { useNavigate } from "react-router-dom";
-import useUserData from "../useUserData";
-import NavbarTop from "../navbar/NavbarTop";
-import Footer from "../Footer";
+import React, { useState, useEffect } from 'react';
+import './Reservation.css';
+import { useNavigate } from 'react-router-dom';
+import useUserData from '../useUserData';
+import NavbarTop from '../navbar/NavbarTop';
+import Footer from '../Footer';
 
 function Reservation2() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Reservation2() {
 
   const [reservation_hour, setReservation_hour] = useState(null);
   const [bag_id, setBag_id] = useState(null);
-  const [selectedBagLabel, setSelectedBagLabel] = useState("");
+  const [selectedBagLabel, setSelectedBagLabel] = useState('');
   const [availability, setAvailability] = useState({});
   const [canReserve, setCanReserve] = useState(0);
 
@@ -27,7 +27,7 @@ function Reservation2() {
 
   useEffect(() => {
     const fetchAvailability = async () => {
-      const response = await fetch("/bags/form2");
+      const response = await fetch('/bags/form2');
       if (response.ok) {
         const data = await response.json();
         setAvailability(data.availability);
@@ -55,7 +55,7 @@ function Reservation2() {
   const handleTimeClick = (time) => {
     setReservation_hour(time.value);
     setBag_id(null);
-    setSelectedBagLabel("");
+    setSelectedBagLabel('');
   };
 
   const handleBagClick = (id, label) => {
@@ -69,7 +69,7 @@ function Reservation2() {
     event.preventDefault();
 
     if (!reservation_hour || !bag_id) {
-      alert("모든 필드를 선택해 주세요.");
+      alert('모든 필드를 선택해 주세요.');
       return;
     }
 
@@ -79,10 +79,10 @@ function Reservation2() {
       bag_id,
     };
 
-    const response = await fetch("/bags/form2", {
-      method: "POST",
+    const response = await fetch('/bags/form2', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(requestBody),
     });
@@ -90,7 +90,7 @@ function Reservation2() {
     if (response.ok) {
       const data = await response.json();
       alert(data.message);
-      navigate("/mypage");
+      navigate('/mypage');
     } else {
       const errorData = await response.json();
       alert(errorData.message);
@@ -101,8 +101,7 @@ function Reservation2() {
     return availability[bag]?.[hour - 9] ?? true;
   };
 
-  const isButtonEnabled =
-    reservation_hour && bag_id && isSlotAvailable(reservation_hour, bag_id);
+  const isButtonEnabled = reservation_hour && bag_id && isSlotAvailable(reservation_hour, bag_id);
 
   return (
     <div>
@@ -121,8 +120,7 @@ function Reservation2() {
               <br />
               [주의] 가져오신 짐, 쓰레기는 사용 종료시 꼭 챙겨주세요!!
               <br />
-              [사용] 각 예약당 1시간, 일일 최대 2시간 예약
-              가능합니다.(중앙도서관과 함께 계산됩니다.)
+              [사용] 각 예약당 1시간, 일일 최대 2시간 예약 가능합니다.(중앙도서관과 함께 계산됩니다.)
             </p>
           </div>
           <div className="form-userInfo">
@@ -149,9 +147,7 @@ function Reservation2() {
                 {timeOptions.map((time, index) => (
                   <div
                     key={index}
-                    className={`time-slot ${
-                      reservation_hour === time.value ? "selected" : ""
-                    }`}
+                    className={`time-slot ${reservation_hour === time.value ? 'selected' : ''}`}
                     onClick={() => handleTimeClick(time)}
                   >
                     {time.label}
@@ -166,30 +162,22 @@ function Reservation2() {
                 {bagOptions.map((option) => (
                   <div
                     key={option.value}
-                    className={`bag-seat ${
-                      bag_id === option.value ? "selected" : ""
-                    } ${
-                      !isSlotAvailable(reservation_hour, option.value)
-                        ? "unavailable"
-                        : ""
+                    className={`bag-seat ${bag_id === option.value ? 'selected' : ''} ${
+                      !isSlotAvailable(reservation_hour, option.value) ? 'unavailable' : ''
                     }`}
                     onClick={() => handleBagClick(option.value, option.label)}
                   >
-                    {option.label.split("번 빈백")[0]}
+                    {option.label.split('번 빈백')[0]}
                   </div>
                 ))}
               </div>
-              {selectedBagLabel && (
-                <p className="selectedText">
-                  {selectedBagLabel}을 선택하셨습니다.
-                </p>
-              )}
+              {selectedBagLabel && <p className="selectedText">{selectedBagLabel}을 선택하셨습니다.</p>}
             </div>
 
             <div className="submitBtnPlace">
               <button
                 type="submit"
-                className={`submitBtn ${isButtonEnabled ? "enabled" : ""}`}
+                className={`submitBtn ${isButtonEnabled ? 'enabled' : ''}`}
                 disabled={!isButtonEnabled}
               >
                 예약완료

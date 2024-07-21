@@ -35,19 +35,19 @@ table {
   margin-top: 20px;
 }
 
-.ReservationDetails_th,
-.ReservationDetails_td {
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
 }
 
-.ReservationDetails_th {
+th {
   background-color: #ffa449bb;
   font-weight: 700;
 }
 
-.ReservationDetails_tr:nth-child(even) {
+tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 

@@ -59,18 +59,24 @@ function ReservationDetails() {
       ) : (
         <table>
           <thead>
-            <tr className="ReservationDetails_tr">
-              <th className="ReservationDetails_th">빈백 좌석 번호</th>
-              <th className="ReservationDetails_th">예약 시간</th>
-              <th className="ReservationDetails_th">취소</th>
+            <tr>
+              <th>위치</th>
+              <th>빈백 좌석 번호</th>
+              <th>예약 시간</th>
+              <th>취소</th>
             </tr>
           </thead>
           <tbody>
             {reservations.map((reservation) => (
-              <tr className="ReservationDetails_tr" key={reservation.id}>
-                <td className="ReservationDetails_th">{reservation.bag_id}번 빈백</td>
-                <td className="ReservationDetails_th">{reservation.reservation_hour}</td>
-                <td className="ReservationDetails_th">
+              <tr key={reservation.id}>
+                <td>{reservation.location}</td>
+                <td>
+                  {reservation.location} {reservation.bag_id}번 빈백
+                </td>
+                <td>
+                  {reservation.reservation_hour}:00 ~ {reservation.reservation_hour + 1}:00
+                </td>
+                <td>
                   <div className="cancelBtnContent">
                     <button className="cancelBtn" onClick={() => handleCancelReservation(reservation)}>
                       취소
