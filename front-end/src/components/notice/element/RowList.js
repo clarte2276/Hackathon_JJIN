@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RowListNotice = ({ children }) => {
-  return <tr className="ListNotice-row">{children}</tr>;
+const RowList = ({ children }) => {
+  return <tr className="List-row">{children}</tr>;
 };
 
-export default RowListNotice;
+export default RowList;

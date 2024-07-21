@@ -6,7 +6,8 @@ function TitleBody(props) {
     <>
       <h1>{props.title}</h1>
       <div>
-        <div>{props.body}</div>
+        <div className="TitleBody_body1">{props.body1}</div>
+        <div className="TitleBody_body2">{props.body2}</div>
       </div>
     </>
   );

@@ -7,14 +7,117 @@
   display: grid;
   justify-content: center;
   text-align: center;
+  margin-top: 50px;
 }
 
 .List_title {
   color: #347988;
 }
 
+.searchContent_layout {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0px;
+}
+
+.SearchForm {
+  display: flex;
+  align-items: center;
+}
+
+.graynotice {
+  color: #797979;
+}
+
+.graynotice1,
+.graynotice2 {
+  margin: 7px 0px;
+  font-size: 13px;
+}
+
+.graynotice2 {
+  margin-bottom: 25px;
+}
+
+.searchform_input,
+.searchform_button {
+  border: 1px solid #d9d9d9;
+}
+
+.searchform_input {
+  padding-left: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+.searchform_button {
+  border: none;
+  background-color: #d9d9d9;
+  display: grid;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  justify-items: center;
+  cursor: pointer;
+}
+
 .PaginationCustom {
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+}
+
+.List {
+  margin: 0 auto;
+  text-align: center;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.List-header-column {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid #000000;
+  width: 400px;
+}
+
+.List-column {
+  padding: 10px;
+  text-decoration: none;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.List-row:hover {
+  background-color: #eceaea;
+  cursor: pointer;
+}
+
+.CreateButton {
+  text-decoration: none;
+  color: white;
+  background-color: #ea5514;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.CreateButton_layout {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root {
+  border-style: none !important;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background-color: rgb(0, 0, 0) !important;
+  color: white !important;
+  border-radius: 18%;
+}
+
+.TitleBody_body1,
+.TitleBody_body2 {
+  margin: 7px 0px;
 }
