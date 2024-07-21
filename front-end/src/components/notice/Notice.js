@@ -8,6 +8,7 @@ import ColumnList from './element/ColumnList.js';
 import RowList from './element/RowList.js';
 import CreateButtonNotice from './element/CreateButtonNotice.js';
 import PaginationCustom from './element/PaginationCustom.js';
+import NavbarTop from '../navbar/NavbarTop.js';
 import Footer from '../Footer.js';
 
 import './Notice.css';
@@ -16,6 +17,7 @@ const Notice = () => {
   const [dataList, setDataList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
   const postsPerPage = 10;
   const location = useLocation();
 
@@ -24,7 +26,10 @@ const Notice = () => {
       const endpoint = keyword ? `/notice/search?keyword=${encodeURIComponent(keyword)}` : '/notice';
       const response = await axios.get(endpoint);
       console.log('응답 데이터:', response.data);
-      setDataList(Array.isArray(response.data) ? response.data : []);
+      if (response.data.admin !== undefined) {
+        setIsAdmin(response.data.admin);
+      }
+      setDataList(Array.isArray(response.data.posts) ? response.data.posts : []);
     } catch (error) {
       console.error('There was an error fetching the posts!', error);
     }
@@ -60,6 +65,7 @@ const Notice = () => {
 
   return (
     <div className="NoticeAll_layout">
+      <NavbarTop />
       <div className="NoticeTop_layout">
         <TitleBodyNotice title="공지사항" body="이곳은 공지사항 안내하는 페이지입니다" />
         <form onSubmit={handleSearch} className="SearchForm">
@@ -89,7 +95,7 @@ const Notice = () => {
           <div>게시글이 없습니다.</div>
         )}
       </ListNotice>
-      <CreateButtonNotice nextNo={getNextNo()} />
+      {isAdmin && <CreateButtonNotice nextNo={getNextNo()} />}
       <div className="PaginationCustom">
         <PaginationCustom
           currentPage={currentPage}

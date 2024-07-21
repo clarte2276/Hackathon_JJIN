@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import CRUDHeader from './CRUDHeader';
+import NavbarTop from '../../navbar/NavbarTop';
+import Footer from '../../Footer';
 import './CRUD.css';
 import axios from 'axios';
 
@@ -19,10 +21,14 @@ function UpdateNotice() {
 
   useEffect(() => {
     axios
-      .get(`/notice/Postview/${no}/process/update`)
+      .get(`/notice/PostView/${no}`)
       .then((response) => {
-        const { title, content, file_data } = response.data;
-        setPost({ title, body: content, file_data });
+        const { post } = response.data;
+        setPost({
+          title: post.title,
+          body: post.content,
+          file_data: post.file_data,
+        });
         setLoading(false);
         setCanEdit(true);
       })
@@ -61,7 +67,7 @@ function UpdateNotice() {
     }
 
     try {
-      await axios.post(`/notice/Postview/${no}/process/update`, formData, {
+      await axios.post(`/notice/PostView/${no}/process/update`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -77,6 +83,19 @@ function UpdateNotice() {
         console.error('게시글을 수정하는 중 오류가 발생했습니다:', error);
         alert('게시글을 수정하는 중 오류가 발생했습니다:');
       }
+    }
+  };
+
+  const deleteFile = async () => {
+    try {
+      await axios.delete(`/notice/PostView/${no}/process/deleteFile`, {
+        withCredentials: true,
+      });
+      setPost({ ...post, file_data: null });
+      alert('파일이 삭제되었습니다.');
+    } catch (error) {
+      console.error('파일 삭제 중 오류가 발생했습니다:', error);
+      alert('파일 삭제 중 오류가 발생했습니다.');
     }
   };
 
@@ -97,6 +116,7 @@ function UpdateNotice() {
 
   return (
     <>
+      <NavbarTop />
       <div>
         <CRUDHeader title="공지사항 글 수정" />
       </div>
@@ -114,7 +134,13 @@ function UpdateNotice() {
         <div>
           <span>현재 업로드된 파일</span>
           {post.file_data ? (
-            <img src={`data:image/jpeg;base64,${post.file_data}`} alt="Current Upload" width="200" />
+            <>
+              <img src={`data:image/jpeg;base64,${post.file_data}`} alt="Current Upload" width="200" />
+              <br />
+              <button type="button" onClick={deleteFile}>
+                파일 삭제
+              </button>
+            </>
           ) : (
             <p>업로드된 파일이 없습니다.</p>
           )}
@@ -127,8 +153,9 @@ function UpdateNotice() {
         <button type="button" onClick={backToList}>
           취소
         </button>
-        <input type="submit" value="수정하기"></input>
+        <input type="submit" value="수정하기" />
       </form>
+      <Footer />
     </>
   );
 }
