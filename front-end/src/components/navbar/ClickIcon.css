@@ -1,0 +1,16 @@
+.ClickIcon_layout {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.ClickIcon_icon1,
+.ClickIcon_icon2 {
+  margin-left: 7px;
+  margin-right: 7px;
+}
+
+.ClickIcon_icon1 {
+  border-radius: 14px;
+}
