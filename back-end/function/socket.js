@@ -1,15 +1,14 @@
 const socketIo = require("socket.io");
 const mysql = require("mysql");
-const axios = require("axios");
 require("dotenv").config();
 
 const predefinedPrompts = {
   "TEXT 1":
-    "이번 공연 라인업은 뉴진스, 싸이, 제이팍, 방탄소년단이 옵니당!! 정말 기대되죠?? ㅎ_ㅎ",
+    "우리 학교의 빈백의 위치는 중앙도서관 3층, 그리고 학림관 1층에 있어용~!! 가서 함께 편히 쉬어볼까용?😚",
   "TEXT 2":
-    "이번 공연은 18:30에 시작합니다!! 그 전에는 동아리 공연이 있으니 함께 즐겨봐용~~",
+    "중앙도서관은 09:00 ~ 21:00에 운영하며 빈백 개수는 20개, 학림관은 10:00 ~ 17:00에 운영하며 빈백 개수는 4개가 있어용~~🥰",
   "TEXT 3":
-    "티켓 수령은 본인이 직접 와서 해야하며, 주민등록증 또는 운전면허증으로 본인 대조를 합니당!! 신분증 꼭 챙겨와주세용~~",
+    "저는 유튜브로 수면 ASMR 음악을 들어용~~! 유튜브 링크로 추천해드릴게용~~😉'https://www.youtube.com/results?search_query=%EC%88%98%EB%A9%B4+ASMR'",
 };
 
 const initSocket = (server, sessionMiddleware, dbConfig) => {
@@ -96,7 +95,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
                 console.error("Failed to load messages:", err);
               } else {
                 const formattedMessages = results.map((msg) => {
-                  if (msg.user === "With 티아코") {
+                  if (msg.user === "내꿈코") {
                     return { ...msg, user: user };
                   }
                   return msg;
@@ -130,11 +129,11 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
             }
           });
 
-          socket.on("ask chatbot", async (msg) => {
+          socket.on("ask chatbot", (msg) => {
             const predefinedResponse = predefinedPrompts[msg];
             if (predefinedResponse) {
               const gptMessage = {
-                user: "티아코",
+                user: "내꿈코",
                 text: predefinedResponse,
                 room_id: roomId,
               };
@@ -154,57 +153,14 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
                 );
               }, 500);
             } else {
-              try {
-                const prompt = `너는 이제부터 "동국대학교 티케팅요정 티아코"처럼 말할 거야. 티아코는 친절하게 말해. 티아코의 평소 말투 예시는 다음과 같아 "안녕하세요! 동국대학교 티케팅요정 티아코예용~!
-티켓팅 방법, 축제 등에 대해서 궁금한 내용을 질문하면 답변해드릴게용~~" 지금부터 티아코처럼 답변하되 이모지는 절대로 사용하지마.: "${msg}"`;
-
-                const response = await axios.post(
-                  "https://api.openai.com/v1/chat/completions",
-                  {
-                    model: "gpt-3.5-turbo",
-                    messages: [{ role: "user", content: prompt }],
-                    max_tokens: 150,
-                  },
-                  {
-                    headers: {
-                      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-                      "Content-Type": "application/json",
-                    },
-                  }
-                );
-
-                const gptResponse =
-                  response.data.choices[0].message.content.trim();
-                const gptMessage = {
-                  user: "티아코",
-                  text: gptResponse,
-                  room_id: roomId,
-                };
-
-                setTimeout(() => {
-                  pool.query(
-                    "INSERT INTO messages (user, text, room_id) VALUES (?, ?, ?)",
-                    [gptMessage.user, gptMessage.text, gptMessage.room_id],
-                    (err) => {
-                      if (err) {
-                        console.error("Failed to save GPT message:", err);
-                      } else {
-                        io.to(roomId).emit("chat message", gptMessage);
-                        updateLoggedInUsers(roomId);
-                      }
-                    }
-                  );
-                }, 500);
-              } catch (error) {
-                console.error("Error fetching from OpenAI:", error);
-              }
+              console.error("Predefined response not found for:", msg);
             }
           });
 
           socket.on("disconnect", () => {
             const user = session.user.name;
-            const specialUser = "티아코";
-            const withSpecialUser = "With 티아코";
+            const specialUser = "내꿈코";
+            const withSpecialUser = "내꿈코";
 
             pool.query(
               "DELETE FROM messages WHERE (user = ? OR user = ? OR user = ?) AND room_id = ?",
