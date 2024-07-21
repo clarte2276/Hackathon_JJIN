@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 
-body {
+.chatbot-container-unique body {
   margin: 0;
-  font-family: "Noto Sans KR", sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   justify-content: center;
   align-items: center;
   background-color: #fff;
@@ -95,7 +95,7 @@ body {
 
 .chatbot-message-left-unique .message-content::before,
 .chatbot-message-right-unique .message-content::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 0;
   height: 0;
@@ -126,6 +126,8 @@ body {
   display: flex;
   align-items: center;
   margin-top: 1rem;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
 }
 
 #chatbot-messageinput-unique {
@@ -139,7 +141,6 @@ body {
 }
 
 #chatbot-chatform-unique button {
-  border: 1px solid pink !important;
   padding: 0rem 0.5rem;
   font-size: calc(0.8rem + 0.5vw);
   color: #fff;
@@ -192,6 +193,9 @@ body {
 
 .sendBtn {
   display: flex;
+
+  width: 24px;
+  height: 24px;
 }
 
 #chatbot-chatform-unique .sendBtn img {
