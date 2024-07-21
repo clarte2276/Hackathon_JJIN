@@ -8,6 +8,7 @@ import ColumnList from './element/ColumnList.js';
 import RowList from './element/RowList.js';
 import CreateButtonNotice from './element/CreateButtonNotice.js';
 import PaginationCustom from './element/PaginationCustom.js';
+import Footer from '../Footer.js';
 
 import './Notice.css';
 
@@ -96,6 +97,7 @@ const Notice = () => {
           onPageChange={handlePageChange}
         />
       </div>
+      <Footer />
     </div>
   );
 };
