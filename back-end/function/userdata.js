@@ -168,7 +168,7 @@ const initializeRandomChat = () => {
       console.log("randomchat 테이블이 초기화되었습니다.");
       const initialMessage = {
         message:
-          "안녕하세요~ 랜덤채팅방입니다!\n 랜덤채팅방은 5분마다 초기화됩니다! 즐겁게 놀아보세용~",
+          "안녕하세요~ 랜덤채팅방입니다! 랜덤채팅방은 5분마다 초기화됩니다! 즐겁게 놀아보세용~",
         created_at: new Date(),
       };
 
