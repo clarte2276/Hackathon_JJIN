@@ -64,14 +64,6 @@ function Mypage() {
         <h1>마이페이지</h1>
         <div className="myPage">
           <form onSubmit={handleSaveWrapper} className="userProfileForm">
-            <div className="userProfileBtn">
-              <button className="logoutBtn" onClick={handleLogout}>
-                LOGOUT
-              </button>
-              <button type="submit" className="saveBtn">
-                SAVE
-              </button>
-            </div>
             <hr className="divider" />
             <div className="inputSpace">
               <p>
@@ -98,7 +90,14 @@ function Mypage() {
               </p>
             </div>
           </form>
-          <hr className="divider" />
+          <div className="userProfileBtn">
+            <button className="logoutBtn" onClick={handleLogout}>
+              로그아웃
+            </button>
+            <button type="submit" className="saveBtn">
+              저장
+            </button>
+          </div>
         </div>
       </div>
       <Footer />
