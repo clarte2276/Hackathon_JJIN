@@ -63,6 +63,7 @@ function ReservationDetails() {
         <table>
           <thead>
             <tr>
+              <th>위치</th>
               <th>빈백 좌석 번호</th>
               <th>예약 시간</th>
               <th>취소</th>
@@ -71,8 +72,14 @@ function ReservationDetails() {
           <tbody>
             {reservations.map((reservation) => (
               <tr key={reservation.id}>
-                <td>{reservation.bag_id}번 빈백</td>
-                <td>{reservation.reservation_hour}</td>
+                <td>{reservation.location}</td>
+                <td>
+                  {reservation.location} {reservation.bag_id}번 빈백
+                </td>
+                <td>
+                  {reservation.reservation_hour}:00 ~{" "}
+                  {reservation.reservation_hour + 1}:00
+                </td>
                 <td>
                   <div className="cancelBtnContent">
                     <button

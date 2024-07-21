@@ -5,7 +5,7 @@ import useUserData from "../useUserData";
 import NavbarTop from "../navbar/NavbarTop";
 import Footer from "../Footer";
 
-function Reservation() {
+function Reservation2() {
   const navigate = useNavigate();
   const { name, id: user_id, phone_num } = useUserData();
 
@@ -14,7 +14,7 @@ function Reservation() {
   const [selectedBagLabel, setSelectedBagLabel] = useState("");
   const [availability, setAvailability] = useState({});
 
-  const bagOptions = Array.from({ length: 14 }, (_, i) => ({
+  const bagOptions = Array.from({ length: 4 }, (_, i) => ({
     value: i + 1,
     label: `${i + 1}번 빈백`,
   }));
@@ -26,7 +26,7 @@ function Reservation() {
 
   useEffect(() => {
     const fetchAvailability = async () => {
-      const response = await fetch("/bags/form");
+      const response = await fetch("/bags/form2");
       if (response.ok) {
         const data = await response.json();
         setAvailability(data.availability);
@@ -63,7 +63,7 @@ function Reservation() {
       bag_id,
     };
 
-    const response = await fetch("/bags/form", {
+    const response = await fetch("/bags/form2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,20 +93,20 @@ function Reservation() {
       <NavbarTop></NavbarTop>
       <div className="reservationPage">
         <div className="reservation_title">
-          <h1>빈백 예약하기</h1>
+          <h1>학림관 빈백 예약하기</h1>
         </div>
         <div className="reservation-container">
           <div className="notice-section">
             <h2>※안내사항※</h2>
             <p>
-              [위치] 빈백은 중앙 도서관 3층 안내데스크 반대 방향에 있습니다.
+              [위치] 빈백은 학림관 1층에 있습니다.
               <br />
-              [시간] 빈백 사용 가능시간은 평일 오전 9시부터 저녁 9시까지입니다.
+              [시간] 빈백 사용 가능시간은 평일 오전 9시부터 저녁 5시까지입니다.
               <br />
               [주의] 가져오신 짐, 쓰레기는 사용 종료시 꼭 챙겨주세요!!
               <br />
-              [사용] 각 예약당 1시간, 일일 최대 2시간 예약 가능합니다.(학림관과
-              함께 계산됩니다.)
+              [사용] 각 예약당 1시간, 일일 최대 2시간 예약
+              가능합니다.(중앙도서관과 함께 계산됩니다.)
             </p>
           </div>
           <div className="form-userInfo">
@@ -186,4 +186,4 @@ function Reservation() {
   );
 }
 
-export default Reservation;
+export default Reservation2;
