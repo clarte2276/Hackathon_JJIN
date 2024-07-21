@@ -10,7 +10,6 @@ const aiuser = "내꿈코";
 const Chatbot = ({ currentUser }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
-  const [users, setUsers] = useState([]);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -22,18 +21,19 @@ const Chatbot = ({ currentUser }) => {
     });
 
     socket.on("chat message", (msg) => {
-      console.log("Received message: ", msg); // 로그 추가
+      console.log("Received message: ", msg);
       setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
-    socket.on("update user list", (users) => {
-      setUsers(users);
+    socket.on("gpt response", (msg) => {
+      console.log("Received GPT response: ", msg);
+      setMessages((prevMessages) => [...prevMessages, msg]);
     });
 
     return () => {
       socket.off("chat message");
       socket.off("init messages");
-      socket.off("update user list");
+      socket.off("gpt response");
     };
   }, [currentUser]);
 
@@ -44,6 +44,9 @@ const Chatbot = ({ currentUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (input) {
+      // 사용자 메시지 전송
+      socket.emit("chat message", { text: input, user: currentUser });
+
       try {
         const response = await fetch("/ask-gpt4", {
           method: "POST",
@@ -53,18 +56,14 @@ const Chatbot = ({ currentUser }) => {
           body: JSON.stringify({ input }),
         });
         const data = await response.json();
-        console.log("Server response: ", data); // 서버 응답 로그 추가
-
-        // 사용자 메시지 전송
-        socket.emit("chat message", { text: input, user: currentUser });
+        console.log("Server response: ", data);
 
         // GPT 응답을 내꿈코로 전송
-        setTimeout(() => {
-          socket.emit("chat message", {
-            text: data.response,
-            user: aiuser,
-          });
-        }, 500);
+        socket.emit("gpt response", {
+          text: data.response,
+          user: aiuser,
+        });
+
         setInput("");
       } catch (error) {
         console.error("Error:", error);

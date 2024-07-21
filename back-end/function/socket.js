@@ -24,8 +24,6 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
     debug: false,
   });
 
-  let loggedInUsers = [];
-
   const updateLoggedInUsers = (roomId) => {
     pool.query(
       "SELECT user FROM messages WHERE room_id = ? GROUP BY user",
@@ -94,13 +92,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
               if (err) {
                 console.error("Failed to load messages:", err);
               } else {
-                const formattedMessages = results.map((msg) => {
-                  if (msg.user === "내꿈코") {
-                    return { ...msg, user: user };
-                  }
-                  return msg;
-                });
-                socket.emit("init messages", formattedMessages);
+                socket.emit("init messages", results);
                 updateLoggedInUsers(roomId);
               }
             }
@@ -129,6 +121,27 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
             }
           });
 
+          socket.on("gpt response", (msg) => {
+            const gptMessage = {
+              user: "내꿈코",
+              text: msg.text,
+              room_id: roomId,
+            };
+
+            pool.query(
+              "INSERT INTO messages (user, text, room_id) VALUES (?, ?, ?)",
+              [gptMessage.user, gptMessage.text, gptMessage.room_id],
+              (err) => {
+                if (err) {
+                  console.error("Failed to save GPT message:", err);
+                } else {
+                  io.to(roomId).emit("gpt response", gptMessage);
+                  updateLoggedInUsers(roomId);
+                }
+              }
+            );
+          });
+
           socket.on("ask chatbot", (msg) => {
             const predefinedResponse = predefinedPrompts[msg.label];
             if (predefinedResponse) {
@@ -146,7 +159,7 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
                     if (err) {
                       console.error("Failed to save GPT message:", err);
                     } else {
-                      io.to(roomId).emit("chat message", gptMessage);
+                      io.to(roomId).emit("gpt response", gptMessage);
                       updateLoggedInUsers(roomId);
                     }
                   }
@@ -159,24 +172,23 @@ const initSocket = (server, sessionMiddleware, dbConfig) => {
 
           socket.on("disconnect", () => {
             const user = session.user.name;
-            const specialUser = "내꿈코";
-            const withSpecialUser = "내꿈코";
 
             pool.query(
-              "DELETE FROM messages WHERE (user = ? OR user = ? OR user = ?) AND room_id = ?",
-              [user, specialUser, withSpecialUser, roomId],
+              "DELETE FROM messages WHERE (user = ? OR user = '내꿈코') AND room_id = ?",
+              [user, roomId],
               (err, result) => {
                 if (err) {
                   console.error("Failed to delete messages:", err);
                 } else {
                   console.log(
-                    `Deleted messages for user ${user}, ${specialUser}, and ${withSpecialUser} in room ${roomId}`
+                    `Deleted messages for user ${user} and 내꿈코 in room ${roomId}`
                   );
                   console.log(`Deleted ${result.affectedRows} rows`);
                   updateLoggedInUsers(roomId);
                 }
               }
             );
+
             socket.leave(roomId);
           });
         }
