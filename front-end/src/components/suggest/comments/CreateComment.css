@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+
 .commentInput {
   margin-bottom: 10px;
   margin-top: 30px;
@@ -28,6 +30,7 @@
   color: white;
   background-color: #ea5514;
   border: none;
+  font-weight: 600;
 }
 
 .commentCreateBtn_layout {

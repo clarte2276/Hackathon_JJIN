@@ -22,6 +22,7 @@ function NoticeHome() {
       const result = await response.json();
       console.log("응답 받음:", result); // 디버깅용 로그
       if (result.loggedIn) {
+        window.scrollTo(0, 0); // 페이지 상단으로 스크롤
         if (newWindow) {
           window.open(targetPath, "_blank");
         } else {
@@ -39,7 +40,7 @@ function NoticeHome() {
   useEffect(() => {
     // 백엔드에서 게시글 목록을 가져옴
     axios
-      .post(`/notice`)
+      .post(`/api/notice`)
       .then((response) => {
         console.log("응답 데이터:", response.data.posts); // 응답 데이터 출력
         setDataList(response.data.posts);
@@ -48,6 +49,13 @@ function NoticeHome() {
         console.error("There was an error fetching the posts!", error);
       });
   }, []);
+
+  const truncateTitle = (title, maxLength = 50) => {
+    if (title.length > maxLength) {
+      return title.substring(0, maxLength) + "...";
+    }
+    return title;
+  };
 
   return (
     <div className="Notice_all">
@@ -65,17 +73,17 @@ function NoticeHome() {
       <div className="NoticeHome_underline"></div>
       <div className="Notice_title_body">
         {dataList.length > 0 ? (
-          (() => {
-            const items = [];
-            for (let i = 0; i < Math.min(3, dataList.length); i++) {
-              items.push(
-                <div key={i} className="Notice_body">
-                  <div className="HomeNotice_title">{dataList[i].title}</div>
-                </div>
-              );
-            }
-            return items;
-          })()
+          dataList.slice(0, 3).map((post, i) => (
+            <div key={i} className="Notice_body">
+              <div
+                className="HomeNotice_title"
+                
+                
+              >
+                {truncateTitle(post.title)}
+              </div>
+            </div>
+          ))
         ) : (
           <div>Loading...</div>
         )}
