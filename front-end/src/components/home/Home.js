@@ -7,6 +7,7 @@ import homechaticon from '../images/homechaticon.png';
 import NoticeHome from './NoticeHome';
 import './Home.css';
 import SeatStatus from './SeatStatus';
+import Header from './Header';
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,6 +42,7 @@ function Home() {
         <div className="homechaticon_layout">
           <img className="homechaticon" src={homechaticon} width={150} onClick={handleChatbotClick} />
         </div>
+        <Header />
         <NoticeHome />
         <SeatStatus />
       </div>
