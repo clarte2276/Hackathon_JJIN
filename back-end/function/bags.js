@@ -39,7 +39,7 @@ router.get('/bags/form', (req, res) => {
       }
 
       rows.forEach((row) => {
-        availability[row.bag_id][row.reservation_hour - 1] = false;
+        availability[row.bag_id][row.reservation_hour - 9] = false;
       });
 
       res.json({ availability });
