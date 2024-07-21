@@ -1,6 +1,5 @@
 const socketIo = require("socket.io");
 const mysql = require("mysql");
-const axios = require("axios");
 
 const predefinedPrompts = {
   "TEXT 1":
