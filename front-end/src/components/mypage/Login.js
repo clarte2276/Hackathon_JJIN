@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
+import NavbarTop from '../navbar/NavbarTop';
+import Footer from '../Footer';
 
 function Login() {
   const navigate = useNavigate();
@@ -30,30 +32,34 @@ function Login() {
   };
 
   return (
-    <div className="loginPage">
-      <h1>로그인</h1>
-      <form className="loginPagecontent" onSubmit={handleSubmit}>
-        <div className="textBox">
-          <input type="text" placeholder="아이디" name="id" value={id} onChange={(e) => setId(e.target.value)} />
-          <input
-            type="password"
-            placeholder="비밀번호"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="btnContent">
-          <button type="submit" className="loginpageBtn">
-            로그인
-          </button>
-          <button className="signuppageBtn">
-            <Link to="/signuppage" className="signupLink">
-              회원가입
-            </Link>
-          </button>
-        </div>
-      </form>
+    <div>
+      <NavbarTop></NavbarTop>
+      <div className="loginPage">
+        <h1>로그인</h1>
+        <form className="loginPagecontent" onSubmit={handleSubmit}>
+          <div className="textBox">
+            <input type="text" placeholder="아이디" name="id" value={id} onChange={(e) => setId(e.target.value)} />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="btnContent">
+            <button type="submit" className="loginpageBtn">
+              로그인
+            </button>
+            <button className="signuppageBtn">
+              <Link to="/signuppage" className="signupLink">
+                회원가입
+              </Link>
+            </button>
+          </div>
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 }

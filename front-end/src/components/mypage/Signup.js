@@ -3,6 +3,8 @@ import './Signup.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useUserData from '../useUserData';
+import NavbarTop from '../navbar/NavbarTop';
+import Footer from '../Footer';
 
 function Signup() {
   const navigate = useNavigate();
@@ -40,37 +42,41 @@ function Signup() {
   };
 
   return (
-    <div className="SignupPage">
-      <h1>회원가입</h1>
-      <form className="SignupContent" onSubmit={handleSubmit}>
-        <div className="signupTextbox">
-          <p>이름 *</p>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-          <p>연락처 *</p>
-          <input
-            type="text"
-            placeholder="- 제외하고 입력 (ex. 01012345678)"
-            value={phone_num}
-            onChange={(e) => setPhone_num(e.target.value)}
-            required
-          />
-          <p>아이디 *</p>
-          <input
-            type="text"
-            placeholder="학번 10자리를 입력해주세요."
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            required
-          />
-          <p>비밀번호 *</p>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </div>
-        <div className="btnContent">
-          <button type="submit" className="signupBtn">
-            회원가입
-          </button>
-        </div>
-      </form>
+    <div>
+      <NavbarTop></NavbarTop>
+      <div className="SignupPage">
+        <h1>회원가입</h1>
+        <form className="SignupContent" onSubmit={handleSubmit}>
+          <div className="signupTextbox">
+            <p>이름 *</p>
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+            <p>연락처 *</p>
+            <input
+              type="text"
+              placeholder="- 제외하고 입력 (ex. 01012345678)"
+              value={phone_num}
+              onChange={(e) => setPhone_num(e.target.value)}
+              required
+            />
+            <p>아이디 *</p>
+            <input
+              type="text"
+              placeholder="학번 10자리를 입력해주세요."
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              required
+            />
+            <p>비밀번호 *</p>
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          </div>
+          <div className="btnContent">
+            <button type="submit" className="signupBtn">
+              회원가입
+            </button>
+          </div>
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 }

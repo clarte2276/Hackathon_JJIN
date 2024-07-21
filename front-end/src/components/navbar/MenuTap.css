@@ -1,0 +1,41 @@
+.MenuTap_layout {
+  width: 100%;
+  margin-bottom: 5px;
+  text-align: right;
+  display: flex;
+  justify-content: center;
+}
+
+.navbarMenu {
+  color: black;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  height: 30px;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+.navbarMenu.underline {
+  position: relative;
+}
+
+.navbarMenu.underline:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 80%;
+  border-bottom: 2.5px solid black;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.navbarMenu:hover {
+  text-shadow: -0.5px -0.5px 1px rgba(180, 182, 186, 0.804);
+  background-color: rgba(237, 237, 237, 0.831);
+  transition-duration: 0.5s;
+}
