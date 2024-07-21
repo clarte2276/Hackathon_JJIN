@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import './ReservationDetails.css';
-import axios from 'axios';
-import useUserData from '../useUserData';
+import React, { useEffect, useState } from "react";
+import "./ReservationDetails.css";
+import axios from "axios";
+import useUserData from "../useUserData";
 
 function ReservationDetails() {
   const [reservations, setReservations] = useState([]);
@@ -12,13 +12,13 @@ function ReservationDetails() {
     // Fetch reservation data from the server
     const fetchReservations = async () => {
       try {
-        const response = await axios.get('/api/reservations', {
+        const response = await axios.get("/api/reservations", {
           params: { user_id },
         });
         setReservations(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching reservation data:', error);
+        console.error("Error fetching reservation data:", error);
         setLoading(false);
       }
     };
@@ -26,17 +26,26 @@ function ReservationDetails() {
     fetchReservations();
   }, [user_id]);
 
-  const handleCancelReservation = async (user_id) => {
-    const confirmCancel = window.confirm('정말로 이 예약을 취소하시겠습니까?');
+  const handleCancelReservation = async (reservation) => {
+    const confirmCancel = window.confirm("정말로 이 예약을 취소하시겠습니까?");
     if (!confirmCancel) return;
 
     try {
-      const response = await axios.delete(`/api/reservations/${user_id}`);
-      alert(response.data);
-      setReservations(reservations.filter((reservation) => reservation.count !== user_id));
+      const response = await axios.delete(
+        `/api/reservations/${reservation.id}`,
+        {
+          params: {
+            user_id: user_id,
+            bag_id: reservation.bag_id,
+            reservation_hour: reservation.reservation_hour,
+          },
+        }
+      );
+      alert(response.data.message);
+      setReservations(reservations.filter((res) => res.id !== reservation.id));
     } catch (error) {
-      console.error('Error cancelling reservation:', error);
-      alert('예약 취소 중 오류가 발생했습니다.');
+      console.error("Error cancelling reservation:", error);
+      alert("예약 취소 중 오류가 발생했습니다.");
     }
   };
 
@@ -66,7 +75,10 @@ function ReservationDetails() {
                 <td>{reservation.reservation_hour}</td>
                 <td>
                   <div className="cancelBtnContent">
-                    <button className="cancelBtn" onClick={() => handleCancelReservation(reservation.id)}>
+                    <button
+                      className="cancelBtn"
+                      onClick={() => handleCancelReservation(reservation)}
+                    >
                       취소
                     </button>
                   </div>

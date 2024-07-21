@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=IBM+Plex+Sans+KR&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-style: normal;
+  letter-spacing: 1px;
+}
+
+.Create_all,
+.Read_all {
+  display: flex;
+  justify-content: center;
+}
+
+.CRUDHeader {
+  width: 1000px;
+  margin-top: 25px;
+  font-weight: 600;
+  font-size: 37px;
+  font-optical-sizing: auto;
+  margin-left: 25px;
+}
+
+.CRUDHeader:after {
+  content: '';
+  display: block;
+  margin-top: 20px;
+}
+
+.borderLine {
+  border-bottom: 1.8px solid #49454f;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.titleBody_layout {
+  display: flex;
+  justify-content: left;
+  margin-left: 25px;
+  margin-bottom: 10px;
+}
+
+.btn_layout {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleBody_name {
+  font-size: 18px;
+  margin-left: 13px;
+  font-weight: 600;
+}
+
+.titleInput,
+.BodyInput {
+  width: 900px;
+  font-size: 15px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: 2px solid #cac4d0;
+}
+
+.titleInput {
+  height: 40px;
+}
+
+.BodyInput {
+  padding-top: 8px;
+  height: 230px;
+  resize: none;
+}
+
+.backBtn,
+.CreateBtn {
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 25px;
+  letter-spacing: 3px;
+  width: 100px;
+}
+
+.backBtn:hover,
+.CreateBtn:hover {
+  cursor: pointer;
+}
+
+.backBtn {
+  background-color: #ffffff;
+  border: 1.8px solid #474747;
+}
+
+.CreateBtn {
+  color: white;
+  background-color: #17499e;
+  border: none;
+}
+
+.ReadTitle {
+  color: #1e1e1e;
+  font-weight: 600;
+  font-size: 28px;
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+.updateDelete {
+  display: flex;
+}
+
+.infoUpdateDelete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ReadContent {
+  margin-top: 30px;
+  margin-left: 20px;
+}
+
+.comment_all {
+  border-top: 1.5px solid #cac4d0;
+  padding: 10px 0px;
+  padding-left: 5px;
+  display: flex;
+}
+.commentNickname {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.commentDate {
+  color: #898989;
+}

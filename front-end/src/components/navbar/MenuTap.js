@@ -42,9 +42,15 @@ function MenuTap() {
         </Link>
         <Link
           className={`navbarMenu ${location.pathname === '/bag/form' ? 'underline' : ''}`}
-          onClick={(e) => checkLogin(e, '/bag/form', true)} // 새 창으로 열기 위해 true 전달
+          onClick={(e) => checkLogin(e, '/bag/form', true)}
         >
           Reservation
+        </Link>
+        <Link
+          className={`navbarMenu ${location.pathname === '/suggest' ? 'underline' : ''}`}
+          onClick={(e) => checkLogin(e, '/suggest')}
+        >
+          Suggest
         </Link>
         <Link
           className={`navbarMenu ${location.pathname === '/notice' ? 'underline' : ''}`}

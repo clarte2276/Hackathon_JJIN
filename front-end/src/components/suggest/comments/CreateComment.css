@@ -1,0 +1,13 @@
+.commentInput {
+  width: 900px;
+  font-size: 15px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: 2px solid #cac4d0;
+}
+
+.BodyInput {
+  padding-top: 8px;
+  height: 100px;
+  resize: none;
+}

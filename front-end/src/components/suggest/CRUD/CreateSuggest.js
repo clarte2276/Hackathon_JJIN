@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './CRUD.css';
 import axios from 'axios';
-import CRUDHeader from './CRUDHeader';
+import CRUDHeader from '../../notice/CRUD/CRUDHeader';
 import NavbarTop from '../../navbar/NavbarTop';
 import Footer from '../../Footer';
 
-function CreateNotice() {
+function CreateSuggest() {
   const navigate = useNavigate();
 
   const [board, setBoard] = useState({
@@ -39,7 +39,7 @@ function CreateNotice() {
     formData.append('created_date', new Date().toISOString());
 
     try {
-      const response = await axios.post(`/notice/process/new_Post`, formData, {
+      const response = await axios.post(`/suggest/process/new_Post`, formData, {
         withCredentials: true,
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -47,7 +47,7 @@ function CreateNotice() {
       });
       const newPostId = response.data.no;
       alert('등록되었습니다.');
-      navigate(`/notice/PostView/${newPostId}`, { state: { newPost: response.data } });
+      navigate(`/suggest/PostView/${newPostId}`, { state: { newPost: response.data } });
     } catch (error) {
       console.error('Error saving post:', error);
       alert('글을 저장하는 도중 오류가 발생했습니다.');
@@ -55,7 +55,7 @@ function CreateNotice() {
   };
 
   const backToList = () => {
-    navigate('/notice');
+    navigate('/suggest');
   };
 
   return (
@@ -121,4 +121,4 @@ function CreateNotice() {
   );
 }
 
-export default CreateNotice;
+export default CreateSuggest;
