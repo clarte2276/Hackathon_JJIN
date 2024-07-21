@@ -50,6 +50,17 @@ router.get("/api/empty", (req, res) => {
   });
 });
 
+router.get("/api/empty2", (req, res) => {
+  pool.query("SELECT COUNT(*) AS total FROM bags2", (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: "Database query error" });
+    }
+    const HtotalReserved = results[0].total;
+    const HavailableSeats = 32 - HtotalReserved;
+    res.json({ availableSeats: HavailableSeats });
+  });
+});
+
 router.get("/api/empty_status", (req, res) => {
   pool.query("SELECT COUNT(*) AS total FROM bags", (error, results) => {
     if (error) {
@@ -61,4 +72,14 @@ router.get("/api/empty_status", (req, res) => {
   });
 });
 
+router.get("/api/empty_status2", (req, res) => {
+  pool.query("SELECT COUNT(*) AS total FROM bags2", (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: "Database query error" });
+    }
+    const HtotalReserved = results[0].total;
+    const HavailableSeats = 32 - HtotalReserved;
+    res.json({ HavailableSeats });
+  });
+});
 module.exports = router;
