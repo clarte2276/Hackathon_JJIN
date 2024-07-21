@@ -256,8 +256,12 @@ function ReadSuggest() {
         const commentsResponse = await axios.get(`/suggest/comments/${no}`);
         setComments(Array.isArray(commentsResponse.data) ? commentsResponse.data : []);
       } catch (error) {
-        console.error('댓글 삭제 중 오류 발생:', error);
-        alert('댓글 삭제 중 오류가 발생했습니다.');
+        if (error.response && error.response.status === 403) {
+          alert('삭제 권한이 없습니다.');
+        } else {
+          console.error('댓글 삭제 중 오류 발생:', error);
+          alert('댓글 삭제 중 오류가 발생했습니다.');
+        }
       }
     }
   };
