@@ -8,7 +8,7 @@ const app = express();
 const cors = require("cors");
 const http = require("http");
 require("dotenv").config();
-const cron = require('node-cron');
+const cron = require("node-cron");
 
 // MySQL 연결 설정
 const pool = mysql.createPool({
@@ -82,12 +82,24 @@ const initSocket = require("./function/socket");
 initSocket(server, sessionMiddleware, db_config);
 
 // 매일 자정에 count 리셋
-cron.schedule('0 0 * * *', () => {
-  pool.query('UPDATE bags SET count = 0', (err, result) => {
+cron.schedule("30 20 * * *", () => {
+  pool.query(
+    "UPDATE user_reservations SET reservation_count = 0",
+    (err, result) => {
+      if (err) {
+        console.error("예약 count 리셋 오류:", err);
+      } else {
+        console.log("예약 count가 리셋되었습니다.");
+      }
+    }
+  );
+});
+cron.schedule("30 20 * * *", () => {
+  pool.query("TRUNCATE TABLE bags", (err, result) => {
     if (err) {
-      console.error('예약 count 리셋 오류:', err);
+      console.error("테이블 비우기 오류:", err);
     } else {
-      console.log('예약 count가 리셋되었습니다.');
+      console.log("bags 테이블이 초기화되었습니다.");
     }
   });
 });
