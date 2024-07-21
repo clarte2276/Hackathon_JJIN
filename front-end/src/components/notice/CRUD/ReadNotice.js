@@ -82,6 +82,10 @@ function ReadNotice() {
 
   const { title, created_date, content } = post;
 
+  const createMarkup = (html) => {
+    return { __html: html.replace(/\n/g, '<br>') };
+  };
+
   return (
     <>
       <NavbarTop />
@@ -109,7 +113,8 @@ function ReadNotice() {
           </div>
           <div className="ReadContent">
             {imageSrc && <img src={imageSrc} alt="Post" />}
-            <p>{content}</p>
+            <div dangerouslySetInnerHTML={createMarkup(content)} />
+            {/* <p>{content}</p> */}
           </div>
         </div>
       </div>
