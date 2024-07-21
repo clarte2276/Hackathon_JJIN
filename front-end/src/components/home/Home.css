@@ -30,7 +30,7 @@
 }
 
 .homechaticon:hover {
-  animation: shake 0.5s infinite; /* Apply the shaking animation on hover */
+  animation: shake 0.5s infinite;
 }
 
 .content {
@@ -43,19 +43,21 @@
 
 .homepage_layout {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  width: 100%;
-  padding: 5%;
+  align-items: flex-start;
+  text-align: center;
+  width: 80%;
+  padding: 3%;
   box-sizing: border-box;
+  margin-right: 7%;
+  margin-left: 0;
 }
 
 .noticeHome {
   flex: 1;
-  margin-right: 10px;
 }
 
 .seatStatus {
   flex: 1;
-  margin-left: 3.5%;
+  margin-left: 75px;
 }

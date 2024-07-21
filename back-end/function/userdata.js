@@ -136,6 +136,19 @@ router.post("/api/messages", (req, res) => {
   );
 });
 
+router.post("/api/notice", (req, res) => {
+  const query = "SELECT no, title FROM notice ORDER BY created_date DESC";
+
+  pool.query(query, (err, results) => {
+    if (err) {
+      console.error("게시글 목록 조회 중 오류 발생:", err);
+      res.status(500).send("서버 오류");
+      return;
+    }
+
+    res.json({ posts: results });
+  });
+});
 // 매일 자정에 count 리셋
 cron.schedule("0 0 * * *", () => {
   pool.query(

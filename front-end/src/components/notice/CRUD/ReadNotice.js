@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import NavbarTop from '../../navbar/NavbarTop';
-import Footer from '../../Footer';
-import '../../suggest/CRUD/CRUD.css';
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import NavbarTop from "../../navbar/NavbarTop";
+import Footer from "../../Footer";
+import "../../suggest/CRUD/CRUD.css";
 
 function ReadNotice() {
   const { no } = useParams();
@@ -11,14 +11,14 @@ function ReadNotice() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [imageSrc, setImageSrc] = useState('');
+  const [imageSrc, setImageSrc] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const postResponse = await axios.get(`/notice/PostView/${no}`);
-        console.log('응답 데이터:', postResponse.data);
+        console.log("응답 데이터:", postResponse.data);
         setPost(postResponse.data.post);
 
         // 관리자 여부 확인
@@ -29,18 +29,21 @@ function ReadNotice() {
         // 이미지 로드
         if (postResponse.data.post.file_data) {
           const imageResponse = await axios.get(`/notice/image/${no}`, {
-            responseType: 'arraybuffer',
+            responseType: "arraybuffer",
           });
           const base64 = btoa(
-            new Uint8Array(imageResponse.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+            new Uint8Array(imageResponse.data).reduce(
+              (data, byte) => data + String.fromCharCode(byte),
+              ""
+            )
           );
           setImageSrc(`data:image/jpeg;base64,${base64}`);
         }
 
         setLoading(false);
       } catch (error) {
-        console.error('게시글을 불러오는 중 오류 발생:', error);
-        setError('게시글을 불러오는 중 오류 발생');
+        console.error("게시글을 불러오는 중 오류 발생:", error);
+        setError("게시글을 불러오는 중 오류 발생");
         setLoading(false);
       }
     };
@@ -49,19 +52,19 @@ function ReadNotice() {
   }, [no]);
 
   const handleDelete = async () => {
-    const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+    const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
 
     if (confirmDelete) {
       try {
         await axios.delete(`/notice/Postview/${no}/process/delete`);
-        alert('게시글이 삭제되었습니다.');
-        navigate('/notice');
+        alert("게시글이 삭제되었습니다.");
+        navigate("/notice");
       } catch (error) {
         if (error.response && error.response.status === 403) {
-          alert('삭제 권한이 없습니다.');
+          alert("삭제 권한이 없습니다.");
         } else {
-          console.error('게시글 삭제 중 오류 발생:', error);
-          alert('게시글 삭제 중 오류가 발생했습니다.');
+          console.error("게시글 삭제 중 오류 발생:", error);
+          alert("게시글 삭제 중 오류가 발생했습니다.");
         }
       }
     }
@@ -80,13 +83,13 @@ function ReadNotice() {
   }
 
   const backToList = () => {
-    navigate('/notice');
+    navigate("/notice");
   };
 
   const { title, created_date, content } = post;
 
   const createMarkup = (html) => {
-    return { __html: html.replace(/\n/g, '<br>') };
+    return { __html: html.replace(/\n/g, "<br>") };
   };
 
   return (
@@ -104,10 +107,13 @@ function ReadNotice() {
             <div className="updateDelete">
               {isAdmin && (
                 <div className="updateDelete">
-                  <Link className="ReadUpdate" to={`/notice/Postview/${no}/process/update`}>
+                  <Link
+                    className="ReadUpdate"
+                    to={`/notice/Postview/${no}/process/update`}
+                  >
                     수정
                   </Link>
-                  <div onClick={handleDelete} style={{ cursor: 'pointer' }}>
+                  <div onClick={handleDelete} style={{ cursor: "pointer" }}>
                     삭제
                   </div>
                 </div>

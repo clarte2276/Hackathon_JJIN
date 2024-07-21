@@ -1,7 +1,7 @@
-import * as React from 'react';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-import './Element.css';
+import * as React from "react";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
+import "./Element.css";
 
 const PaginationCustom = ({ currentPage, totalPages, onPageChange }) => {
   const handleChange = (event, value) => {

@@ -1,5 +1,5 @@
-import React from 'react';
-import './Element.css';
+import React from "react";
+import "./Element.css";
 
 const List = (props) => {
   const { headersName, children } = props;
