@@ -209,7 +209,7 @@ router.get('/suggest/image/:id', (req, res) => {
 });
 
 // 댓글 등록
-router.post('/suggest/:no/comments', (req, res) => {
+router.post('/suggest/PostView/:no/comments', (req, res) => {
   if (!isLoggedIn(req)) {
     return res.status(403).send('로그인해야 댓글을 작성할 수 있습니다.');
   }
