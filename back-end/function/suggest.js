@@ -87,7 +87,7 @@ router.get('/suggest/PostView/:no', (req, res) => {
         } else {
           post.file_data = null;
         }
-        res.json(post);
+        res.json({ post });
       } else {
         res.status(404).send('게시물을 찾을 수 없습니다.');
       }
@@ -194,19 +194,19 @@ router.delete('/suggest/PostView/:no/process/deleteFile', (req, res) => {
 
 // 이미지 파일 서빙
 router.get('/suggest/image/:id', (req, res) => {
-    const id = req.params.id;
-    pool.query(`SELECT file_data FROM suggests WHERE no = ?`, [id], (error, results) => {
-      if (error) {
-        console.error('이미지 조회 오류:', error);
-        return res.status(500).send('서버 오류');
-      }
-      if (results.length === 0 || !results[0].file_data) {
-        return res.status(404).send('이미지를 찾을 수 없습니다.');
-      }
-      res.writeHead(200, { 'Content-Type': 'image/jpeg' });
-      res.end(results[0].file_data);
-    });
+  const id = req.params.id;
+  pool.query(`SELECT file_data FROM suggests WHERE no = ?`, [id], (error, results) => {
+    if (error) {
+      console.error('이미지 조회 오류:', error);
+      return res.status(500).send('서버 오류');
+    }
+    if (results.length === 0 || !results[0].file_data) {
+      return res.status(404).send('이미지를 찾을 수 없습니다.');
+    }
+    res.writeHead(200, { 'Content-Type': 'image/jpeg' });
+    res.end(results[0].file_data);
   });
+});
 
 // 댓글 등록
 router.post('/suggest/:no/comments', (req, res) => {

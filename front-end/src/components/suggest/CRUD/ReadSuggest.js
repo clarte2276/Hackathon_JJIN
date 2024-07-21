@@ -24,7 +24,8 @@ function ReadSuggest() {
         setPost(postResponse.data.post);
 
         const commentsResponse = await axios.get(`/suggest/comments/${no}`);
-        setComments(commentsResponse.data);
+        // commentsResponse.data가 배열인지 확인
+        setComments(Array.isArray(commentsResponse.data) ? commentsResponse.data : []);
 
         // 이미지 로드
         if (postResponse.data.post.file_data) {
@@ -71,7 +72,8 @@ function ReadSuggest() {
     // 댓글 등록 후 댓글 목록 다시 불러오기
     try {
       const commentsResponse = await axios.get(`/suggest/comments/${no}`);
-      setComments(commentsResponse.data);
+      // commentsResponse.data가 배열인지 확인
+      setComments(Array.isArray(commentsResponse.data) ? commentsResponse.data : []);
     } catch (error) {
       console.error('댓글 목록을 다시 불러오는 중 오류 발생:', error);
     }
@@ -124,7 +126,7 @@ function ReadSuggest() {
               comments.map((comment) => (
                 <div className="comment_all" key={comment.comment_no}>
                   <div>
-                    <div className="commentNickname">{comment.nickname}</div>
+                    <div className="commentNickname">익명</div>
                     <div>{comment.content}</div>
                     <div className="commentDate">{comment.created_date}</div>
                   </div>

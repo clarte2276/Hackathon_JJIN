@@ -1,0 +1,54 @@
+.seat-status-container {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.seat-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.seat-status-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.seat-status-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.seat-room {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.room-name {
+  background-color: #ffbf00;
+  padding: 0.5rem;
+  border-radius: 4px;
+  color: white;
+  width: 100px;
+  text-align: center;
+}
+
+.room-seats {
+  display: flex;
+  align-items: center;
+}
+
+.available-seats {
+  font-size: 1rem;
+  color: #333;
+  margin-right: 0.5rem;
+}
