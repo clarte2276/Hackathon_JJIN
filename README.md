@@ -31,42 +31,42 @@
 - [프로젝트 링크](http://한울.홈페이지.한국:3000)
 
 <p align="center">
-  <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
+  <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="70%"/>
   <br><div align="center">메인 홈 상단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="55%"/>
-  <br><div>메인 홈 하단</div>
+  <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="70%"/>
+  <br><div align="center">메인 홈 하단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="65%"/>
-  <br><div>예약 장소 선택</div>
+  <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="70%"/>
+  <br><div align="center">예약 장소 선택</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="75%"/>
-  <br><div>예약 폼 상단</div>
+  <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="70%"/>
+  <br><div align="center">예약 폼 상단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="85%"/>
-  <br><div>예약 폼 하단</div>
+  <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="70%"/>
+  <br><div align="center">예약 폼 하단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="95%"/>
-  <br><div>마이페이지 내 예약내역</div>
+  <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="70%"/>
+  <br><div align="center">마이페이지 내 예약내역</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG7.png" alt="DreamBAG7" width="45%"/>
-  <br><div>건의사항 게시판</div>
+  <img src="./images/DreamBAG7.png" alt="DreamBAG7" width="70%"/>
+  <br><div align="center">건의사항 게시판</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG8.png" alt="DreamBAG8" width="45%"/>
-  <br><div>공지사항</div>
+  <img src="./images/DreamBAG8.png" alt="DreamBAG8" width="70%"/>
+  <br><div align="center">공지사항</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="45%"/>
-  <br><div>챗봇 팝업 창</div>
+  <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="70%"/>
+  <br><div align="center">챗봇 팝업 창</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="45%"/>
-  <br><div>익명 단체 채팅방</div>
+  <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="70%"/>
+  <br><div align="center">익명 단체 채팅방</div>
 </p>
