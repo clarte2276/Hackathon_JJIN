@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import './ReservationDetails.css';
-import axios from 'axios';
-import useUserData from '../useUserData';
+import React, { useEffect, useState } from "react";
+import "./ReservationDetails.css";
+import axios from "axios";
+import useUserData from "../useUserData";
 
 function ReservationDetails() {
   const [reservations, setReservations] = useState([]);
@@ -12,13 +12,13 @@ function ReservationDetails() {
     // Fetch reservation data from the server
     const fetchReservations = async () => {
       try {
-        const response = await axios.get('/api/reservations', {
+        const response = await axios.get("/api/reservations", {
           params: { user_id },
         });
         setReservations(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching reservation data:', error);
+        console.error("Error fetching reservation data:", error);
         setLoading(false);
       }
     };
@@ -27,22 +27,44 @@ function ReservationDetails() {
   }, [user_id]);
 
   const handleCancelReservation = async (reservation) => {
-    const confirmCancel = window.confirm('정말로 이 예약을 취소하시겠습니까?');
+    const confirmCancel = window.confirm("정말로 이 예약을 취소하시겠습니까?");
     if (!confirmCancel) return;
 
     try {
-      const response = await axios.delete(`/api/reservations/${reservation.id}`, {
-        params: {
-          user_id: user_id,
-          bag_id: reservation.bag_id,
-          reservation_hour: reservation.reservation_hour,
-        },
-      });
+      const response = await axios.delete(
+        `/api/reservations/${reservation.id}`,
+        {
+          params: {
+            user_id: user_id,
+            bag_id: reservation.bag_id,
+            reservation_hour: reservation.reservation_hour,
+          },
+        }
+      );
+
       alert(response.data.message);
       setReservations(reservations.filter((res) => res.id !== reservation.id));
+
+      // Post to /mypage to update user info
+      try {
+        const postResponse = await axios.post("/mypage", {
+          user_id: user_id,
+        });
+        console.log("Post to /mypage successful:", postResponse.data);
+      } catch (postError) {
+        console.error("Error posting to /mypage:", postError);
+      }
+
+      // Fetch updated reservations from server
+      const updatedReservations = await axios.get(`/api/reservations`, {
+        params: {
+          user_id: user_id,
+        },
+      });
+      setReservations(updatedReservations.data);
     } catch (error) {
-      console.error('Error cancelling reservation:', error);
-      alert('예약 취소 중 오류가 발생했습니다.');
+      console.error("Error cancelling reservation:", error);
+      alert("예약 취소 중 오류가 발생했습니다.");
     }
   };
 
@@ -69,16 +91,22 @@ function ReservationDetails() {
           <tbody>
             {reservations.map((reservation) => (
               <tr className="ReservationDetails_tr" key={reservation.id}>
-                <td className="ReservationDetails_td">{reservation.location}</td>
+                <td className="ReservationDetails_td">
+                  {reservation.location}
+                </td>
                 <td className="ReservationDetails_td">
                   {reservation.location} {reservation.bag_id}번 빈백
                 </td>
                 <td className="ReservationDetails_td">
-                  {reservation.reservation_hour}:00 ~ {reservation.reservation_hour + 1}:00
+                  {reservation.reservation_hour}:00 ~{" "}
+                  {reservation.reservation_hour + 1}:00
                 </td>
                 <td className="ReservationDetails_td">
                   <div className="cancelBtnContent">
-                    <button className="cancelBtn" onClick={() => handleCancelReservation(reservation)}>
+                    <button
+                      className="cancelBtn"
+                      onClick={() => handleCancelReservation(reservation)}
+                    >
                       취소
                     </button>
                   </div>

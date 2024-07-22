@@ -20,14 +20,13 @@ function Login() {
       const data = response.data;
 
       if (data.success) {
-        alert('로그인 성공!');
         navigate('/'); // 로그인 성공 시 메인페이지 이동
       } else {
         alert(data.message);
       }
     } catch (error) {
       console.error('로그인 요청 중 오류 발생:', error);
-      alert('로그인 요청 중 오류가 발생했습니다.');
+      alert('아이디 또는 패스워드를 확인하세요.');
     }
   };
 

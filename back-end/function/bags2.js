@@ -66,10 +66,6 @@ router.post("/bags/form2", (req, res) => {
     const serverDate = new Date(currentHourRows[0]["NOW()"]);
     const serverDateString = serverDate.toISOString().split("T")[0];
 
-    if (currentDateString !== serverDateString) {
-      return res.status(400).json({ message: "당일 예약만 가능합니다." });
-    }
-
     // 이미 동일 시간대에 동일 좌석이 예약되었는지 확인
     pool.query(
       `
