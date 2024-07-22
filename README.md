@@ -31,7 +31,10 @@
 - [프로젝트 링크](http://한울.홈페이지.한국:3000)
 
 <p align="center">
-  <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
+    <div>
+        <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
+        <div>메인 홈</div>
+    </div>
   <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="45%"/>
 </p>
 <p align="center">
