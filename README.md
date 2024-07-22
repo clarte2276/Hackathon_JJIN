@@ -30,55 +30,55 @@
 
 - [프로젝트 링크](http://한울.홈페이지.한국:3000)
 
-<p align="center">
-  <table>
+<p align="center" style="width: 100%;">
+  <table style="width: 100%;">
     <tr>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="50%"/>
         <div>메인 홈 상단</div>
       </td>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="50%"/>
         <div>메인 홈 하단</div>
       </td>
     </tr>
     <tr>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="50%"/>
         <div>예약 장소 선택</div>
       </td>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="45%"/>
-        <div>예약 폼1</div>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="50%"/>
+        <div>예약 폼 상단</div>
       </td>
     </tr>
     <tr>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="45%"/>
-        <div>예약 폼2</div>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="50%"/>
+        <div>예약 폼 하단</div>
       </td>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="45%"/>
-        <div>예약내역 확인</div>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="50%"/>
+        <div>마이페이지 내 예약내역</div>
       </td>
     </tr>
     <tr>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG7.png" alt="DreamBAG7" width="45%"/>
-        <div>건의사항</div>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG7.png" alt="DreamBAG7" width="50%"/>
+        <div>건의사항 게시판</div>
       </td>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG8.png" alt="DreamBAG8" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG8.png" alt="DreamBAG8" width="50%"/>
         <div>공지사항</div>
       </td>
     </tr>
     <tr>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="50%"/>
         <div>챗봇 팝업 창</div>
       </td>
-      <td style="text-align: center;">
-        <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="45%"/>
+      <td style="text-align: center; padding: 0;">
+        <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="50%"/>
         <div>익명 단체 채팅방</div>
       </td>
     </tr>
