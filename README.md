@@ -32,26 +32,26 @@
 
 <p align="center">
   <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
-  <br><div>메인 홈 상단</div>
+  <br><div align="center">메인 홈 상단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="45%"/>
+  <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="55%"/>
   <br><div>메인 홈 하단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="45%"/>
+  <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="65%"/>
   <br><div>예약 장소 선택</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="45%"/>
+  <img src="./images/DreamBAG4.png" alt="DreamBAG4" width="75%"/>
   <br><div>예약 폼 상단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="45%"/>
+  <img src="./images/DreamBAG5.png" alt="DreamBAG5" width="85%"/>
   <br><div>예약 폼 하단</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="45%"/>
+  <img src="./images/DreamBAG6.png" alt="DreamBAG6" width="95%"/>
   <br><div>마이페이지 내 예약내역</div>
 </p>
 <p align="center">
