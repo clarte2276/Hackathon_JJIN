@@ -63,10 +63,10 @@
   <br><div align="center">공지사항</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="30%"/>
+  <img src="./images/DreamBAG9.png" alt="DreamBAG9" width="40%"/>
   <br><div align="center">챗봇 팝업 창</div>
 </p>
 <p align="center">
-  <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="30%"/>
+  <img src="./images/DreamBAG10.png" alt="DreamBAG10" width="50%"/>
   <br><div align="center">익명 단체 채팅방</div>
 </p>
