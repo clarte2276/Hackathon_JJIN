@@ -33,9 +33,12 @@
 <p align="center">
     <div>
         <img src="./images/DreamBAG1.png" alt="DreamBAG1" width="45%"/>
-        <div>메인 홈</div>
+        <div>메인 홈 상단</div>
     </div>
-  <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="45%"/>
+    <div>
+        <img src="./images/DreamBAG2.png" alt="DreamBAG2" width="45%"/>
+        <div>메인 홈 하단</div>
+    </div>
 </p>
 <p align="center">
   <img src="./images/DreamBAG3.png" alt="DreamBAG3" width="45%"/>
